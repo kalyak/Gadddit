@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,7 +21,7 @@ const LoginPage = () => {
     console.log(formData);
 
     axios
-      .post(" ", formData)
+      .post(" ", formData) //TODO add axios call
       .then((response) => {
         setDone(true);
       })
@@ -42,10 +42,10 @@ const LoginPage = () => {
           <legend>Create New Account</legend>
           <label>Username: </label>
           <input
-            type="text"
-            name="username"
+            type='text'
+            name='username'
             required
-            id="username"
+            id='username'
             value={formData.username}
             onChange={handleChange}
           />
@@ -54,15 +54,15 @@ const LoginPage = () => {
           <label>Password: </label>
           <input
             // type="password"
-            name="password"
+            name='password'
             required
-            id="password"
+            id='password'
             value={formData.password}
             onChange={handleChange}
           />
           <br />
           <br />
-          <input type="submit" />
+          <input type='submit' />
           <p style={{ color: "red" }}>{errors}</p>
         </fieldset>
       </form>
@@ -70,4 +70,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;

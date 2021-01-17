@@ -1,9 +1,51 @@
-const logoutBtn = () => {
+import axios from "axios";
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
+import SweetAlert from "react-bootstrap-sweetalert";
+
+const LogoutBtn = () => {
+  const [loggedOut, setLogout] = useState(false);
+  const [error, setError] = useState("");
+  const [errorPopup, setPopup] = useState(false);
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    axios
+      .delete("/sessions/delete")
+      .then((response) => {
+        setLogout(true);
+      })
+      .catch((err) => {
+        setError(err);
+        setPopup(true);
+      });
+  };
+
+  if (loggedOut) {
+    return <Redirect to />;
+  }
+
   return (
-    <button>
-      <Link to={URL.LOGOUT}>Logout</Link>
-    </button>
+    <>
+      <button onClick={handleLogout}>Logout</button>
+      {errorPopup && (
+        <SweetAlert
+          warning
+          showCancel
+          confirmBtnText='Logout'
+          confirmBtnBsStyle='danger'
+          title='Sorry, we are unable to process your request.'
+          onConfirm={handleLogout}
+          onCancel={() => {
+            setPopup(false);
+          }}
+          focusCancelBtn
+        >
+          {error}
+        </SweetAlert>
+      )}
+    </>
   );
 };
 
-export default logoutBtn;
+export default LogoutBtn;

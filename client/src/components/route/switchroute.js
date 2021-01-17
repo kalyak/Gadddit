@@ -6,12 +6,13 @@ import HostRoom from "../pages/host-room";
 import About from "../pages/main-about";
 import Home from "../pages/main-Home";
 import LoginPage from "../pages/main-Login";
-import SignupPage from "../pages/main-Signup";
 import UserAttended from "../pages/user-allAttended";
 import UserUpcoming from "../pages/user-allUpcoming";
 import EnterRoom from "../pages/user-enterRoom";
 import UserRoom from "../pages/user-room";
+import SignupPage from "../pages/main-Signup";
 import NavBar from "./NavBar";
+import AppURL from "./route-constants";
 
 const SwitchRoute = () => {
   return (
@@ -19,41 +20,41 @@ const SwitchRoute = () => {
       <NavBar />
 
       <Switch>
-        <Route exact path="/host/:userid">
+        <Route exact path='/host/:userid'>
           <HostHosting />
         </Route>
-        <Route exact path="/host/:userid/hosted">
+        <Route exact path='/host/:userid/hosted'>
           <HostHosted />
         </Route>
-        <Route exact path="/host/:userid/createroom">
+        <Route exact path='/host/:userid/createroom'>
           <HostCreate />
         </Route>
-        <Route exact path="/host/:userid/:roomid">
+        <Route exact path='/host/:userid/:roomid'>
           <HostRoom />
         </Route>
-        <Route exact path="/user/:userid/">
+        <Route exact path='/user/:userid/'>
           <UserUpcoming />
         </Route>
-        <Route exact path="/user/:userid/attended">
+        <Route exact path='/user/:userid/attended'>
           <UserAttended />
         </Route>
 
-        <Route exact path="/user/:userid/enterroom">
+        <Route exact path='/user/:userid/enterroom'>
           <EnterRoom />
         </Route>
-        <Route exact path="/user/:userid/:roomid">
+        <Route exact path='/user/:userid/:roomid'>
           <UserRoom />
         </Route>
-        <Route exact path="/about">
+        <Route exact path={AppURL.main.about}>
           <About />
         </Route>
-        <Route exact path="/login">
+        <Route exact path={AppURL.main.login}>
           <LoginPage />
         </Route>
-        <Route exact path="/signup">
+        <Route exact path={AppURL.main.signup}>
           <SignupPage />
         </Route>
-        <Route exact path="/">
+        <Route exact path={AppURL.main.home}>
           <Home />
         </Route>
       </Switch>
