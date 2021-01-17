@@ -3,13 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import SwitchRoute from "./components/route/switchroute";
 
 ReactDOM.render(
   <React.StrictMode>
-    <SwitchRoute>
-      <App />
-    </SwitchRoute>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

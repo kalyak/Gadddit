@@ -7,23 +7,14 @@ import UserAttended from "../pages/user-allAttended";
 import UserUpcoming from "../pages/user-allUpcoming";
 import EnterRoom from "../pages/user-enterRoom";
 import UserRoom from "../pages/user-room";
-import HostRoute from "./route-host";
-import MainRoute from "./route-main";
-import UserRoute from "./route-user";
+import NavBar from "./NavBar";
 
 const SwitchRoute = () => {
   return (
     <Router>
+      <NavBar />
+
       <Switch>
-        <Route path='/user*'>
-          <UserRoute />
-        </Route>
-        <Route path='/host*'>
-          <HostRoute />
-        </Route>
-        <Route exact path='/'>
-          <MainRoute />
-        </Route>
         <Route exact path='/host/:userid'>
           <HostHosting />
         </Route>
