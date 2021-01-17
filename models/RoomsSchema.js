@@ -4,15 +4,17 @@ const Schema = mongoose.Schema;
 const RoomsSchema = new Schema(
   {
     eventName: { type: String },
-    roomCode: { type: String }, //during room creation, see if can get last 6 of _id to be in
+    roomCode: { type: String },
     roomPassword: { type: String },
     hostID: { type: String },
-    eventStart: { Date },
-    eventEnd: { Date },
+    hostName: { type: String },
+    eventStart: { type: Date },
+    eventEnd: { type: Date },
     isPublic: { type: Boolean },
   },
   {
     timestamps: true,
+    strict: false,
   }
 );
 

@@ -90,22 +90,22 @@ router.put("/", isAuthenticated, (req, res) => {
   });
 });
 
-// // DELETE
-// router.delete("/", isAuthenticated, (req, res) => {
-//   // res.send("USERS DELETE");
-//   Users.findByIdAndUpdate(
-//     req.session.currentUser._id,
-//     { archive: true },
-//     { new: true },
-//     (err, user) => {
-//       if (err) {
-//         return res.status(500).send("Database error");
-//       } else {
-//         console.log("User deleted", user);
-//         res.status(200).send(user);
-//       }
-//     }
-//   );
-// });
+// DELETE
+router.delete("/", isAuthenticated, (req, res) => {
+  // res.send("USERS DELETE");
+  Users.findByIdAndUpdate(
+    req.session.currentUser._id,
+    { archive: true },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        return res.status(500).send("Database error");
+      } else {
+        console.log("User deleted", user);
+        res.status(200).send(user);
+      }
+    }
+  );
+});
 
 module.exports = router;

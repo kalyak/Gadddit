@@ -7,6 +7,7 @@ const UsersSchema = new Schema(
     password: { type: String, required: true },
     roomHostedHistory: { type: Array },
     roomAttendedHistory: { type: Array }, // tag roomID of events attended (not hosted) here
+    isArchived: { type: Boolean, default: false },
   },
   {
     timestamps: true,
