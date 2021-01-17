@@ -3,7 +3,10 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
   const [errors, setErrors] = useState("");
   const [done, setDone] = useState(false);
 
@@ -18,7 +21,7 @@ const LoginPage = () => {
     console.log(formData);
 
     axios
-      .post("/users", formData)
+      .post(" ", formData)
       .then((response) => {
         setDone(true);
       })
@@ -34,11 +37,10 @@ const LoginPage = () => {
   return (
     <>
       <h1>Sign Up Page</h1>
-      <p>To add in sign up form here</p>
       <form onSubmit={(event) => handleSubmit(event)}>
         <fieldset>
           <legend>Create New Account</legend>
-          <label for="username">Username: </label>
+          <label>Username: </label>
           <input
             type="text"
             name="username"
@@ -49,7 +51,7 @@ const LoginPage = () => {
           />
           <br />
           <br />
-          <label for="password">Password: </label>
+          <label>Password: </label>
           <input
             // type="password"
             name="password"
