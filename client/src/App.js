@@ -5,23 +5,27 @@ import MainRoute from "./components/route/route-main.js";
 import HostRoute from "./components/route/route-host.js";
 import UserRoute from "./components/route/route-user.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import NavBar from "./components/route/NavBar";
+import SwitchRoute from "./components/route/switchroute";
 
 function App() {
   return (
     <>
-      <Router>
+      <NavBar />
+      {/* <SwitchRoute /> */}
+      {/* <Router>
         <Switch>
-          <Route exact path="/user*">
+          <Route path='/user*'>
             <UserRoute />
           </Route>
-          <Route exact path="/host*">
+          <Route path='/host*'>
             <HostRoute />
           </Route>
-          <Route exact path="/*">
+          <Route exact path='/'>
             <MainRoute />
           </Route>
         </Switch>
-      </Router>
+      </Router> */}
     </>
   );
 }
