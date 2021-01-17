@@ -1,6 +1,7 @@
 import ChangeRoleBtn from "../buttons/changeRole.js";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import LogoutBtn from "../buttons/logoutButton.js";
 
 const UserRoute = () => {
   return (
@@ -14,6 +15,7 @@ const UserRoute = () => {
           <Nav.Link href='/user/:userid/enterroom'>Enter Room</Nav.Link>
           <Nav.Link href='/user/:userid/:roomid'>User Room</Nav.Link>
           <ChangeRoleBtn />
+          <LogoutBtn />
         </Nav>
         {/* START - Temporary - to be removed */}
         <ul>

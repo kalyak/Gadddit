@@ -2,6 +2,7 @@ import Nav from "react-bootstrap/esm/Nav";
 import Navbar from "react-bootstrap/esm/Navbar";
 import { Link } from "react-router-dom";
 import ChangeRoleBtn from "../buttons/changeRole";
+import LogoutBtn from "../buttons/logoutButton";
 
 const HostRoute = () => {
   return (
@@ -15,6 +16,7 @@ const HostRoute = () => {
           <Nav.Link href='/host/:userid/createroom'>Create Room</Nav.Link>
           <Nav.Link href='/host/:userid/:roomid'>Host Room</Nav.Link>
           <ChangeRoleBtn />
+          <LogoutBtn />
         </Nav>
 
         {/* START - Temporary - to be removed */}
