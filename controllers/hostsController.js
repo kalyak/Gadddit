@@ -6,17 +6,68 @@ const Qna = require("../models/QnASchema");
 const router = express.Router();
 
 let hostID = "";
+let hostName = "";
 
 const isAuthenticated = (req, res, next) => {
   console.log("session data:", req.session.currentUser);
   if (req.session.currentUser) {
     hostID = req.session.currentUser._id;
+    hostName = req.session.currentUser.username;
     next();
   } else {
     console.log("no session");
     res.status(401).send("You are currently not logged in. Please log in");
   }
 };
+
+// to find all upcoming room
+router.get("/upcoming", isAuthenticated, (req, res) => {
+  Rooms.find({ hostID }, (err, rooms) => {
+    if (err) {
+      res.status(500).send("Database error. Pls contact your system admin");
+    } else {
+      const upcoming = rooms.filter(
+        (room) => Date.parse(room.eventStart) > new Date()
+      );
+      res.status(200).send(upcoming);
+    }
+  });
+});
+
+// to find all past room + extract the QnA for respective rooms
+router.get("/past", isAuthenticated, (req, res) => {
+  Rooms.find({ hostID }, (err, rooms) => {
+    if (err) {
+      res.status(500).send("Database error. Pls contact your system admin");
+    } else {
+      const past = rooms.filter(
+        (room) => Date.parse(room.eventStart) < new Date()
+      );
+      let data = [];
+      past.map((room, index) => {
+        Qna.find({ roomID: room._id }, (err, qna) => {
+          if (err) {
+            res
+              .status(500)
+              .send("Database error. Pls contact your system admin");
+          } else {
+            if (qna.length === 0) {
+              data.push(room);
+              if (index === rooms.length - 1) {
+                return res.status(200).send(data);
+              }
+            } else {
+              data.push({ ...room, questions: qna });
+              if (index === rooms.length - 1) {
+                return res.status(200).send(data);
+              }
+            }
+          }
+        });
+      });
+    }
+  });
+});
 
 // to find all rooms with hostID + extract the QnA for respective rooms
 router.get("/", isAuthenticated, (req, res) => {
@@ -25,23 +76,33 @@ router.get("/", isAuthenticated, (req, res) => {
       res.status(500).send("Database error. Pls contact your system admin");
     } else {
       let data = [];
-      rooms.map((room) => {
-        Qna.findById({ roomID: room._id }, (err, qna) => {
+      rooms.map((room, index) => {
+        Qna.find({ roomID: room._id }, (err, qna) => {
           if (err) {
             res
               .status(500)
               .send("Database error. Pls contact your system admin");
           } else {
-            data.push({ ...room, questions: qna });
+            console.log("qna", qna);
+            if (qna.length === 0) {
+              data.push(room);
+              if (index === rooms.length - 1) {
+                res.status(200).send(data);
+              }
+            } else {
+              data.push({ ...room, questions: qna });
+              if (index === rooms.length - 1) {
+                res.status(200).send(data);
+              }
+            }
           }
         });
       });
-      res.status(200).send(data);
     }
   });
 });
 
-//to show individual roomID
+//to show individual room - to edit upcoming event
 router.get("/:roomID", isAuthenticated, (req, res) => {
   Rooms.findById(req.params.roomID, (err, room) => {
     if (err) {
@@ -55,7 +116,7 @@ router.get("/:roomID", isAuthenticated, (req, res) => {
 
 // to create a new room + return roomCode + update roomHostedHistory on userDetail
 router.post("/rooms/new", isAuthenticated, (req, res) => {
-  const data = { ...req.body, hostID: hostID };
+  const data = { ...req.body, hostID: hostID, hostName: hostName };
 
   Rooms.create(data, (err, createdRoom) => {
     if (err) {
@@ -88,7 +149,6 @@ router.post("/rooms/new", isAuthenticated, (req, res) => {
                 }
               }
             );
-
             res.status(200).send(room);
           }
         }
@@ -97,7 +157,7 @@ router.post("/rooms/new", isAuthenticated, (req, res) => {
   });
 });
 
-//update
+//UPDATE
 router.put("/:roomID", isAuthenticated, (req, res) => {
   Rooms.findByIdAndUpdate(
     req.params.roomID,
@@ -113,15 +173,34 @@ router.put("/:roomID", isAuthenticated, (req, res) => {
   );
 });
 
-// DELETE
+// DELETE + update roomHostedHistory on userDetail
 router.delete("/:roomID", isAuthenticated, (req, res) => {
-  console.log(req.params.id);
-  Rooms.findByIdAndDelete(req.params.roomID, (err, result) => {
+  Rooms.findByIdAndDelete(req.params.roomID, (err, deletedRoom) => {
     if (err) {
       res.status(500).send("Database error. Pls contact your system admin");
     } else {
-      Rooms.find({ hostID }, (err, rooms) => {
-        res.status(200).send(rooms);
+      Users.findById(hostID, (err, user) => {
+        if (err) {
+          res.status(500).send("Database error. Pls contact your system admin");
+        } else {
+          const deletedRoomID = deletedRoom._id;
+          Users.findByIdAndUpdate(
+            hostID,
+            { $pullAll: { roomHostedHistory: [deletedRoomID] } },
+            { upsert: true, new: true },
+            (err, user) => {
+              if (err) {
+                res
+                  .status(500)
+                  .send(
+                    " error here Database error. Pls contact your system admin"
+                  );
+              } else {
+                res.status(200).send(deletedRoom);
+              }
+            }
+          );
+        }
       });
     }
   });
