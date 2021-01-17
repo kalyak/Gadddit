@@ -2,6 +2,7 @@
 const express = require("express");
 const Rooms = require("../models/RoomsSchema");
 const Users = require("../models/UsersSchema");
+const Qna = require("../models/QnASchema");
 const router = express.Router();
 
 let hostID = "";
@@ -17,14 +18,25 @@ const isAuthenticated = (req, res, next) => {
   }
 };
 
-// to find all rooms with hostID
+// to find all rooms with hostID + extract the QnA for respective rooms
 router.get("/", isAuthenticated, (req, res) => {
   Rooms.find({ hostID }, (err, rooms) => {
     if (err) {
       res.status(500).send("Database error. Pls contact your system admin");
     } else {
-      console.log(rooms);
-      res.status(200).send(rooms);
+      let data = [];
+      rooms.map((room) => {
+        Qna.findById({ roomID: room._id }, (err, qna) => {
+          if (err) {
+            res
+              .status(500)
+              .send("Database error. Pls contact your system admin");
+          } else {
+            data.push({ ...room, questions: qna });
+          }
+        });
+      });
+      res.status(200).send(data);
     }
   });
 });
