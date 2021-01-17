@@ -48,17 +48,14 @@ const SwitchRoute = () => {
         <Route exact path={AppURL.main.about}>
           <About />
         </Route>
-
-        <Route exact path={AppURL.main.home}>
-          <Home />
-        </Route>
-
         <Route exact path={AppURL.main.login}>
           <LoginPage />
         </Route>
-
         <Route exact path={AppURL.main.signup}>
           <SignupPage />
+        </Route>
+        <Route exact path={AppURL.main.home}>
+          <Home />
         </Route>
       </Switch>
     </Router>
