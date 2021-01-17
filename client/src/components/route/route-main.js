@@ -1,64 +1,49 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Home from "../pages/main-Home.js";
-import About from "../pages/main-about.js";
-import LoginPage from "../pages/main-Login";
-import SignupPage from "../pages/main-Signup";
+import { Link } from "react-router-dom";
 import AppURL from "./route-constants.js";
+import Navbar from "react-bootstrap/esm/Navbar";
+import Nav from "react-bootstrap/esm/Nav";
 
 const MainRoute = () => {
   return (
     <>
       <h1>Home Route</h1>
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              Navbar:
-              <li>
-                <Link to={AppURL.main.home}>Home</Link>
-              </li>
-              <li>
-                <Link to={AppURL.main.about}>About</Link>
-              </li>
-              <li>
-                <Link to={AppURL.main.login}>Login</Link>
-              </li>
-              <li>
-                <Link to={AppURL.main.signup}>signup</Link>
-              </li>
-            </ul>
+      <Navbar bg='dark' variant='dark' sticky='top'>
+        <Navbar.Brand href='/user'>Gaddit</Navbar.Brand>
+        <Nav className='mr-auto'>
+          <Nav.Link href={AppURL.main.home}>Home</Nav.Link>
+          <Nav.Link href={AppURL.main.about}>About</Nav.Link>
+          <Nav.Link href={AppURL.main.login}>Login</Nav.Link>
+          <Nav.Link href={AppURL.main.signup}>Sign Up</Nav.Link>
+        </Nav>
 
-            {/* START - Temporary - to be removed */}
-            <ul>
-              Temporary list:
-              <li>
-                <a href="/user/:userid">User</a>
-              </li>
-              <li>
-                <a href="/host/:userid">Host</a>
-              </li>
-            </ul>
-            {/* END - Temporary - to be removed */}
-          </nav>
-          <Switch>
-            <Route exact path={AppURL.main.about}>
-              <About />
-            </Route>
+        {/* <ul>
+          Navbar:
+          <li>
+            <Link to={AppURL.main.home}>Home</Link>
+          </li>
+          <li>
+            <Link to={AppURL.main.about}>About</Link>
+          </li>
+          <li>
+            <Link to={AppURL.main.login}>Login</Link>
+          </li>
+          <li>
+            <Link to={AppURL.main.signup}>signup</Link>
+          </li>
+        </ul> */}
 
-            <Route exact path={AppURL.main.home}>
-              <Home />
-            </Route>
-
-            <Route exact path={AppURL.main.login}>
-              <LoginPage />
-            </Route>
-
-            <Route exact path={AppURL.main.signup}>
-              <SignupPage />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+        {/* START - Temporary - to be removed */}
+        {/* <ul>
+          Temporary list:
+          <li>
+            <a href='/user/:userid'>User</a>
+          </li>
+          <li>
+            <a href='/host/:userid'>Host</a>
+          </li>
+        </ul> */}
+        {/* END - Temporary - to be removed */}
+      </Navbar>
     </>
   );
 };

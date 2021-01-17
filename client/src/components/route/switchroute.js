@@ -3,11 +3,16 @@ import HostHosted from "../pages/host-allHosted";
 import HostHosting from "../pages/host-allHosting";
 import HostCreate from "../pages/host-createEvent";
 import HostRoom from "../pages/host-room";
+import About from "../pages/main-about";
+import Home from "../pages/main-Home";
+import LoginPage from "../pages/main-Login";
 import UserAttended from "../pages/user-allAttended";
 import UserUpcoming from "../pages/user-allUpcoming";
 import EnterRoom from "../pages/user-enterRoom";
 import UserRoom from "../pages/user-room";
+import SignupPage from "../pages/main-Signup";
 import NavBar from "./NavBar";
+import AppURL from "./route-constants";
 
 const SwitchRoute = () => {
   return (
@@ -39,6 +44,21 @@ const SwitchRoute = () => {
         </Route>
         <Route exact path='/user/:userid/:roomid'>
           <UserRoom />
+        </Route>
+        <Route exact path={AppURL.main.about}>
+          <About />
+        </Route>
+
+        <Route exact path={AppURL.main.home}>
+          <Home />
+        </Route>
+
+        <Route exact path={AppURL.main.login}>
+          <LoginPage />
+        </Route>
+
+        <Route exact path={AppURL.main.signup}>
+          <SignupPage />
         </Route>
       </Switch>
     </Router>

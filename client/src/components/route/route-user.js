@@ -9,7 +9,7 @@ const UserRoute = () => {
       {/* <h1>User Route</h1> */}
 
       {/* <div> */}
-      <Navbar bg='dark' variant='dark' sticky='top'>
+      <Navbar bg='info' variant='dark' sticky='top'>
         <Navbar.Brand href='/user'>Gaddit</Navbar.Brand>
         <Nav className='mr-auto'>
           <Nav.Link href='/user/:userid'>User Home</Nav.Link>
