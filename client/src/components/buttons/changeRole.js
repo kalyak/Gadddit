@@ -17,16 +17,16 @@ const ChangeRoleBtn = () => {
 
   if (isHost) {
     return (
-      <button>
-        <Link to='/user/:userid'>Switch to Attendee</Link>
-      </button>
+      <Link to="/user/">
+        <button>Switch to Attendee </button>
+      </Link>
     );
   }
   if (isAttendee) {
     return (
-      <button>
-        <Link to='/host/:userid'>Switch to Host</Link>
-      </button>
+      <Link to="/host/">
+        <button>Switch to Host</button>
+      </Link>
     );
   }
 };
