@@ -11,7 +11,7 @@ const LogoutBtn = () => {
   const handleLogout = (event) => {
     event.preventDefault();
     axios
-      .delete("/sessions/delete")
+      .delete("/sessions/")
       .then((response) => {
         setLogout(true);
       })
