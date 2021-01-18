@@ -7,13 +7,13 @@ const UserRoute = () => {
   return (
     <>
       {/* <h1>User Route</h1> */}
-      <Navbar bg='info' variant='dark' sticky='top'>
-        <Navbar.Brand href='/user'>Gaddit</Navbar.Brand>
-        <Nav className='mr-auto'>
-          <Nav.Link href='/user/:userid'>User Home</Nav.Link>
-          <Nav.Link href='/user/:userid/attended'>Attended</Nav.Link>
-          <Nav.Link href='/user/:userid/enterroom'>Enter Room</Nav.Link>
-          <Nav.Link href='/user/:userid/:roomid'>User Room</Nav.Link>
+      <Navbar bg="info" variant="dark" sticky="top">
+        <Navbar.Brand href="/user">Gaddit</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="/user">User Home</Nav.Link>
+          <Nav.Link href="/user/attended">Attended</Nav.Link>
+          <Nav.Link href="/user/enterroom">Enter Room</Nav.Link>
+          <Nav.Link href="/user/:roomid">User Room</Nav.Link>
           <ChangeRoleBtn />
           <LogoutBtn />
         </Nav>
@@ -21,7 +21,7 @@ const UserRoute = () => {
         <ul>
           Temporary List:
           <li>
-            <a href='/'>HOME</a>
+            <a href="/">HOME</a>
           </li>
         </ul>
         {/* END - Temporary - to be removed */}
