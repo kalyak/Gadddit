@@ -3,9 +3,9 @@ import AppURL from "../route/route-constants";
 
 const LoginBtn = () => {
   return (
-    <button>
-      <Link to={AppURL.main.login}>Login</Link>
-    </button>
+    <Link to={AppURL.main.login}>
+      <button>Login</button>
+    </Link>
   );
 };
 

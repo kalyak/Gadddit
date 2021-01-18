@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,27 +9,40 @@ const LoginPage = () => {
     userType: "",
   });
   const [isLogin, setIsLogin] = useState(false);
-  const [resError, setResError] = useState("");
+  const [resError, setResError] = useState({
+    username: "",
+    password: "",
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
 
     axios
-      .post(" ", formData)
+      .post("/sessions", formData)
       .then((response) => {
         console.log(response);
         setIsLogin(true);
       })
       .catch((error) => {
         console.log(error.response.data);
-        setResError(error.response.data);
+        setResError((state) => {
+          return { ...state, ...error.response.data };
+        });
       });
   };
+
+  if (isLogin) {
+    return <Redirect to="/user" />;
+  }
 
   const handleChange = (event) => {
     setFormData((state) => {
       return { ...state, [event.target.name]: event.target.value };
+    });
+    setResError({
+      username: "",
+      password: "",
     });
   };
 
@@ -51,6 +64,7 @@ const LoginPage = () => {
           value={formData.username}
           onChange={handleChange}
         />
+        <span style={{ color: "red" }}> {resError.username} </span>
         <br />
         <br />
         <label>Password: </label>
@@ -62,7 +76,9 @@ const LoginPage = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <br />
+        <span style={{ color: "red" }}> {resError.password} </span>
+
+        {/* <br />
         <br />
         <label>Signing As: </label>
         <select
@@ -75,7 +91,7 @@ const LoginPage = () => {
           </option>
           <option value="host">Host</option>
           <option value="attendee">Attendee</option>
-        </select>
+        </select> */}
         <br />
         <br />
         <input type="submit" value="Login" />

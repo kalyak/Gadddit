@@ -20,29 +20,29 @@ const SwitchRoute = () => {
       <NavBar />
 
       <Switch>
-        <Route exact path='/host/:userid'>
+        <Route exact path="/host">
           <HostHosting />
         </Route>
-        <Route exact path='/host/:userid/hosted'>
+        <Route exact path="/host/hosted">
           <HostHosted />
         </Route>
-        <Route exact path='/host/:userid/createroom'>
+        <Route exact path="/host/createroom">
           <HostCreate />
         </Route>
-        <Route exact path='/host/:userid/:roomid'>
+        <Route exact path="/host/:roomid">
           <HostRoom />
         </Route>
-        <Route exact path='/user/:userid/'>
+        <Route exact path="/user/">
           <UserUpcoming />
         </Route>
-        <Route exact path='/user/:userid/attended'>
+        <Route exact path="/user/attended">
           <UserAttended />
         </Route>
 
-        <Route exact path='/user/:userid/enterroom'>
+        <Route exact path="/user/enterroom">
           <EnterRoom />
         </Route>
-        <Route exact path='/user/:userid/:roomid'>
+        <Route exact path="/user/:roomid">
           <UserRoom />
         </Route>
         <Route exact path={AppURL.main.about}>

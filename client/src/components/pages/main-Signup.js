@@ -21,17 +21,20 @@ const SignupPage = () => {
     console.log(formData);
 
     axios
-      .post(" ", formData) //TODO add axios call
+      .post("/users/new", formData)
       .then((response) => {
+        console.log(response);
         setDone(true);
+        console.log("first then");
       })
       .catch((error) => {
-        setErrors(error.message);
+        console.log(error.response);
+        setErrors(error.response.data);
       });
   };
 
   if (done) {
-    return <Redirect to />;
+    return <Redirect to="/user" />;
   }
 
   return (
@@ -42,28 +45,30 @@ const SignupPage = () => {
           <legend>Create New Account</legend>
           <label>Username: </label>
           <input
-            type='text'
-            name='username'
+            type="text"
+            name="username"
             required
-            id='username'
+            id="username"
             value={formData.username}
             onChange={handleChange}
+            placeholder="Username"
           />
+          <span style={{ color: "red" }}> {errors} </span>
           <br />
           <br />
           <label>Password: </label>
           <input
-            // type="password"
-            name='password'
+            type="password"
+            name="password"
             required
-            id='password'
+            id="password"
             value={formData.password}
             onChange={handleChange}
+            placeholder="Password"
           />
           <br />
           <br />
-          <input type='submit' />
-          <p style={{ color: "red" }}>{errors}</p>
+          <input type="submit" />
         </fieldset>
       </form>
     </>
