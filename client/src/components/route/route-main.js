@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import SignUpBtn from "../buttons/signupButton.js";
 import LoginBtn from "../buttons/loginButton.js";
+import { Link } from "react-router-dom";
 
 const MainRoute = () => {
   return (
@@ -11,11 +12,9 @@ const MainRoute = () => {
       <Navbar bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="/">Gaddit</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href={AppURL.main.home}>Home</Nav.Link>
-          <Nav.Link href={AppURL.main.about}>About</Nav.Link>
-          {/* <Nav.Link href={AppURL.main.login}>Login</Nav.Link> */}
+          <Link to={AppURL.main.home}>Home</Link>
+          <Link to={AppURL.main.about}>About</Link>
           <LoginBtn />
-          {/* <Nav.Link href={AppURL.main.signup}>Sign Up</Nav.Link> */}
           <SignUpBtn />
         </Nav>
 
