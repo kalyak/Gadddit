@@ -8,13 +8,13 @@ const HostRoute = () => {
   return (
     <>
       {/* <h1>Host Route</h1> */}
-      <Navbar bg='danger' variant='light' sticky='top'>
-        <Navbar.Brand href='/host'>Gaddit</Navbar.Brand>
-        <Nav className='mr-auto'>
-          <Nav.Link href='/host/:userid'>Host Home</Nav.Link>
-          <Nav.Link href='/host/:userid/hosted'>Hosted</Nav.Link>
-          <Nav.Link href='/host/:userid/createroom'>Create Room</Nav.Link>
-          <Nav.Link href='/host/:userid/:roomid'>Host Room</Nav.Link>
+      <Navbar bg="danger" variant="light" sticky="top">
+        <Navbar.Brand href="/host">Gaddit</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="/host">Host Home</Nav.Link>
+          <Nav.Link href="/host/hosted">Hosted</Nav.Link>
+          <Nav.Link href="/host/createroom">Create Room</Nav.Link>
+          <Nav.Link href="/host/:roomid">Host Room</Nav.Link>
           <ChangeRoleBtn />
           <LogoutBtn />
         </Nav>
@@ -23,7 +23,7 @@ const HostRoute = () => {
         <ul>
           Temporary List:
           <li>
-            <a href='/'>HOME</a>
+            <a href="/">HOME</a>
           </li>
         </ul>
         {/* END - Temporary - to be removed */}

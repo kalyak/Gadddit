@@ -8,9 +8,9 @@ const MainRoute = () => {
   return (
     <>
       {/* <h1>Home Route</h1> */}
-      <Navbar bg='dark' variant='dark' sticky='top'>
-        <Navbar.Brand href='/user'>Gaddit</Navbar.Brand>
-        <Nav className='mr-auto'>
+      <Navbar bg="dark" variant="dark" sticky="top">
+        <Navbar.Brand href="/">Gaddit</Navbar.Brand>
+        <Nav className="mr-auto">
           <Nav.Link href={AppURL.main.home}>Home</Nav.Link>
           <Nav.Link href={AppURL.main.about}>About</Nav.Link>
           {/* <Nav.Link href={AppURL.main.login}>Login</Nav.Link> */}
@@ -23,10 +23,10 @@ const MainRoute = () => {
         <ul>
           Temporary list:
           <li>
-            <a href='/user/:userid'>User</a>
+            <a href="/user">User</a>
           </li>
           <li>
-            <a href='/host/:userid'>Host</a>
+            <a href="/host">Host</a>
           </li>
         </ul>
         {/* END - Temporary - to be removed */}
