@@ -83,7 +83,7 @@ router.get("/past", isAuthenticated, (req, res) => {
   });
 });
 
-// //to check credentials for private event + update roomAttendedHistory on user profile
+// //to check credentials for private event + update roomAttendedHistory on user profile  + store roomInfo on the session
 // router.post("/private", isAuthenticated, (req, res) => {
 //   Rooms.findById(req.body.roomID, (err, room) => {
 //     if (err) {
@@ -99,6 +99,7 @@ router.get("/past", isAuthenticated, (req, res) => {
 //         req.body.roomCode === room.roomCode &&
 //         req.body.roomPassword === room.roomPassword
 //       ) {
+//         req.session.currentRoom = room;
 //         Users.findByIdAndUpdate(
 //           attendeeID,
 //           { $addToSet: { roomAttendedHistory: req.body.roomID } },
@@ -124,7 +125,7 @@ router.get("/past", isAuthenticated, (req, res) => {
 // });
 
 //try 2
-//to check credentials for private event + update roomAttendedHistory on user profile
+//to check credentials for private event + update roomAttendedHistory on user profile + store roomInfo on the session
 router.post("/private", isAuthenticated, (req, res) => {
   Rooms.findOne({ roomCode: req.body.roomCode }, (err, room) => {
     if (err) {
@@ -140,6 +141,7 @@ router.post("/private", isAuthenticated, (req, res) => {
         req.body.roomCode === room.roomCode &&
         req.body.roomPassword === room.roomPassword
       ) {
+        req.session.currentRoom = room;
         Users.findByIdAndUpdate(
           attendeeID,
           { $addToSet: { roomAttendedHistory: room._id } },
@@ -164,7 +166,7 @@ router.post("/private", isAuthenticated, (req, res) => {
   });
 });
 
-//to check credentials for public event + update roomAttendedHistory on user profile
+//to check credentials for public event + update roomAttendedHistory on user profile + store roomInfo on the session
 router.post("/:roomID", isAuthenticated, (req, res) => {
   Rooms.findById(req.params.roomID, (err, room) => {
     if (err) {
@@ -174,6 +176,7 @@ router.post("/:roomID", isAuthenticated, (req, res) => {
         req.body.roomCode === room.roomCode &&
         req.body.roomPassword === room.roomPassword
       ) {
+        req.session.currentRoom = room;
         Users.findByIdAndUpdate(
           attendeeID,
           { $addToSet: { roomAttendedHistory: req.params.roomID } },

@@ -43,4 +43,7 @@ app.use("/sessions", sessionsController);
 const usersController = require("./controllers/usersController.js");
 app.use("/users", usersController);
 
+const qnaController = require("./controllers/qnaController.js");
+app.use("/qna", qnaController);
+
 app.listen(process.env.PORT || 4000);
