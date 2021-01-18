@@ -51,7 +51,7 @@ router.get("/past", isAuthenticated, (req, res) => {
     });
 });
 
-// //to check credentials for private event + update roomAttendedHistory on user profile + store roomInfo on the session
+// //to check credentials for private event + update roomAttendedHistory on user profile  + store roomInfo on the session
 // router.post("/private", isAuthenticated, (req, res) => {
 //   Rooms.findById(req.body.roomID, (err, room) => {
 //     if (err) {
