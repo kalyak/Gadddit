@@ -13,7 +13,7 @@ sessions.post("/", (req, res) => {
       console.log(error);
       res.status(500).send("Database error. Pls contact your system admin");
     } else if (!foundUser) {
-      return res.status(401).send("No user found");
+      return res.status(401).send({ username: "No user found" });
     } else {
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.currentUser = foundUser;
@@ -26,7 +26,7 @@ sessions.post("/", (req, res) => {
           roomAttendedHistory: foundUser.roomAttendedHistory,
         });
       } else {
-        res.status(401).send("Password incorrect.");
+        res.status(401).send({ password: "Password incorrect" });
       }
     }
   });
