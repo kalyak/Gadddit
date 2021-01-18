@@ -13,7 +13,7 @@ sessions.post("/", (req, res) => {
       console.log(error);
       res.status(500).send("Database error. Pls contact your system admin");
     } else if (!foundUser) {
-      return res.status(401).send({ username: "No user found" });
+      return res.status(401).send({ username: "Username not found" });
     } else {
       if (bcrypt.compareSync(req.body.password, foundUser.password)) {
         req.session.currentUser = foundUser;
