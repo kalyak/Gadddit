@@ -45,36 +45,80 @@ router.get("/past", isAuthenticated, (req, res) => {
       res.status(500).send("Database error. Pls contact your system admin");
     } else {
       const attendedRoom = user.roomAttendedHistory;
+      console.log(attendedRoom);
+      if (attendedRoom.length === 0) {
+        return res.status(200).send(attendedRoom);
+      }
       let data = [];
       attendedRoom.map((roomID, index) => {
         Rooms.findById(roomID, (err, room) => {
+          console.log(roomID);
           if (err) {
             res
               .status(500)
               .send("Database error. Pls contact your system admin");
-          } else {
-            Qna.find({ roomID: room._id }, (err, qna) => {
-              if (err) {
-                res
-                  .status(500)
-                  .send("Database error. Pls contact your system admin");
+          }
+          Qna.find({ roomID: room._id }, (err, qna) => {
+            if (err) {
+              res
+                .status(500)
+                .send("Database error. Pls contact your system admin");
+            } else {
+              if (qna.length === 0) {
+                data.push(room);
+                if (index === attendedRoom.length - 1) {
+                  return res.status(200).send(data);
+                }
               } else {
-                if (qna.length === 0) {
-                  data.push(room);
-                  if (index === attendedRoom.length - 1) {
-                    return res.status(200).send(data);
-                  }
-                } else {
-                  data.push({ ...room, questions: qna });
-                  if (index === attendedRoom.length - 1) {
-                    return res.status(200).send(data);
-                  }
+                data.push({ ...room, questions: qna });
+                if (index === attendedRoom.length - 1) {
+                  return res.status(200).send(data);
                 }
               }
-            });
-          }
+            }
+          });
         });
       });
+    }
+  });
+});
+
+//to check credentials for private event + update roomAttendedHistory on user profile
+router.post("/private", isAuthenticated, (req, res) => {
+  Rooms.findById(req.body.roomID, (err, room) => {
+    if (err) {
+      res
+        .status(500)
+        .send("Database error. Pls contact your system admin for rooms");
+    } else if (!room) {
+      res
+        .status(401)
+        .send("No room found. Please ensure you key in the correct room ID");
+    } else {
+      if (
+        req.body.roomCode === room.roomCode &&
+        req.body.roomPassword === room.roomPassword
+      ) {
+        Users.findByIdAndUpdate(
+          attendeeID,
+          { $addToSet: { roomAttendedHistory: req.body.roomID } },
+          (err, user) => {
+            if (err) {
+              console.log("error on updating user profile");
+              res
+                .status(500)
+                .send(
+                  "Database error. Pls contact your system admin for users"
+                );
+            }
+            res.status(200).send("successfully join");
+          }
+        );
+      } else {
+        res
+          .status(401)
+          .send("Please ensure the room code and room password is correct");
+      }
     }
   });
 });
@@ -91,51 +135,17 @@ router.post("/:roomID", isAuthenticated, (req, res) => {
       ) {
         Users.findByIdAndUpdate(
           attendeeID,
-          { $push: { roomAttendedHistory: req.params.roomID } },
+          { $addToSet: { roomAttendedHistory: req.params.roomID } },
           (err, user) => {
             if (err) {
               res
                 .status(500)
                 .send("Database error. Pls contact your system admin");
+            } else {
+              res.status(200).send("successfully join");
             }
           }
         );
-        res.status(200).send("successfully join");
-      } else {
-        res
-          .status(401)
-          .send("Please ensure the room code and room password is correct");
-      }
-    }
-  });
-});
-
-//to check credentials for private event + update roomAttendedHistory on user profile
-router.post("/private", isAuthenticated, (req, res) => {
-  Rooms.findById(req.body.roomID, (err, room) => {
-    if (err) {
-      res.status(500).send("Database error. Pls contact your system admin");
-    } else if (!room) {
-      res
-        .status(401)
-        .send("No room found. Please ensure you key in the correct room ID");
-    } else {
-      if (
-        req.body.roomCode === room.roomCode &&
-        req.body.roomPassword === room.roomPassword
-      ) {
-        Users.findByIdAndUpdate(
-          attendeeID,
-          { $push: { roomAttendedHistory: req.params.roomID } },
-          (err, user) => {
-            if (err) {
-              res
-                .status(500)
-                .send("Database error. Pls contact your system admin");
-            }
-          }
-        );
-        res.status(200).send("successfully join");
       } else {
         res
           .status(401)
