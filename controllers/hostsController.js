@@ -139,7 +139,7 @@ router.post("/rooms/new", isAuthenticated, (req, res) => {
             Users.findByIdAndUpdate(
               hostID,
               {
-                $push: { roomHostedHistory: createdRoom._id },
+                $addToSet: { roomHostedHistory: createdRoom._id },
               },
               (err, user) => {
                 if (err) {

@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 });
 
 // CREATE
-router.post("/", (req, res) => {
+router.post("/new", (req, res) => {
   Users.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       return res
