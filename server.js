@@ -31,8 +31,8 @@ app.use(
   })
 );
 
-// const attendeesController = require("./controllers/attendeesController.js");
-// app.use("/attendees", attendeesController);
+const attendeesController = require("./controllers/attendeesController.js");
+app.use("/attendees", attendeesController);
 
 const hostsController = require("./controllers/hostsController.js");
 app.use("/hosts", hostsController);

@@ -83,9 +83,50 @@ router.get("/past", isAuthenticated, (req, res) => {
   });
 });
 
+// //to check credentials for private event + update roomAttendedHistory on user profile
+// router.post("/private", isAuthenticated, (req, res) => {
+//   Rooms.findById(req.body.roomID, (err, room) => {
+//     if (err) {
+//       res
+//         .status(500)
+//         .send("Database error. Pls contact your system admin for rooms");
+//     } else if (!room) {
+//       res
+//         .status(401)
+//         .send("No room found. Please ensure you key in the correct room ID");
+//     } else {
+//       if (
+//         req.body.roomCode === room.roomCode &&
+//         req.body.roomPassword === room.roomPassword
+//       ) {
+//         Users.findByIdAndUpdate(
+//           attendeeID,
+//           { $addToSet: { roomAttendedHistory: req.body.roomID } },
+//           (err, user) => {
+//             if (err) {
+//               console.log("error on updating user profile");
+//               res
+//                 .status(500)
+//                 .send(
+//                   "Database error. Pls contact your system admin for users"
+//                 );
+//             }
+//             res.status(200).send("successfully join");
+//           }
+//         );
+//       } else {
+//         res
+//           .status(401)
+//           .send("Please ensure the room code and room password is correct");
+//       }
+//     }
+//   });
+// });
+
+//try 2
 //to check credentials for private event + update roomAttendedHistory on user profile
 router.post("/private", isAuthenticated, (req, res) => {
-  Rooms.findById(req.body.roomID, (err, room) => {
+  Rooms.findOne({ roomCode: req.body.roomCode }, (err, room) => {
     if (err) {
       res
         .status(500)
@@ -101,7 +142,7 @@ router.post("/private", isAuthenticated, (req, res) => {
       ) {
         Users.findByIdAndUpdate(
           attendeeID,
-          { $addToSet: { roomAttendedHistory: req.body.roomID } },
+          { $addToSet: { roomAttendedHistory: room._id } },
           (err, user) => {
             if (err) {
               console.log("error on updating user profile");
@@ -111,7 +152,7 @@ router.post("/private", isAuthenticated, (req, res) => {
                   "Database error. Pls contact your system admin for users"
                 );
             }
-            res.status(200).send("successfully join");
+            res.status(200).send({ roomID: room._id });
           }
         );
       } else {
