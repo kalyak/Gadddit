@@ -1,62 +1,89 @@
 import { useState } from "react";
 import DateTimePicker from "react-datetime-picker";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 const HostCreate = () => {
   const [formData, setFormData] = useState({
     eventName: "",
-    roomCode: "",
     roomPassword: "",
-    eventStart: new Date(),
-    eventEnd: new Date(),
-    isPublic: true,
+    eventStart: new Date().toISOString(),
+    eventEnd: new Date().toISOString(),
+    isPublic: false,
   });
 
   const [formStart, setStart] = useState(new Date());
   const [formEnd, setEnd] = useState(new Date());
+  const [done, setDone] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   const handleChange = (event) => {
     setFormData((state) => {
-      return { ...state, [event.target.name]: event.target.value };
+      return { ...state, [event.target.id]: event.target.value };
     });
-    // console.log(event.target);
   };
 
   const handleDateChange = (name, value) => {
-    // console.log(event.toISOString());
-    // console.log(event.name);
-
     setFormData((state) => {
       return { ...state, [name]: value.toISOString() };
     });
   };
 
+  const handleCheck = () => {
+    setFormData((state) => {
+      return { ...state, isPublic: !state.isPublic };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("/hosts/rooms/new", formData)
+      .then((response) => {
+        setDone(true);
+      })
+      .catch((error) => {
+        setErrors(error.message);
+      });
+  };
+
+  if (done) {
+    return <Redirect to={"/host"} />;
+  }
+
   return (
     <>
       <h1>Host Create New Room</h1>
-      {/* <p>To add form to create new room</p> */}
-      <Form>
-        <fieldset>
-          <legend>Create a new room</legend>
-          <label htmlFor='eventName'>Event Name: </label>
-          <input
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId='eventName'>
+          <Form.Label>Event Name: </Form.Label>
+          <Form.Control
             type='text'
-            name='eventName'
+            placeholder='Enter event name'
             value={formData.eventName}
             onChange={handleChange}
           />
-          <br />
-          <br />
-          <label htmlFor='roomCode'>Room Code:</label>
-          <input
+          <Form.Text className='text-muted'>
+            Event name for display in the calendar of events.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId='roomPassword'>
+          <Form.Label>Room Password: </Form.Label>
+          <Form.Control
             type='text'
-            name='roomCode'
-            value={formData.roomCode}
+            placeholder='Enter event password'
+            value={formData.roomPassword}
             onChange={handleChange}
           />
-          <br />
-          <br />
-          <label htmlFor='eventStart'>Start Time:</label>
+          <Form.Text className='text-muted'>
+            Event password for event entry confirmation.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId='eventStart'>
+          <Form.Label>Start Time: </Form.Label>
           <DateTimePicker
             name='eventStart'
             onChange={(event) => {
@@ -68,9 +95,13 @@ const HostCreate = () => {
             disableClock={true}
             returnValue='end'
           />
-          <br />
-          <br />
-          <label htmlFor='eventEnd'>End Time:</label>
+          <Form.Text className='text-muted'>
+            Select event start date and time.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId='eventEnd'>
+          <Form.Label>End Time: </Form.Label>
           <DateTimePicker
             name='eventEnd'
             onChange={(event) => {
@@ -78,38 +109,29 @@ const HostCreate = () => {
               handleDateChange("eventEnd", event);
             }}
             value={formEnd}
-            minDate={formStart}
+            minDate={new Date()}
             disableClock={true}
             returnValue='end'
           />
-          {/* <input
-            type='date'
-            name='eventEnd'
-            value={formData.eventEnd}
-            onChange={handleChange}
-          /> */}
-          <br />
-          <br />
-          <label htmlFor='roomPassword'>Room Password:</label>
-          <input
-            type='text'
-            name='roomPassword'
-            value={formData.roomPassword}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor='roomType'>Public Event: </label>
-          <input
+          <Form.Text className='text-muted'>
+            Select event end date and time.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId='isPublic'>
+          <Form.Check
             type='checkbox'
-            name='isPublic'
             id='isPublic'
-            value='true'
-            onChange={handleChange}
-            // {formData.isPublic? "checked":""}
+            label='Public Event'
+            // value={true}
+            checked={formData.isPublic}
+            onChange={handleCheck}
           />
-          {/* <input type='text' name='roomType' value={formData.isPublic} /> */}
-        </fieldset>
+        </Form.Group>
+
+        <Button variant='primary' type='submit'>
+          Create Event
+        </Button>
       </Form>
     </>
   );
