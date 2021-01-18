@@ -10,7 +10,7 @@ const HostCreate = () => {
     roomPassword: "",
     eventStart: new Date().toISOString(),
     eventEnd: new Date().toISOString(),
-    isPublic: false,
+    isPublic: true,
   });
 
   const [formStart, setStart] = useState(new Date());
@@ -59,6 +59,7 @@ const HostCreate = () => {
         <Form.Group controlId='eventName'>
           <Form.Label>Event Name: </Form.Label>
           <Form.Control
+            required
             type='text'
             placeholder='Enter event name'
             value={formData.eventName}
@@ -72,6 +73,7 @@ const HostCreate = () => {
         <Form.Group controlId='roomPassword'>
           <Form.Label>Room Password: </Form.Label>
           <Form.Control
+            required
             type='text'
             placeholder='Enter event password'
             value={formData.roomPassword}
