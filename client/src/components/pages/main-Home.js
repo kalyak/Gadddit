@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <h1>WELCOME TO GADDIT</h1>
 
-      <Link exact to='/login'>
+      <Link exact="true" to="/login">
         <p>Login</p>
       </Link>
       {/* <Link exact to='/signup'>
