@@ -21,7 +21,7 @@ const SignupPage = () => {
     console.log(formData);
 
     axios
-      .post("/users/", formData)
+      .post("/users/new", formData)
       .then((response) => {
         console.log(response);
         setDone(true);
