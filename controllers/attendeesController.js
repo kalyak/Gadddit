@@ -40,47 +40,15 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
 
 //Get past attended room
 router.get("/past", isAuthenticated, (req, res) => {
-  Users.findById(attendeeID, (err, user) => {
-    if (err) {
-      res.status(500).send("Database error. Pls contact your system admin");
-    } else {
-      const attendedRoom = user.roomAttendedHistory;
-      console.log(attendedRoom);
-      if (attendedRoom.length === 0) {
-        return res.status(200).send(attendedRoom);
+  Users.findById(attendeeID)
+    .populate({ path: "roomAttendedHistory", populate: { path: "questions" } })
+    .exec((err, user) => {
+      if (err) {
+        res.status(500).send("Database error. Pls contact your system admin");
+      } else {
+        res.status(200).send(user.roomAttendedHistory);
       }
-      let data = [];
-      attendedRoom.map((roomID, index) => {
-        Rooms.findById(roomID, (err, room) => {
-          console.log(roomID);
-          if (err) {
-            res
-              .status(500)
-              .send("Database error. Pls contact your system admin");
-          }
-          Qna.find({ roomID: room._id }, (err, qna) => {
-            if (err) {
-              res
-                .status(500)
-                .send("Database error. Pls contact your system admin");
-            } else {
-              if (qna.length === 0) {
-                data.push(room);
-                if (index === attendedRoom.length - 1) {
-                  return res.status(200).send(data);
-                }
-              } else {
-                data.push({ ...room, questions: qna });
-                if (index === attendedRoom.length - 1) {
-                  return res.status(200).send(data);
-                }
-              }
-            }
-          });
-        });
-      });
-    }
-  });
+    });
 });
 
 // //to check credentials for private event + update roomAttendedHistory on user profile  + store roomInfo on the session

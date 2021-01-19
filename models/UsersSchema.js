@@ -6,7 +6,9 @@ const UsersSchema = new Schema(
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     roomHostedHistory: { type: Array },
-    roomAttendedHistory: { type: Array }, // tag roomID of events attended (not hosted) here
+    roomAttendedHistory: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Rooms" },
+    ],
     isArchived: { type: Boolean, default: false },
   },
   {
