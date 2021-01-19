@@ -2,58 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 const HostHosting = () => {
-  const [allHostingList, setAllHostingList] = useState([
-    {
-      _id: "6004f9cd9c826d03f8689520",
-      eventName: "test",
-      roomPassword: "test",
-      eventStart: "2021-01-20T13:19:10.452Z",
-      eventEnd: "2021-01-20T13:19:10.452Z",
-      isPublic: false,
-      hostID: "60045addd11c032a54e787ce",
-      hostName: "kalya",
-      createdAt: "2021-01-18T03:00:29.347Z",
-      updatedAt: "2021-01-18T03:00:29.366Z",
-      __v: 0,
-      roomCode: "689520",
-    },
-    {
-      _id: "6004f9cd9c826d03f8689521",
-      eventName: "test2",
-      roomPassword: "test",
-      eventStart: "2021-01-20T13:19:10.452Z",
-      eventEnd: "2021-01-20T13:19:10.452Z",
-      isPublic: false,
-      hostID: "60045addd11c032a54e787ce",
-      hostName: "kalya",
-      createdAt: "2021-01-18T03:00:29.347Z",
-      updatedAt: "2021-01-18T03:00:29.366Z",
-      __v: 0,
-      roomCode: "689520",
-    },
-    {
-      _id: "6004f9cd9c826d03f8689522",
-      eventName: "test3",
-      roomPassword: "test",
-      eventStart: "2021-01-20T13:19:10.452Z",
-      eventEnd: "2021-01-20T13:19:10.452Z",
-      isPublic: false,
-      hostID: "60045addd11c032a54e787ce",
-      hostName: "kalya",
-      createdAt: "2021-01-18T03:00:29.347Z",
-      updatedAt: "2021-01-18T03:00:29.366Z",
-      __v: 0,
-      roomCode: "689520",
-    },
-  ]);
+  const [allHostingList, setAllHostingList] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/host/upcoming", { withCredentials: true })
+      .get("/hosts/upcoming", { withCredentials: true })
       .then((response) => {
-        console.log(response);
+        console.log("all hosting list", response.data);
         setAllHostingList(response.data);
       })
       .catch((error) => {
@@ -61,19 +19,19 @@ const HostHosting = () => {
       });
   }, []);
 
-  const handleDelete = (event) => {
-    console.log(event.target.id);
-    const id = event.target.id;
-    axios
-      .delete(`/host/${id}`, { withCredentials: true })
-      .then(() => {
-        const newHostingList = allHostingList.filter((list) => list._id !== id);
-        setAllHostingList(newHostingList);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const handleDelete = (event) => {
+  //   console.log(event.target.id);
+  //   const id = event.target.id;
+  //   axios
+  //     .delete(`/host/${id}`, { withCredentials: true })
+  //     .then(() => {
+  //       const newHostingList = allHostingList.filter((list) => list._id !== id);
+  //       setAllHostingList(newHostingList);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const handleDirectToRoom = (event) => {
     console.log(event.target.id);
@@ -91,9 +49,9 @@ const HostHosting = () => {
         <td>{eventTime}</td>
         <td>{room.roomCode}</td>
         <td>
-          <button id={room._id} onClick={(event) => handleDelete(event)}>
-            Delete Event
-          </button>
+          <Link to={`/host/${room._id}/edit`}>
+            <button id={room._id}>Edit Event</button>
+          </Link>
         </td>
         <td>
           <Link to={`/host/${room._id}`}>
@@ -106,10 +64,9 @@ const HostHosting = () => {
 
   return (
     <>
-      <h1>Host Hosting</h1>
-      <p>Display all hosting events</p>
+      <h1>Upcoming Event</h1>
 
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Event Name</th>
@@ -119,7 +76,7 @@ const HostHosting = () => {
           </tr>
         </thead>
         <tbody>{displayAllEvents}</tbody>
-      </table>
+      </Table>
     </>
   );
 };

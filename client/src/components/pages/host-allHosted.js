@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 const HostHosted = () => {
   const [allHostedListing, setAllHostedListing] = useState([]);
@@ -54,9 +55,9 @@ const HostHosted = () => {
 
   return (
     <>
-      <h1>Past Hosted Events</h1>
+      <h1>Past Events</h1>
 
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Event Name</th>
@@ -67,7 +68,7 @@ const HostHosted = () => {
           </tr>
         </thead>
         <tbody>{displayAllEvents}</tbody>
-      </table>
+      </Table>
     </>
   );
 };
