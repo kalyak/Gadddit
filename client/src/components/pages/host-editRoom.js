@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import dayjs from "dayjs";
 import { Redirect, useParams } from "react-router-dom";
+import DeleteRoom from "./host-DeleteRoom";
 
 const EditRoom = () => {
   const [formData, setFormData] = useState({});
-
   const { roomid } = useParams();
-  const [formStart, setStart] = useState(new Date());
+  const [formStart, setStart] = useState("");
   const [formEnd, setEnd] = useState("");
   const [updated, setUpdated] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -163,6 +162,7 @@ const EditRoom = () => {
             <Button variant="primary" type="submit">
               Edit
             </Button>
+            <DeleteRoom roomid={roomid} />
           </Form>
         </>
       )}
