@@ -55,7 +55,7 @@ const HostHosted = () => {
 
   return (
     <>
-      <h1>Past Hosted Events</h1>
+      <h1>Past Events</h1>
 
       <Table striped bordered hover>
         <thead>
