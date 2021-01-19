@@ -10,6 +10,9 @@ const AnswerField = (props) => {
   };
 
   const handleDoubleClick = (event) => {
+    console.log("roomid: " + props.roomId.roomid);
+    console.log(props.roomId.roomid);
+    console.log("qnaid: " + props.qnaId);
     setAnswer(props.answer);
     setEditing(true);
   };
@@ -27,7 +30,7 @@ const AnswerField = (props) => {
 
     axios
       .put(
-        `/qna/${props.roomId}/${props.qnaId}`,
+        `/qna/${props.roomId.roomid}/${props.qnaId}`,
         { answer: answer },
         { withCredentials: true }
       )
