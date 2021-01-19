@@ -17,8 +17,8 @@ const UserUpcoming = () => {
       });
   }, [upcomingRooms.length]);
 
-  const historyDisplay = upcomingRooms.map((room) => {
-    return <UpcomingEvent key={room._id} room={room} />;
+  const historyDisplay = upcomingRooms.map((room, index) => {
+    return <UpcomingEvent key={room._id} room={room} index={index} />;
   });
 
   return (
@@ -28,6 +28,7 @@ const UserUpcoming = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>S/N</th>
             <th>Event Name</th>
             <th>Event Date</th>
             <th>Host</th>

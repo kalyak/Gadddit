@@ -33,13 +33,16 @@ const HostHosted = () => {
     }
     return count;
   };
-  const displayAllEvents = allHostedListing.map((room) => {
+  const displayAllEvents = allHostedListing.map((room, index) => {
     const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
     const eventTime = dayjs(room.eventStart).format("HH:mm");
 
     return (
       <tr key={room._id}>
-        <td>{room.eventName}</td>
+        <td>{index + 1}</td>
+        <td>
+          <Link to={`/host/${room._id}`}>{room.eventName}</Link>
+        </td>
         <td>{eventDate}</td>
         <td>{eventTime}</td>
         <td>{room.questions.length}</td>
@@ -60,6 +63,7 @@ const HostHosted = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>S/N</th>
             <th>Event Name</th>
             <th>Event Date</th>
             <th>Event Time</th>

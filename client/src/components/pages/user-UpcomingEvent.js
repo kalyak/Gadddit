@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import dayjs from "dayjs";
 
-const UpcomingEvent = ({ room }) => {
+const UpcomingEvent = ({ room, index }) => {
   const [joined, setJoin] = useState(false);
 
   const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
@@ -29,6 +29,7 @@ const UpcomingEvent = ({ room }) => {
 
   return (
     <tr key={room._id}>
+      <td>{index + 1}</td>
       <td>{room.eventName}</td>
       <td>{eventDate}</td>
       <td>{room.hostName}</td>
