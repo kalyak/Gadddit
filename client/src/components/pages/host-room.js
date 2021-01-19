@@ -8,12 +8,13 @@ const HostRoom = () => {
   const roomId = useParams();
   const [qnaList, setQnaList] = useState([]);
   const [filterby, setFilterby] = useState("all");
+  console.log(qnaList);
 
   useEffect(() => {
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQnaList(response.data);
       })
       .catch((error) => {
@@ -22,7 +23,7 @@ const HostRoom = () => {
   }, []);
 
   const handleAnswerBtn = (qnaArr) => {
-    console.log("Clicked");
+    // console.log("Clicked");
     setQnaList((state) => {
       const filter = state.filter((x) => x._id !== qnaArr._id);
       const toUpdateAnswer = state.find((list) => list._id === qnaArr._id);
@@ -36,15 +37,34 @@ const HostRoom = () => {
   };
 
   const handleStateUpdate = (updatedAns, qnaid) => {
-    console.log("UpdatedAns: " + updatedAns);
-    console.log("ID: " + qnaid);
-
+    // console.log("UpdatedAns: " + updatedAns);
+    // console.log("ID: " + qnaid);
     setQnaList((state) => {
       const filter = state.filter((x) => x._id !== qnaid);
       const toUpdateAnswer = state.find((list) => list._id === qnaid);
-      console.log(toUpdateAnswer);
+      // console.log(toUpdateAnswer);
       return [...filter, { ...toUpdateAnswer, answer: updatedAns }];
     });
+  };
+
+  const countUnanswered = () => {
+    let count = 0;
+    for (let i = 0; i < qnaList.length; i++) {
+      if (qnaList[i].answer === "") {
+        count += 1;
+      }
+    }
+    return count;
+  };
+
+  const countAnswered = () => {
+    let count = 0;
+    for (let i = 0; i < qnaList.length; i++) {
+      if (qnaList[i].answer !== "") {
+        count += 1;
+      }
+    }
+    return count;
   };
 
   const displayAllqna = qnaList
@@ -103,9 +123,9 @@ const HostRoom = () => {
           handleFilter(event);
         }}
       >
-        <option value="all">All</option>
-        <option value="unanswered">Unanswered</option>
-        <option value="answered">Answered</option>
+        <option value="all">All ({qnaList.length})</option>
+        <option value="unanswered">Unanswered ({countUnanswered()})</option>
+        <option value="answered">Answered ({countAnswered()})</option>
       </select>
       <br />
       <br />
