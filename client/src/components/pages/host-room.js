@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import AnswerField from "../others/answerField";
 
 const HostRoom = () => {
   const roomId = useParams();
   console.log(roomId.roomid);
   const [qnaList, setQnaList] = useState([
     {
-      answer: "answered",
+      answer: "answer1",
       upvote: 20,
       isFlagged: false,
       _id: "60058a3487de6610ac448620",
@@ -20,7 +21,7 @@ const HostRoom = () => {
       __v: 0,
     },
     {
-      answer: "",
+      answer: "answer2",
       upvote: 14,
       isFlagged: false,
       _id: "60058a4087de6610ac448621",
@@ -65,7 +66,22 @@ const HostRoom = () => {
       const toUpdateAnswer = state.find((list) => list._id === qnaArr._id);
       console.log(toUpdateAnswer);
 
-      return [...filter, { ...toUpdateAnswer, answer: "answered" }];
+      return [
+        ...filter,
+        { ...toUpdateAnswer, answer: "Answered during presentation" },
+      ];
+    });
+  };
+
+  const handleStateUpdate = (updatedAns, qnaid) => {
+    console.log("UpdatedAns: " + updatedAns);
+    console.log("ID: " + qnaid);
+
+    setQnaList((state) => {
+      const filter = state.filter((x) => x._id !== qnaid);
+      const toUpdateAnswer = state.find((list) => list._id === qnaid);
+      console.log(toUpdateAnswer);
+      return [...filter, { ...toUpdateAnswer, answer: updatedAns }];
     });
   };
 
@@ -84,18 +100,26 @@ const HostRoom = () => {
       return (
         <tr key={qnaList._id}>
           <td>{index + 1}</td>
-          <td>{qnaList.question}</td>
           <td>{qnaList.upvote}</td>
-          <td>{qnaList.answer}</td>
+
           {qnaList.answer === "" ? (
             <td>
               <button onClick={() => handleAnswerBtn(qnaList)}>✔️</button>
             </td>
           ) : (
-            <td>
-              <button>Edit</button>
-            </td>
+            <td></td>
           )}
+
+          <td>{qnaList.question}</td>
+          <td>
+            <AnswerField
+              answer={qnaList.answer}
+              handleStateUpdate={handleStateUpdate}
+              qnaId={qnaList._id}
+              roomId={roomId}
+            />
+          </td>
+          {/* <td>{qnaList.answer}</td> */}
         </tr>
       );
     });
@@ -127,8 +151,9 @@ const HostRoom = () => {
         <thead>
           <tr>
             <td>S/N</td>
-            <td>Question</td>
             <td>Upvote</td>
+            <td>Answered during event</td>
+            <td>Question</td>
             <td>Answer</td>
           </tr>
         </thead>
