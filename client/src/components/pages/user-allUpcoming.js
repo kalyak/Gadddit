@@ -63,7 +63,7 @@ const UserUpcoming = () => {
   }, [upcomingRooms.length]);
 
   const historyDisplay = upcomingRooms.map((room) => {
-    return <UpcomingEvent room={room} />;
+    return <UpcomingEvent key={room._id} room={room} />;
   });
 
   return (
