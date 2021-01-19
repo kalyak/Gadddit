@@ -11,7 +11,7 @@ const RoomsSchema = new Schema(
     eventStart: { type: Date },
     eventEnd: { type: Date },
     isPublic: { type: Boolean },
-    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Qna" }],: 
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Qna" }],
   },
   {
     timestamps: true,
