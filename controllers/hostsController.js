@@ -37,82 +37,34 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
 });
 
 // to find all past room + extract the QnA for respective rooms
-router.get("/past", isAuthenticated, (req, res) => {
-  Rooms.find(
-    {
-      $and: [{ eventStart: { $lt: new Date() } }, { hostID: hostID }],
-    },
-    (err, rooms) => {
+router.get("/past", isAuthenticated, async (req, res) => {
+  Rooms.find({
+    $and: [{ eventStart: { $lt: new Date() } }, { hostID: hostID }],
+  })
+    .populate("questions")
+    .exec((err, room) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
-        console.log(rooms);
-        if (rooms.length === 0) {
-          res.status(200).send(rooms);
-        } else {
-          console.log(rooms);
-          let data = [];
-          rooms.map((room, index) => {
-            Qna.find({ roomID: room._id }, (err, qna) => {
-              if (err) {
-                res
-                  .status(500)
-                  .send("Database error. Pls contact your system admin");
-              } else {
-                if (qna.length === 0) {
-                  data.push(room);
-                  if (index === rooms.length - 1) {
-                    return res.status(200).send(data);
-                  }
-                } else {
-                  data.push({ ...room, questions: qna });
-                  if (index === rooms.length - 1) {
-                    return res.status(200).send(data);
-                  }
-                }
-              }
-            });
-          });
-        }
+        res.status(200).send(room);
       }
-    }
-  );
+    });
 });
 
 // to find all rooms with hostID + extract the QnA for respective rooms
 router.get("/", isAuthenticated, (req, res) => {
-  Rooms.find({ hostID }, (err, rooms) => {
-    if (err) {
-      res.status(500).send("Database error. Pls contact your system admin");
-    } else {
-      let data = [];
-      rooms.map((room, index) => {
-        Qna.find({ roomID: room._id }, (err, qna) => {
-          if (err) {
-            res
-              .status(500)
-              .send("Database error. Pls contact your system admin");
-          } else {
-            console.log("qna", qna);
-            if (qna.length === 0) {
-              data.push(room);
-              if (index === rooms.length - 1) {
-                res.status(200).send(data);
-              }
-            } else {
-              data.push({ ...room, questions: qna });
-              if (index === rooms.length - 1) {
-                res.status(200).send(data);
-              }
-            }
-          }
-        }).lean();
-      });
-    }
-  });
+  Rooms.find({ hostID })
+    .populate("questions")
+    .exec((err, rooms) => {
+      if (err) {
+        res.status(500).send("Database error. Pls contact your system admin");
+      } else {
+        res.status(200).send(rooms);
+      }
+    });
 });
 
-//to show individual room - to edit upcoming event
+//to show individual room - for subsequent edit purpose
 router.get("/:roomID", isAuthenticated, (req, res) => {
   Rooms.findById(req.params.roomID, (err, room) => {
     if (err) {

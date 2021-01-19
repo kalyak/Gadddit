@@ -5,7 +5,6 @@ const Qna = require("../models/QnASchema");
 const router = express.Router();
 
 let id = "";
-let roomID = "";
 let hostID = "";
 let username = "";
 
@@ -38,26 +37,18 @@ const isRoomAuthenticated = (req, res, next) => {
   }
 };
 
-const isHost = (req, res, next) => {
-  Rooms.findById(req.params.roomID, (err, room) => {
-    hostID = room.hostID;
-    if (hostID === id) {
-      next();
-    } else {
-      res.status(401).send("Only host can do this request");
-    }
-  });
-};
-
 //get all the qna when hosts start the room or attendees join room
 router.get("/:roomID", isAuthenticated, isRoomAuthenticated, (req, res) => {
-  Qna.find({ roomID: req.params.roomID }, (err, qna) => {
-    if (err) {
-      res.status(500).send("Database error. Pls contact your system admin");
-    } else {
-      res.status(200).send(qna);
+  Qna.find(
+    { $and: [{ roomID: req.params.roomID }, { isFlagged: false }] },
+    (err, qna) => {
+      if (err) {
+        res.status(500).send("Database error. Pls contact your system admin");
+      } else {
+        res.status(200).send(qna);
+      }
     }
-  });
+  );
 });
 
 //get single qna details
@@ -93,43 +84,43 @@ router.post(
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
-        Users.findById(id, (err, user) => {
-          if (err) {
-            res
-              .status(500)
-              .send("Database error. Pls contact your system admin");
-          } else {
-            res.status(200).send(createdQna);
+        Rooms.findByIdAndUpdate(
+          req.params.roomID,
+          { $push: { questions: createdQna._id } },
+          (err, room) => {
+            if (err) {
+              res
+                .status(500)
+                .send("Database error. Pls contact your system admin");
+            } else {
+              res.status(200).send(createdQna);
+            }
           }
-        });
+        );
       }
     });
   }
 );
 
-//UPDATE - no roomAuthentication since only host can edit
-router.put("/:roomID/:qnaID", isAuthenticated, isHost, (err, qna) => {
-  Qna.findByIdAndUpdate(
-    req.params.qnaID,
-    isAuthenticated,
-    isHost,
-    { upsert: true, new: true },
-    (err, qna) => {
-      if (err) {
-        res.status(500).send("Database error. Pls contact your system admin");
-      } else {
-        Users.findById(id, (err, user) => {
-          if (err) {
-            res
-              .status(500)
-              .send("Database error. Pls contact your system admin");
-          } else {
-            res.status(200).send(qna);
-          }
-        });
+//UPDATE
+router.put(
+  "/:roomID/:qnaID",
+  isAuthenticated,
+  isRoomAuthenticated,
+  (req, res) => {
+    Qna.findByIdAndUpdate(
+      req.params.qnaID,
+      req.body,
+      { upsert: true, new: true },
+      (err, qna) => {
+        if (err) {
+          res.status(500).send("Database error. Pls contact your system admin");
+        } else {
+          res.status(200).send(qna);
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 module.exports = router;
