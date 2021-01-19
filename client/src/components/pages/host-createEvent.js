@@ -16,7 +16,7 @@ const HostCreate = () => {
   const [formStart, setStart] = useState(new Date());
   const [formEnd, setEnd] = useState(new Date());
   const [done, setDone] = useState(false);
-  const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
     setFormData((state) => {
@@ -90,12 +90,16 @@ const HostCreate = () => {
             name='eventStart'
             onChange={(event) => {
               setStart(event);
+              setEnd(event);
               handleDateChange("eventStart", event);
             }}
             value={formStart}
             minDate={new Date()}
             disableClock={true}
             returnValue='end'
+            clearIcon={null}
+            showLeadingZeros={true}
+            format='dd/MM/yyyy hh:mm a'
           />
           <Form.Text className='text-muted'>
             Select event start date and time.
@@ -111,9 +115,12 @@ const HostCreate = () => {
               handleDateChange("eventEnd", event);
             }}
             value={formEnd}
-            minDate={new Date()}
+            minDate={formStart}
             disableClock={true}
             returnValue='end'
+            clearIcon={null}
+            showLeadingZeros={true}
+            format='dd/MM/yyyy hh:mm a'
           />
           <Form.Text className='text-muted'>
             Select event end date and time.
