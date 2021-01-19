@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AnswerField from "../others/answerField";
+import { Table } from "react-bootstrap";
 
 const HostRoom = () => {
   const roomId = useParams();
@@ -147,7 +148,7 @@ const HostRoom = () => {
       </select>
       <br />
       <br />
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <td>S/N</td>
@@ -158,7 +159,7 @@ const HostRoom = () => {
           </tr>
         </thead>
         <tbody>{displayAllqna}</tbody>
-      </table>
+      </Table>
     </>
   );
 };
