@@ -1,8 +1,8 @@
-import { Button } from "bootstrap";
+import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-import SweetAlert from "react-bootstrap-sweetalert";
 import axios from "axios";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 const DeleteRoom = (props) => {
   const [popUp, setPopUp] = useState(false);
@@ -17,7 +17,8 @@ const DeleteRoom = (props) => {
   };
 
   const handleConfirmDelete = () => {
-    const roomID = props.roomid;
+    const roomID = props.roomID;
+    setIsDeleted(true);
     axios
       .delete(`/hosts/${roomID}`, { withCredentials: true })
       .then(() => {
@@ -29,11 +30,17 @@ const DeleteRoom = (props) => {
   };
 
   if (isDeleted) {
-    <Redirect to="/host" />;
+    return <Redirect to="/host" />;
   }
   return (
     <>
-      <Button variant="primary" type="submit" onClick={handleClick}>
+      <Button
+        variant="primary"
+        type="submit"
+        onClick={() => {
+          handleClick();
+        }}
+      >
         Delete
       </Button>
       {popUp && (
@@ -43,8 +50,8 @@ const DeleteRoom = (props) => {
           confirmBtnText="Yes, delete it!"
           confirmBtnBsStyle="danger"
           title="Are you sure?"
-          onConfirm={handleConfirmDelete}
-          onCancel={handleClickCancel}
+          onConfirm={() => handleConfirmDelete()}
+          onCancel={() => handleClickCancel()}
           focusCancelBtn
         >
           You will not be able to recover this event room!
