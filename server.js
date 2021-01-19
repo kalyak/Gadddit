@@ -5,12 +5,15 @@ const app = express();
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/gadddit",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  }
+);
 
 db.on("error", (err) => console.log(err.message + " is mongod not running?"));
 db.on("connected", () =>

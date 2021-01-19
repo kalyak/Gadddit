@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import DeleteRoom from "./host-DeleteRoom";
 
 const HostHosting = () => {
   const [allHostingList, setAllHostingList] = useState([]);

@@ -6,8 +6,8 @@ import { Redirect, useParams } from "react-router-dom";
 import DeleteRoom from "./host-DeleteRoom";
 
 const EditRoom = () => {
-  const [formData, setFormData] = useState({});
   const { roomid } = useParams();
+  const [formData, setFormData] = useState({});
   const [formStart, setStart] = useState("");
   const [formEnd, setEnd] = useState("");
   const [updated, setUpdated] = useState(false);
@@ -162,8 +162,10 @@ const EditRoom = () => {
             <Button variant="primary" type="submit">
               Edit
             </Button>
-            <DeleteRoom roomid={roomid} />
           </Form>
+          <br />
+          <h6>To delete this room, please click below</h6>
+          <DeleteRoom roomID={roomid} />
         </>
       )}
     </>
