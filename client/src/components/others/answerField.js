@@ -25,7 +25,7 @@ const AnswerField = (props) => {
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    console.log(answer);
+    // console.log(answer);
     props.handleStateUpdate(answer, props.qnaId);
     setEditing(false);
 
@@ -36,7 +36,7 @@ const AnswerField = (props) => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.log(error);
