@@ -14,7 +14,9 @@ const isAuthenticated = (req, res, next) => {
     next();
   } else {
     console.log("no session");
-    res.status(401).send("You are currently not logged in. Please log in");
+    res
+      .status(401)
+      .send({ unauthorized: "You are currently not logged in. Please log in" });
   }
 };
 
@@ -97,13 +99,13 @@ router.get("/past", isAuthenticated, (req, res) => {
 router.post("/private", isAuthenticated, (req, res) => {
   Rooms.findOne({ roomCode: req.body.roomCode }, (err, room) => {
     if (err) {
-      res
-        .status(500)
-        .send("Database error. Pls contact your system admin for rooms");
+      res.status(500).send({
+        database: "Database error. Pls contact your system admin for rooms",
+      });
     } else if (!room) {
-      res
-        .status(401)
-        .send("No room found. Please ensure you key in the correct room ID");
+      res.status(401).send({
+        roomCode: "No room found. Please ensure you key in the correct room ID",
+      });
     } else {
       if (
         req.body.roomCode === room.roomCode &&
@@ -126,9 +128,10 @@ router.post("/private", isAuthenticated, (req, res) => {
           }
         );
       } else {
-        res
-          .status(401)
-          .send("Please ensure the room code and room password is correct");
+        res.status(401).send({
+          roomPassword:
+            "Please ensure the room code and room password is correct",
+        });
       }
     }
   });
