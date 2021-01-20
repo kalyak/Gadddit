@@ -17,15 +17,6 @@ const HostRoute = () => {
           <ChangeRoleBtn />
           <LogoutBtn />
         </Nav>
-
-        {/* START - Temporary - to be removed */}
-        <ul>
-          Temporary List:
-          <li>
-            <a href='/'>HOME</a>
-          </li>
-        </ul>
-        {/* END - Temporary - to be removed */}
       </Navbar>
     </>
   );

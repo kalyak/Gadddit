@@ -44,7 +44,6 @@ const HostHosted = () => {
           <Link to={`/host/${room._id}`}>{room.eventName}</Link>
         </td>
         <td>{eventDate}</td>
-        <td>{eventTime}</td>
         <td>{room.questions.length}</td>
         <td>{countUnanswered(room.questions)}</td>
         <td>
@@ -66,7 +65,6 @@ const HostHosted = () => {
             <th>S/N</th>
             <th>Event Name</th>
             <th>Event Date</th>
-            <th>Event Time</th>
             <th># of questions</th>
             <th># of unanswered</th>
           </tr>
