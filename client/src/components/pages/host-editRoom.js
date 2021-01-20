@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DateTimePicker from "react-datetime-picker";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 import DeleteRoom from "./host-DeleteRoom";
 
 const EditRoom = () => {
@@ -160,8 +160,11 @@ const EditRoom = () => {
             </Form.Group>
 
             <Button variant="primary" type="submit">
-              Edit
+              Submit Edit
             </Button>
+            <Link to="/host">
+              <Button variant="danger">Cancel Edit</Button>
+            </Link>
           </Form>
           <br />
           <h6>To delete this room, please click below</h6>
