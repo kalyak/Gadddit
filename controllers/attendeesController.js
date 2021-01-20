@@ -14,34 +14,39 @@ const isAuthenticated = (req, res, next) => {
     next();
   } else {
     console.log("no session");
-    res.status(401).send("You are currently not logged in. Please log in");
+    res
+      .status(401)
+      .send({ unauthorized: "You are currently not logged in. Please log in" });
   }
 };
 
 //Get upcoming rooms that are public and not hosted by this attendee
 router.get("/upcoming", isAuthenticated, (req, res) => {
-  Rooms.find(
-    {
-      $and: [
-        { eventStart: { $gte: new Date() } },
-        { isPublic: true },
-        { hostID: { $ne: attendeeID } },
-      ],
-    },
-    (err, rooms) => {
+  Rooms.find({
+    $and: [
+      { eventEnd: { $gte: new Date() } },
+      { isPublic: true },
+      { hostID: { $ne: attendeeID } },
+    ],
+  })
+    .sort({ eventEnd: 1 })
+    .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
         res.status(200).send(rooms);
       }
-    }
-  );
+    });
 });
 
 //Get past attended room
 router.get("/past", isAuthenticated, (req, res) => {
   Users.findById(attendeeID)
-    .populate({ path: "roomAttendedHistory", populate: { path: "questions" } })
+    .populate({
+      path: "roomAttendedHistory",
+      options: { sort: "-eventEnd" },
+      populate: { path: "questions" },
+    })
     .exec((err, user) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
@@ -97,13 +102,13 @@ router.get("/past", isAuthenticated, (req, res) => {
 router.post("/private", isAuthenticated, (req, res) => {
   Rooms.findOne({ roomCode: req.body.roomCode }, (err, room) => {
     if (err) {
-      res
-        .status(500)
-        .send("Database error. Pls contact your system admin for rooms");
+      res.status(500).send({
+        database: "Database error. Pls contact your system admin for rooms",
+      });
     } else if (!room) {
-      res
-        .status(401)
-        .send("No room found. Please ensure you key in the correct room ID");
+      res.status(401).send({
+        roomCode: "No room found. Please ensure you key in the correct room ID",
+      });
     } else {
       if (
         req.body.roomCode === room.roomCode &&
@@ -126,9 +131,10 @@ router.post("/private", isAuthenticated, (req, res) => {
           }
         );
       } else {
-        res
-          .status(401)
-          .send("Please ensure the room code and room password is correct");
+        res.status(401).send({
+          roomPassword:
+            "Please ensure the room code and room password is correct",
+        });
       }
     }
   });

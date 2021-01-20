@@ -5,13 +5,13 @@ import { Redirect } from "react-router-dom";
 
 const EnterRoom = () => {
   const [formData, setFormData] = useState({
-    // roomID: "",
     roomCode: "",
     roomPassword: "",
   });
   const [roomID, setRoomID] = useState("");
   const [done, setDone] = useState(false);
-  const [errors, setErrors] = useState(false);
+  const [resError, setResError] = useState({});
+  const [unauthorized, setUnauth] = useState(false);
 
   const handleChange = (event) => {
     setFormData((state) => {
@@ -28,13 +28,23 @@ const EnterRoom = () => {
         setDone(true);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        console.log(error.response.data.unauthorized);
+        setResError((state) => {
+          return { ...state, ...error.response.data };
+        });
+        if (error.response.data.unauthorized) {
+          setUnauth(true);
+        }
       });
   };
 
   if (done) {
     // console.log(roomID);
     return <Redirect to={`/user/${roomID}`} />;
+  }
+
+  if (unauthorized) {
+    return <Redirect to={"/login"} />;
   }
 
   return (
@@ -51,6 +61,11 @@ const EnterRoom = () => {
             value={formData.roomCode}
             onChange={handleChange}
           />
+          <span style={{ color: "red" }}>
+            {" "}
+            {resError.database}
+            {resError.roomCode}
+          </span>
           <Form.Text className='text-muted'>
             Enter event code given by the event host.
           </Form.Text>
@@ -65,6 +80,7 @@ const EnterRoom = () => {
             value={formData.roomPassword}
             onChange={handleChange}
           />
+          <span style={{ color: "red" }}> {resError.roomPassword} </span>
           <Form.Text className='text-muted'>
             Enter event password given by the event host.
           </Form.Text>
