@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Table } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UserAttended = () => {
   const [roomHistory, setHistroy] = useState([]);

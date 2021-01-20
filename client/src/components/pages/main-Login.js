@@ -1,4 +1,4 @@
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ const LoginPage = () => {
   };
 
   if (isLogin) {
-    return <Redirect to="/user" />;
+    return <Redirect to='/user' />;
   }
 
   const handleChange = (event) => {
@@ -57,9 +57,9 @@ const LoginPage = () => {
       >
         <label>Username: </label>
         <input
-          type="text"
-          name="username"
-          id="username"
+          type='text'
+          name='username'
+          id='username'
           required
           value={formData.username}
           onChange={handleChange}
@@ -69,9 +69,9 @@ const LoginPage = () => {
         <br />
         <label>Password: </label>
         <input
-          type="password"
-          name="password"
-          id="password"
+          type='password'
+          name='password'
+          id='password'
           required
           value={formData.password}
           onChange={handleChange}
@@ -94,7 +94,7 @@ const LoginPage = () => {
         </select> */}
         <br />
         <br />
-        <input type="submit" value="Login" />
+        <input type='submit' value='Login' />
       </form>
     </>
   );

@@ -7,6 +7,10 @@ const UpcomingEvent = ({ room, index }) => {
   const [joined, setJoin] = useState(false);
 
   const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
+  const now = new Date();
+  const startDate = new Date(room.eventStart);
+  const endDate = new Date(room.eventEnd);
+  const eventOngoing = now > startDate && now < endDate;
 
   const handleJoinEvent = () => {
     axios
@@ -34,7 +38,7 @@ const UpcomingEvent = ({ room, index }) => {
       <td>{eventDate}</td>
       <td>{room.hostName}</td>
       <td>
-        <button onClick={handleJoinEvent}>Join</button>
+        {eventOngoing ? <button onClick={handleJoinEvent}>Join</button> : ""}
       </td>
     </tr>
   );
