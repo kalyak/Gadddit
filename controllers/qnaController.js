@@ -123,4 +123,48 @@ router.put(
   }
 );
 
+//UPDATE - when user upvote
+router.put(
+  "/:roomID/:qnaID/upvote",
+  isAuthenticated,
+  isRoomAuthenticated,
+  (req, res) => {
+    Qna.findByIdAndUpdate(
+      req.params.qnaID,
+      { $addToSet: { upvote: id } },
+      { upsert: true, new: true },
+      (err, qna) => {
+        if (err) {
+          res.status(500).send("Database error. Pls contact your system admin");
+        } else {
+          console.log("upvote:", qna.upvote.length);
+          res.status(200).send(qna);
+        }
+      }
+    );
+  }
+);
+
+//when user downvote
+router.delete(
+  "/:roomID/:qnaID/upvote",
+  isAuthenticated,
+  isRoomAuthenticated,
+  (req, res) => {
+    Qna.findByIdAndUpdate(
+      req.params.qnaID,
+      { $pullAll: { upvote: id } },
+      { upsert: true, new: true },
+      (err, qna) => {
+        if (err) {
+          res.status(500).send("Database error. Pls contact your system admin");
+        } else {
+          console.log("upvote:", qna.upvote.length);
+          res.status(200).send(qna);
+        }
+      }
+    );
+  }
+);
+
 module.exports = router;
