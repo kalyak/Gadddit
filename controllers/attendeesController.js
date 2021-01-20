@@ -23,7 +23,7 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
   Rooms.find(
     {
       $and: [
-        { eventStart: { $gte: new Date() } },
+        { eventEnd: { $gte: new Date() } },
         { isPublic: true },
         { hostID: { $ne: attendeeID } },
       ],

@@ -22,7 +22,7 @@ const LogoutBtn = () => {
   };
 
   if (loggedOut) {
-    return <Redirect to />;
+    return <Redirect to='/' />;
   }
 
   return (
