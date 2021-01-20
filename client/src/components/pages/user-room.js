@@ -7,16 +7,19 @@ import UpvoteButton from "../buttons/upvoteButton";
 
 const UserRoom = () => {
   const roomId = useParams();
+  const [roomInfo, setRoom] = useState({});
   const [qnaList, setQnaList] = useState([]);
   const [filterby, setFilterby] = useState("all");
   console.log(qnaList);
+  console.log(roomInfo);
 
   useEffect(() => {
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        // console.log(response.data);
-        setQnaList(response.data);
+        console.log(response.data);
+        setQnaList(response.data.qna);
+        setRoom(response.data.roomInfo);
       })
       .catch((error) => {
         console.log(error);
@@ -75,8 +78,12 @@ const UserRoom = () => {
 
   return (
     <>
-      <h1>User QnA Page</h1>
-      <p>Display all QnA from database</p>
+      {/* <h1>User QnA Page</h1> */}
+      <h1>{roomInfo.eventName}</h1>
+      <h3>
+        Hosted by <b>{roomInfo.hostName}</b>
+      </h3>
+      {/* <p>Display all QnA from database</p> */}
       <br />
       <QuestionField roomId={roomId} />
       <br />
@@ -87,9 +94,9 @@ const UserRoom = () => {
           handleFilter(event);
         }}
       >
-        <option value="all">All ({qnaList.length})</option>
-        <option value="unanswered">Unanswered ({countUnanswered()})</option>
-        <option value="answered">Answered ({countAnswered()})</option>
+        <option value='all'>All ({qnaList.length})</option>
+        <option value='unanswered'>Unanswered ({countUnanswered()})</option>
+        <option value='answered'>Answered ({countAnswered()})</option>
       </select>
       <br />
       <br />
