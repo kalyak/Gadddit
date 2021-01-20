@@ -8,7 +8,7 @@ const QnASchema = new Schema(
     questionBy_userID: { type: String }, //userid
     questionBy: { type: String },
     answer: { type: String, default: "" },
-    upvote: { type: Number, default: 0 },
+    upvote: { type: Array },
     isFlagged: { type: Boolean, default: false }, // when host flag
   },
   {

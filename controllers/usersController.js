@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../models/UsersSchema");
 const bcrypt = require("bcrypt");
+const { body, validationResult } = require("express-validator");
 
 // SHOW
 router.get("/", (req, res) => {
@@ -10,30 +11,45 @@ router.get("/", (req, res) => {
 });
 
 // CREATE
-router.post("/new", (req, res) => {
-  Users.findOne({ username: req.body.username }, (err, user) => {
-    if (err) {
-      return res
-        .status(500)
-        .send("Database error. Pls contact your system admin");
-    } else if (user) {
-      return res.status(401).send("Username taken");
-    } else {
-      req.body.password = bcrypt.hashSync(
-        req.body.password,
-        bcrypt.genSaltSync()
-      );
-      Users.create(req.body, (err, user) => {
-        if (err) {
-          res.status(500).send("Database error. Pls contact your system admin");
-        } else {
-          console.log("User created");
-          res.status(200).send(user);
-        }
-      });
+router.post(
+  "/new",
+  [
+    body("username").notEmpty().withMessage("username cannot be empty"),
+    body("password")
+      .isLength({ min: 8 })
+      .withMessage("password must be at least 8 characters"),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
     }
-  });
-});
+    Users.findOne({ username: req.body.username }, (err, user) => {
+      if (err) {
+        return res
+          .status(500)
+          .send("Database error. Pls contact your system admin");
+      } else if (user) {
+        return res.status(401).send("Username taken");
+      } else {
+        req.body.password = bcrypt.hashSync(
+          req.body.password,
+          bcrypt.genSaltSync()
+        );
+        Users.create(req.body, (err, user) => {
+          if (err) {
+            res
+              .status(500)
+              .send("Database error. Pls contact your system admin");
+          } else {
+            console.log("User created");
+            res.status(200).send(user);
+          }
+        });
+      }
+    });
+  }
+);
 
 const isAuthenticated = (req, res, next) => {
   console.log(req.session.currentUser);
