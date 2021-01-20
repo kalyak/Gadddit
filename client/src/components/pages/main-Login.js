@@ -16,12 +16,12 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
 
     axios
       .post("/sessions", formData)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setIsLogin(true);
       })
       .catch((error) => {
