@@ -35,7 +35,15 @@ const UpcomingEvent = ({ room, index }) => {
   return (
     <tr key={room._id}>
       <td>{index + 1}</td>
-      <td>{room.eventName}</td>
+
+      {eventOngoing ? (
+        <td>
+          <Link onClick={handleJoinEvent}>{room.eventName}</Link>
+        </td>
+      ) : (
+        <td>{room.eventName}</td>
+      )}
+
       <td>{eventDate}</td>
       <td>{room.hostName}</td>
       <td>
