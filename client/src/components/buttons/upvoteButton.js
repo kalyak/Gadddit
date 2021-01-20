@@ -2,17 +2,20 @@ import { useState } from "react";
 import axios from "axios";
 
 const UpvoteButton = (props) => {
-  console.log(props);
+  // console.log(props);
 
   const [upvote, setUpvote] = useState(false);
 
   const handleUpvote = (event) => {
     setUpvote(true);
-    console.log("upvote");
-    console.log(event.target);
+    // console.log("upvote");
+    // console.log(event.target);
     axios
       .put(`/qna/${props.roomId.roomid}/${props.qnaId}/upvote`, {
         withCredential: true,
+      })
+      .then((response) => {
+        console.log(response.data.upvote);
       })
       .catch((error) => {
         console.log(error);
@@ -21,8 +24,8 @@ const UpvoteButton = (props) => {
 
   const handleUnvote = (event) => {
     setUpvote(false);
-    console.log("unvote");
-    console.log(event.target);
+    // console.log("unvote");
+    // console.log(event.target);
     axios
       .delete(`/qna/${props.roomId.roomid}/${props.qnaId}/upvote`, {
         withCredential: true,
