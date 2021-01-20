@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import AnswerField from "../others/answerField";
 import { Table } from "react-bootstrap";
 import QuestionField from "../others/questionField";
 import UpvoteButton from "../buttons/upvoteButton";
@@ -23,31 +22,6 @@ const UserRoom = () => {
         console.log(error);
       });
   }, []);
-
-  // const handleAnswerBtn = (qnaArr) => {
-  //   // console.log("Clicked");
-  //   setQnaList((state) => {
-  //     const filter = state.filter((x) => x._id !== qnaArr._id);
-  //     const toUpdateAnswer = state.find((list) => list._id === qnaArr._id);
-  //     console.log(toUpdateAnswer);
-
-  //     return [
-  //       ...filter,
-  //       { ...toUpdateAnswer, answer: "Answered during presentation" },
-  //     ];
-  //   });
-  // };
-
-  // const handleStateUpdate = (updatedAns, qnaid) => {
-  //   // console.log("UpdatedAns: " + updatedAns);
-  //   // console.log("ID: " + qnaid);
-  //   setQnaList((state) => {
-  //     const filter = state.filter((x) => x._id !== qnaid);
-  //     const toUpdateAnswer = state.find((list) => list._id === qnaid);
-  //     // console.log(toUpdateAnswer);
-  //     return [...filter, { ...toUpdateAnswer, answer: updatedAns }];
-  //   });
-  // };
 
   const countUnanswered = () => {
     let count = 0;
