@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 const UpcomingEvent = ({ room, index }) => {
   const [joined, setJoin] = useState(false);
