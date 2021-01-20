@@ -11,20 +11,20 @@ const ChangeRoleBtn = () => {
     path: "/user",
   });
 
-  console.log(path.pathname);
-  console.log(isHost);
-  console.log(isAttendee);
+  // console.log(path.pathname);
+  // console.log(isHost);
+  // console.log(isAttendee);
 
   if (isHost) {
     return (
-      <Link to="/user/">
+      <Link to='/user/'>
         <button>Switch to Attendee </button>
       </Link>
     );
   }
   if (isAttendee) {
     return (
-      <Link to="/host/">
+      <Link to='/host/'>
         <button>Switch to Host</button>
       </Link>
     );

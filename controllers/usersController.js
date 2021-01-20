@@ -30,7 +30,7 @@ router.post(
           .status(500)
           .send("Database error. Pls contact your system admin");
       } else if (user) {
-        return res.status(401).send("Username taken");
+        return res.status(401).send({ username: "Username taken" });
       } else {
         req.body.password = bcrypt.hashSync(
           req.body.password,
