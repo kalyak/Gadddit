@@ -77,12 +77,12 @@ const HostRoom = () => {
         return x;
       }
     })
-    .sort((a, b) => b.upvote - a.upvote)
+    .sort((a, b) => b.upvote.length - a.upvote.length)
     .map((qnaList, index) => {
       return (
         <tr key={qnaList._id}>
           <td>{index + 1}</td>
-          <td>{qnaList.upvote}</td>
+          <td>{qnaList.upvote.length}</td>
 
           {qnaList.answer === "" ? (
             <td>

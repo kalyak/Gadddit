@@ -6,6 +6,7 @@ const AnswerField = (props) => {
   const [answer, setAnswer] = useState("");
 
   const handleClick = (event) => {
+    setAnswer(props.answer);
     setEditing(true);
   };
 
@@ -42,6 +43,10 @@ const AnswerField = (props) => {
       });
   };
 
+  if (props.answer === "" && editing === false) {
+    return <button onClick={() => setEditing(true)}>Add Answer</button>;
+  }
+
   if (editing) {
     return (
       <>
@@ -52,18 +57,20 @@ const AnswerField = (props) => {
               handleTextChange(event);
             }}
           ></textarea>
+          <br />
           <button type="submit">Update</button>
+          <button onClick={() => setEditing(false)}>Cancel</button>
         </form>
-        <button onClick={() => setEditing(false)}>Cancel</button>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <span onDoubleClick={handleDoubleClick}>{props.answer}</span>
+        <button onClick={handleClick}>Edit</button>
       </>
     );
   }
-  return (
-    <>
-      <span onDoubleClick={handleDoubleClick}>{props.answer}</span>
-      {/* <button onClick={handleClick}>Edit</button> */}
-    </>
-  );
 };
 
 export default AnswerField;

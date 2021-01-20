@@ -79,7 +79,7 @@ const UserRoom = () => {
         return x;
       }
     })
-    .sort((a, b) => b.upvote - a.upvote)
+    .sort((a, b) => b.upvote.length - a.upvote.length)
     .map((qnaList, index) => {
       return (
         <tr key={qnaList._id}>
@@ -87,7 +87,7 @@ const UserRoom = () => {
           <td>
             <UpvoteButton roomId={roomId} qnaId={qnaList._id} />
           </td>
-          <td>{qnaList.upvote}</td>
+          <td>{qnaList.upvote.length}</td>
           <td>{qnaList.question}</td>
           <td>{qnaList.answer}</td>
         </tr>
