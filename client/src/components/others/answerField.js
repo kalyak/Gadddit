@@ -10,12 +10,15 @@ const AnswerField = (props) => {
   };
 
   const handleDoubleClick = (event) => {
+    // console.log("roomid: " + props.roomId.roomid);
+    // console.log(props.roomId.roomid);
+    // console.log("qnaid: " + props.qnaId);
     setAnswer(props.answer);
     setEditing(true);
   };
 
   const handleTextChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setAnswer(event.target.value);
   };
 
@@ -27,7 +30,7 @@ const AnswerField = (props) => {
 
     axios
       .put(
-        `/qna/${props.roomId}/${props.qnaId}`,
+        `/qna/${props.roomId.roomid}/${props.qnaId}`,
         { answer: answer },
         { withCredentials: true }
       )
@@ -51,6 +54,7 @@ const AnswerField = (props) => {
           ></textarea>
           <button type="submit">Update</button>
         </form>
+        <button onClick={() => setEditing(false)}>Cancel</button>
       </>
     );
   }

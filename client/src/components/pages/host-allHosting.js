@@ -39,12 +39,13 @@ const HostHosting = () => {
     const roomid = event.target.id;
   };
 
-  const displayAllEvents = allHostingList.map((room) => {
+  const displayAllEvents = allHostingList.map((room, index) => {
     const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
     const eventTime = dayjs(room.eventStart).format("HH:mm");
 
     return (
       <tr key={room._id}>
+        <td>{index + 1}</td>
         <td>{room.eventName}</td>
         <td>{eventDate}</td>
         <td>{eventTime}</td>
@@ -70,6 +71,7 @@ const HostHosting = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>S/N</th>
             <th>Event Name</th>
             <th>Event Date</th>
             <th>Event Time</th>

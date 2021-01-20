@@ -18,12 +18,13 @@ const UserAttended = () => {
       });
   }, []);
 
-  const historyDisplay = roomHistory.map((room) => {
+  const historyDisplay = roomHistory.map((room, index) => {
     const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
     const noOfQna = room.questions.length;
 
     return (
       <tr key={room._id}>
+        <td>{index + 1}</td>
         <td>{room.eventName}</td>
         <td>{eventDate}</td>
         <td>{noOfQna}</td>
@@ -44,6 +45,7 @@ const UserAttended = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
+            <th>S/N</th>
             <th>Event Name</th>
             <th>Event Date</th>
             <th># of Questions</th>
