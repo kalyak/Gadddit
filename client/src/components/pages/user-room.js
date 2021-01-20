@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 import AnswerField from "../others/answerField";
 import { Table } from "react-bootstrap";
 import QuestionField from "../others/questionField";
+import UpvoteButton from "../buttons/upvoteButton";
 
 const UserRoom = () => {
   const roomId = useParams();
   const [qnaList, setQnaList] = useState([]);
   const [filterby, setFilterby] = useState("all");
-  const [upvote, setUpvote] = useState(false);
   console.log(qnaList);
 
   useEffect(() => {
@@ -84,6 +84,9 @@ const UserRoom = () => {
       return (
         <tr key={qnaList._id}>
           <td>{index + 1}</td>
+          <td>
+            <UpvoteButton roomId={roomId} qnaId={qnaList._id} />
+          </td>
           <td>{qnaList.upvote}</td>
           <td>{qnaList.question}</td>
           <td>{qnaList.answer}</td>
@@ -120,7 +123,8 @@ const UserRoom = () => {
         <thead>
           <tr>
             <td>S/N</td>
-            <td>Upvote</td>
+            <td></td>
+            <td>Vote Count</td>
             <td>Question</td>
             <td>Answer</td>
           </tr>
