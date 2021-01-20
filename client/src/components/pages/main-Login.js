@@ -2,7 +2,7 @@ import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-const LoginPage = () => {
+const LoginPage = ({ setLoggedIn }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -23,6 +23,7 @@ const LoginPage = () => {
       .then((response) => {
         // console.log(response);
         setIsLogin(true);
+        setLoggedIn(true);
       })
       .catch((error) => {
         console.log(error.response.data);

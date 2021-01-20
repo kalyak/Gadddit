@@ -17,52 +17,52 @@ import AppURL from "./route-constants";
 
 const SwitchRoute = () => {
   return (
-    <Router>
-      <NavBar />
+    // <Router>
+    // <NavBar />
 
-      <Switch>
-        <Route exact path="/host">
-          <HostHosting />
-        </Route>
-        <Route exact path="/host/hosted">
-          <HostHosted />
-        </Route>
-        <Route exact path="/host/createroom">
-          <HostCreate />
-        </Route>
-        <Route exact path="/host/:roomid">
-          <HostRoom />
-        </Route>
-        <Route exact path="/host/:roomid/edit">
-          <EditRoom />
-        </Route>
-        <Route exact path="/user/">
-          <UserUpcoming />
-        </Route>
-        <Route exact path="/user/attended">
-          <UserAttended />
-        </Route>
+    <Switch>
+      <Route exact path='/host'>
+        <HostHosting />
+      </Route>
+      <Route exact path='/host/hosted'>
+        <HostHosted />
+      </Route>
+      <Route exact path='/host/createroom'>
+        <HostCreate />
+      </Route>
+      <Route exact path='/host/:roomid'>
+        <HostRoom />
+      </Route>
+      <Route exact path='/host/:roomid/edit'>
+        <EditRoom />
+      </Route>
+      <Route exact path='/user/'>
+        <UserUpcoming />
+      </Route>
+      <Route exact path='/user/attended'>
+        <UserAttended />
+      </Route>
 
-        <Route exact path="/user/enterroom">
-          <EnterRoom />
-        </Route>
-        <Route path="/user/:roomid">
-          <UserRoom />
-        </Route>
-        <Route exact path={AppURL.main.about}>
-          <About />
-        </Route>
-        <Route exact path={AppURL.main.login}>
-          <LoginPage />
-        </Route>
-        <Route exact path={AppURL.main.signup}>
-          <SignupPage />
-        </Route>
-        <Route exact path={AppURL.main.home}>
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+      <Route exact path='/user/enterroom'>
+        <EnterRoom />
+      </Route>
+      <Route path='/user/:roomid'>
+        <UserRoom />
+      </Route>
+      {/* <Route exact path={AppURL.main.about}>
+        <About />
+      </Route>
+      <Route exact path={AppURL.main.login}>
+        <LoginPage />
+      </Route>
+      <Route exact path={AppURL.main.signup}>
+        <SignupPage />
+      </Route>
+      <Route exact path={AppURL.main.home}>
+        <Home />
+      </Route> */}
+    </Switch>
+    // </Router>
   );
 };
 export default SwitchRoute;

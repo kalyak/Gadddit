@@ -32,6 +32,18 @@ sessions.post("/", (req, res) => {
   });
 });
 
+//check if user logged in
+sessions.get("/check", (req, res) => {
+  console.log("session data:", req.session.currentUser);
+  if (req.session.currentUser) {
+    attendeeID = req.session.currentUser._id;
+    res.status(200).send(true);
+  } else {
+    console.log("no session");
+    res.send(false);
+  }
+});
+
 //user logging out
 sessions.delete("/", (req, res) => {
   req.session.destroy(() => {

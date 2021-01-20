@@ -1,12 +1,39 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SwitchRoute from "./components/route/switchroute";
 import "bootstrap/dist/css/bootstrap.min.css";
+import MainRoute from "./components/route/route-main";
+import { BrowserRouter as Router } from "react-router-dom";
+import NavBar from "./components/route/NavBar";
+import axios from "axios";
 
 function App() {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("/sessions/check", { withCredentials: true })
+      .then((response) => {
+        console.log("checking login", response.data);
+        setLoggedIn(response.data);
+      })
+      .catch((error) => {
+        setLoggedIn(false);
+      });
+  }, [isLoggedIn]);
+
   return (
     <>
-      <SwitchRoute />
+      <Router>
+        {isLoggedIn ? (
+          <>
+            <NavBar />
+            <SwitchRoute />
+          </>
+        ) : (
+          <MainRoute setLoggedIn={setLoggedIn} />
+        )}
+      </Router>
     </>
   );
 }
