@@ -26,12 +26,23 @@ const isRoomAuthenticated = (req, res, next) => {
     roomID = req.session.currentRoom._id;
     next();
   } else {
+    //check if the person is the host
+    console.log("check if the person is the host");
     Rooms.findById(req.params.roomID, (err, room) => {
       hostID = room.hostID;
       if (hostID === id) {
         next();
       } else {
-        res.status(401).send("Not authenticated to room");
+        //check if the person attended this room previously
+        console.log("checking if the person attended this room prev");
+        Users.findById(id, (err, user) => {
+          const roomAttendedHistory = user.roomAttendedHistory;
+          if (roomAttendedHistory.includes(req.params.roomID)) {
+            next();
+          } else {
+            res.status(401).send("Not authenticated to room");
+          }
+        });
       }
     });
   }
