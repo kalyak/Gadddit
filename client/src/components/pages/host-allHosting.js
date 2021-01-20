@@ -46,7 +46,9 @@ const HostHosting = () => {
     return (
       <tr key={room._id}>
         <td>{index + 1}</td>
-        <td>{room.eventName}</td>
+        <td>
+          <Link to={`/host/${room._id}`}>{room.eventName}</Link>
+        </td>
         <td>{eventDate}</td>
         <td>{eventTime}</td>
         <td>{room.roomCode}</td>

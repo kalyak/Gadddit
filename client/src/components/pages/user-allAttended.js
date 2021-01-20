@@ -25,7 +25,9 @@ const UserAttended = () => {
     return (
       <tr key={room._id}>
         <td>{index + 1}</td>
-        <td>{room.eventName}</td>
+        <td>
+          <Link to={`/user/${room._id}`}>{room.eventName}</Link>
+        </td>
         <td>{eventDate}</td>
         <td>{noOfQna}</td>
         <td>{room.hostName}</td>
