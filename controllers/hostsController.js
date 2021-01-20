@@ -22,25 +22,25 @@ const isAuthenticated = (req, res, next) => {
 
 // to find all upcoming room
 router.get("/upcoming", isAuthenticated, (req, res) => {
-  Rooms.find(
-    {
-      $and: [{ eventStart: { $gte: new Date() } }, { hostID: hostID }],
-    },
-    (err, rooms) => {
+  Rooms.find({
+    $and: [{ eventEnd: { $gte: new Date() } }, { hostID: hostID }],
+  })
+    .sort({ eventEnd: 1 })
+    .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
         res.status(200).send(rooms);
       }
-    }
-  );
+    });
 });
 
 // to find all past room + extract the QnA for respective rooms
 router.get("/past", isAuthenticated, async (req, res) => {
   Rooms.find({
-    $and: [{ eventStart: { $lt: new Date() } }, { hostID: hostID }],
+    $and: [{ eventEnd: { $lt: new Date() } }, { hostID: hostID }],
   })
+    .sort({ eventEnd: -1 })
     .populate("questions")
     .exec((err, room) => {
       if (err) {

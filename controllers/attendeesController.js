@@ -22,28 +22,31 @@ const isAuthenticated = (req, res, next) => {
 
 //Get upcoming rooms that are public and not hosted by this attendee
 router.get("/upcoming", isAuthenticated, (req, res) => {
-  Rooms.find(
-    {
-      $and: [
-        { eventEnd: { $gte: new Date() } },
-        { isPublic: true },
-        { hostID: { $ne: attendeeID } },
-      ],
-    },
-    (err, rooms) => {
+  Rooms.find({
+    $and: [
+      { eventEnd: { $gte: new Date() } },
+      { isPublic: true },
+      { hostID: { $ne: attendeeID } },
+    ],
+  })
+    .sort({ eventEnd: 1 })
+    .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
         res.status(200).send(rooms);
       }
-    }
-  );
+    });
 });
 
 //Get past attended room
 router.get("/past", isAuthenticated, (req, res) => {
   Users.findById(attendeeID)
-    .populate({ path: "roomAttendedHistory", populate: { path: "questions" } })
+    .populate({
+      path: "roomAttendedHistory",
+      options: { sort: "-eventEnd" },
+      populate: { path: "questions" },
+    })
     .exec((err, user) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
