@@ -17,18 +17,6 @@ const MainRoute = () => {
           <LoginBtn />
           <SignUpBtn />
         </Nav>
-
-        {/* START - Temporary - to be removed */}
-        <ul>
-          Temporary list:
-          <li>
-            <a href="/user">User</a>
-          </li>
-          <li>
-            <a href="/host">Host</a>
-          </li>
-        </ul>
-        {/* END - Temporary - to be removed */}
       </Navbar>
     </>
   );

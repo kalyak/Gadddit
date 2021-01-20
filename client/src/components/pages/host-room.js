@@ -8,7 +8,7 @@ const HostRoom = () => {
   const roomId = useParams();
   const [qnaList, setQnaList] = useState([]);
   const [filterby, setFilterby] = useState("all");
-  console.log(qnaList);
+  // console.log(qnaList);
 
   useEffect(() => {
     axios
@@ -22,18 +22,32 @@ const HostRoom = () => {
       });
   }, []);
 
-  const handleAnswerBtn = (qnaArr) => {
+  const handleAnswerBtn = (qnaObj) => {
     // console.log("Clicked");
     setQnaList((state) => {
-      const filter = state.filter((x) => x._id !== qnaArr._id);
-      const toUpdateAnswer = state.find((list) => list._id === qnaArr._id);
-      console.log(toUpdateAnswer);
+      const filter = state.filter((x) => x._id !== qnaObj._id);
+      const toUpdateAnswer = state.find((list) => list._id === qnaObj._id);
+      // console.log(toUpdateAnswer);
 
       return [
         ...filter,
         { ...toUpdateAnswer, answer: "Answered during presentation" },
       ];
     });
+    axios
+      .put(
+        `/qna/${roomId.roomid}/${qnaObj._id}`,
+        {
+          answer: "Answered during presentation",
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        // console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleStateUpdate = (updatedAns, qnaid) => {
@@ -78,26 +92,26 @@ const HostRoom = () => {
       }
     })
     .sort((a, b) => b.upvote.length - a.upvote.length)
-    .map((qnaList, index) => {
+    .map((qnaObj, index) => {
       return (
-        <tr key={qnaList._id}>
+        <tr key={qnaObj._id}>
           <td>{index + 1}</td>
-          <td>{qnaList.upvote.length}</td>
+          <td>{qnaObj.upvote.length}</td>
 
-          {qnaList.answer === "" ? (
+          {qnaObj.answer === "" ? (
             <td>
-              <button onClick={() => handleAnswerBtn(qnaList)}>✔️</button>
+              <button onClick={() => handleAnswerBtn(qnaObj)}>✔️</button>
             </td>
           ) : (
             <td></td>
           )}
 
-          <td>{qnaList.question}</td>
+          <td>{qnaObj.question}</td>
           <td>
             <AnswerField
-              answer={qnaList.answer}
+              answer={qnaObj.answer}
               handleStateUpdate={handleStateUpdate}
-              qnaId={qnaList._id}
+              qnaId={qnaObj._id}
               roomId={roomId}
             />
           </td>
@@ -107,8 +121,7 @@ const HostRoom = () => {
     });
 
   const handleFilter = (event) => {
-    console.log(event.target.value);
-
+    // console.log(event.target.value);
     setFilterby(event.target.value);
   };
 

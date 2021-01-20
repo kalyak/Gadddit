@@ -7,7 +7,7 @@ const UpvoteButton = (props) => {
   const [upvote, setUpvote] = useState(false);
 
   const handleUpvote = (event) => {
-    setUpvote(true);
+    // setUpvote(true);
     // console.log("upvote");
     // console.log(event.target);
     axios
@@ -35,30 +35,42 @@ const UpvoteButton = (props) => {
       });
   };
 
-  if (upvote) {
-    return (
-      <>
-        <button
-          onClick={(event) => {
-            handleUnvote(event);
-          }}
-        >
-          Unvote
-        </button>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <button
-          onClick={(event) => {
-            handleUpvote(event);
-          }}
-        >
-          Vote
-        </button>
-      </>
-    );
-  }
+  // if (upvote) {
+  //   return (
+  //     <>
+  //       <button
+  //         onClick={(event) => {
+  //           handleUnvote(event);
+  //         }}
+  //       >
+  //         Unvote
+  //       </button>
+  //     </>
+  //   );
+  // } else {
+  //   return (
+  //     <>
+  //       <button
+  //         onClick={(event) => {
+  //           handleUpvote(event);
+  //         }}
+  //       >
+  //         Vote
+  //       </button>
+  //     </>
+  //   );
+  // }
+
+  return (
+    <>
+      <button
+        onClick={(event) => {
+          handleUpvote(event);
+        }}
+      >
+        Vote
+      </button>
+    </>
+  );
 };
 export default UpvoteButton;
