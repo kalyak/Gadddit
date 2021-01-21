@@ -1,11 +1,11 @@
-import "./App.css";
-import React, { useEffect, useState } from "react";
-import SwitchRoute from "./components/route/switchroute";
-import "bootstrap/dist/css/bootstrap.min.css";
-import MainRoute from "./components/route/route-main";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
-import NavBar from "./components/route/NavBar";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import NavBar from "./components/route/NavBar";
+import MainRoute from "./components/route/route-main";
+import SwitchRoute from "./components/route/switchroute";
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -33,7 +33,6 @@ function App() {
         ) : (
           <>
             <MainRoute setLoggedIn={setLoggedIn} />
-            <Redirect to='/' />
           </>
         )}
       </Router>
