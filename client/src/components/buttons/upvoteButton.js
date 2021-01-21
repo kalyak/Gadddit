@@ -20,6 +20,8 @@ const UpvoteButton = (props) => {
       .catch((error) => {
         console.log(error);
       });
+
+    props.handleRefresh();
   };
 
   const handleUnvote = (event) => {

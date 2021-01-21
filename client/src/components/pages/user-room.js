@@ -14,6 +14,7 @@ const UserRoom = () => {
   console.log(qnaList);
   console.log(roomInfo);
   console.log("roomid: ", roomId.roomid);
+
   useEffect(() => {
     // axios
     //   .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
@@ -37,6 +38,20 @@ const UserRoom = () => {
         console.log(error);
       });
   }, []);
+
+  const handleRefresh = (event) => {
+    axios
+      .get(`/qna/${roomId.roomid}`, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data);
+        setQnaList(response.data.qna);
+        // setRoom(response.data.roomInfo);
+        setUser(response.data.userID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const countUnanswered = () => {
     let count = 0;
@@ -75,7 +90,13 @@ const UserRoom = () => {
         <tr key={qna._id}>
           <td>{index + 1}</td>
           <td>
-            {upVoted ? null : <UpvoteButton roomId={roomId} qnaId={qna._id} />}
+            {upVoted ? null : (
+              <UpvoteButton
+                roomId={roomId}
+                qnaId={qna._id}
+                handleRefresh={handleRefresh}
+              />
+            )}
           </td>
           <td>{qna.upvote.length}</td>
           <td>{qna.question}</td>
@@ -98,7 +119,7 @@ const UserRoom = () => {
       </h3> */}
       <p>Display all QnA from database</p>
       <br />
-      <QuestionField roomId={roomId} />
+      <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
       <br />
       <br />
       <label>Filter by: </label>
@@ -107,10 +128,19 @@ const UserRoom = () => {
           handleFilter(event);
         }}
       >
-        <option value='all'>All ({qnaList.length})</option>
-        <option value='unanswered'>Unanswered ({countUnanswered()})</option>
-        <option value='answered'>Answered ({countAnswered()})</option>
+        <option value="all">All ({qnaList.length})</option>
+        <option value="unanswered">Unanswered ({countUnanswered()})</option>
+        <option value="answered">Answered ({countAnswered()})</option>
       </select>
+      <br />
+      <br />
+      <button
+        onClick={(error) => {
+          handleRefresh(error);
+        }}
+      >
+        Refresh
+      </button>
       <br />
       <br />
       <Table striped bordered hover>
