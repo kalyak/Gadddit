@@ -43,7 +43,7 @@ const UserAttended = () => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <h1>All Attended Events</h1>
+        <h1>Past Events</h1>
       </Row>
       <Row>
         <br />

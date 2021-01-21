@@ -51,7 +51,7 @@ const EnterRoom = () => {
     <Container>
       <Row className="justify-content-md-center">
         <Form onSubmit={handleSubmit}>
-          <Row>
+          <Row className="justify-content-md-center">
             <h1>Join Room</h1>
           </Row>
           <Row>

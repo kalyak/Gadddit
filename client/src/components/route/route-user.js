@@ -21,7 +21,7 @@ const UserRoute = ({ setLoggedIn }) => {
             Home
           </Nav.Link>
           <Nav.Link as={Link} to="/user/attended">
-            Previous Event
+            Attended
           </Nav.Link>
           <Nav.Link as={Link} to="/user/enterroom">
             Join A Room

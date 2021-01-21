@@ -21,7 +21,7 @@ const HostRoute = ({ setLoggedIn }) => {
             Home
           </Nav.Link>
           <Nav.Link as={Link} to="/host/hosted">
-            Previous Event
+            Hosted
           </Nav.Link>
           <Nav.Link as={Link} to="/host/createroom">
             Create A Room

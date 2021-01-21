@@ -24,7 +24,7 @@ const UserUpcoming = () => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <h1>All Upcoming Event</h1>
+        <h1>Upcoming Events</h1>
       </Row>
       <Row>
         <br />
