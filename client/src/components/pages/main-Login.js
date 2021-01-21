@@ -1,7 +1,7 @@
-import { Redirect } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 import { Table, Container, Row, Button, Col } from "react-bootstrap";
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const LoginPage = ({ setLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const LoginPage = ({ setLoggedIn }) => {
         setLoggedIn(true);
       })
       .catch((error) => {
-        // console.log(error.response.data);
+        console.log(error.response.data);
         setResError((state) => {
           return { ...state, ...error.response.data };
         });
@@ -35,9 +35,7 @@ const LoginPage = ({ setLoggedIn }) => {
   };
 
   if (isLogin) {
-    // setLoggedIn(true);
-
-    return <Redirect to="/user" />;
+    return <Redirect to='/user' />;
   }
 
   const handleChange = (event) => {
@@ -52,7 +50,7 @@ const LoginPage = ({ setLoggedIn }) => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>Login Page</h1>
       </Row>
       <br />
@@ -62,49 +60,49 @@ const LoginPage = ({ setLoggedIn }) => {
           handleSubmit(event);
         }}
       >
-        <Row className="justify-content-md-center">
-          <Col sm="auto">
+        <Row className='justify-content-md-center'>
+          <Col sm='auto'>
             <label>Username: </label>
           </Col>
-          <Col sm="auto">
+          <Col sm='auto'>
             <input
-              type="text"
-              name="username"
-              id="username"
+              type='text'
+              name='username'
+              id='username'
               required
               value={formData.username}
               onChange={handleChange}
             />
           </Col>
         </Row>
-        <Row className="justify-content-md-center">
+        <Row className='justify-content-md-center'>
           <span style={{ color: "red" }}> {resError.username} </span>
         </Row>
         <br />
         <br />
-        <Row className="justify-content-md-center">
-          <Col sm="auto">
+        <Row className='justify-content-md-center'>
+          <Col sm='auto'>
             <label>Password: </label>
           </Col>
-          <Col sm="auto">
+          <Col sm='auto'>
             <input
-              type="password"
-              name="password"
-              id="password"
+              type='password'
+              name='password'
+              id='password'
               required
               value={formData.password}
               onChange={handleChange}
             />
           </Col>
         </Row>
-        <Row className="justify-content-md-center">
+        <Row className='justify-content-md-center'>
           <span style={{ color: "red" }}> {resError.password} </span>
         </Row>
 
         <br />
         <br />
-        <Row className="justify-content-md-center">
-          <Button type="submit">Login</Button>
+        <Row className='justify-content-md-center'>
+          <Button type='submit'>Login</Button>
         </Row>
       </form>
     </Container>

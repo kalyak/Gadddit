@@ -95,7 +95,6 @@ router.get("/public/:roomID", (req, res) => {
         res.status(200).send({
           roomInfo: roomInfo,
           qna: qna,
-          userID: "NOT_LOGGED_IN",
         });
       }
     }

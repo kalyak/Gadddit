@@ -7,8 +7,8 @@ const QuestionField = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log(question);
+    // console.log(event.target);
+    // console.log(question);
 
     axios
       .post(
@@ -17,7 +17,7 @@ const QuestionField = (props) => {
         { withCredentials: true }
       )
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
     setQuestion("");
     props.handleRefresh();
