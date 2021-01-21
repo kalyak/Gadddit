@@ -15,15 +15,15 @@ const UserRoom = () => {
   console.log(roomInfo);
   console.log("roomid: ", roomId.roomid);
   useEffect(() => {
-    axios
-      .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
-      .then((response) => {
-        console.log(response.data);
-        setRoom(response.data.room);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+    // axios
+    //   .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setRoom(response.data.room);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response.data);
+    // });
 
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
@@ -91,12 +91,12 @@ const UserRoom = () => {
 
   return (
     <>
-      {/* <h1>User QnA Page</h1> */}
-      <h1>{roomInfo.eventName}</h1>
+      <h1>User QnA Page</h1>
+      {/* <h1>{roomInfo.eventName}</h1>
       <h3>
         Hosted by <b>{roomInfo.hostName}</b>
-      </h3>
-      {/* <p>Display all QnA from database</p> */}
+      </h3> */}
+      <p>Display all QnA from database</p>
       <br />
       <QuestionField roomId={roomId} />
       <br />
