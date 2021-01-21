@@ -8,12 +8,12 @@ const HostRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Host Route</h1> */}
-      <Navbar bg='danger' variant='light' sticky='top'>
-        <Navbar.Brand href='/host'>Gaddit</Navbar.Brand>
-        <Nav className='mr-auto'>
-          <Link to='/host'>Host Home</Link>
-          <Link to='/host/hosted'>Hosted</Link>
-          <Link to='/host/createroom'>Create Room</Link>
+      <Navbar bg="danger" variant="light" sticky="top">
+        <Navbar.Brand href="/host">Gadddit</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Link to="/host">Host Home</Link>
+          <Link to="/host/hosted">Hosted</Link>
+          <Link to="/host/createroom">Create Room</Link>
           <ChangeRoleBtn />
           <LogoutBtn setLoggedIn={setLoggedIn} />
         </Nav>
