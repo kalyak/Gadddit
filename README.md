@@ -1,6 +1,14 @@
 # Project 3 - Gadddit
 
-<!-- <working app url> -->
+https://gadddit.herokuapp.com/
+
+### An integrated platform for all your event needs!
+
+Your event participants might find large / small crowds intimidating to ask questions.
+
+Our platform is only only catered for such groups of people,it may also help increasing engagement between organizer and participants!
+
+#### Engage and captivate your participants even more with our platform now!
 
 ## PROBLEM STATEMENT
 
@@ -18,6 +26,7 @@ This app aims to allow participants to post any questions they have and the orga
 2. Able to view all the upcoming event that was created, edit event details, and even delete the event
 3. During sessions, able to view all questions posted by attendees, sorted in accordance to the number of upvotes. Mark questions as answered once addressed during the session
 4. Able to view past events including all the Q&A of the respective events, post answer to those questions which were not addressed during the session
+5. Able to identify and address questions that are important to attendees during the event
 
 ### As Attendees
 
@@ -25,17 +34,38 @@ This app aims to allow participants to post any questions they have and the orga
 2. Able to join private event room by keying in the room credentials
 3. Post questions once we are inside the room, upvote other questions
 4. Able to view all attended events room and view the Q&A of the respective rooms
+5. Able to vote for the questions that are important to them
 
 ## TECH STACKS
 
 ### Frontend:
 
-HTML, CSS, Javascript, ReactJS
+- HTML
+- CSS
+- Javascript
+- ReactJS
 
 ### Backend:
 
-Express, Mongoose, MongoDB Atlas
+- Express
+- Mongoose
+- MongoDB Atlas
 
-### Other libraries used:
+### Other libraries / frameworks used:
 
-axios, dayjs, react-bootstrap, react-bootstrap-sweetalert, react-datepicker, react-datetime-picker, react-router-dom, bcrypt, dotenv, express-session, express-validator
+#### Frontend:
+
+- axios
+- dayjs
+- react-bootstrap
+- react-bootstrap-sweetalert
+- react-datepicker
+- react-datetime-picker
+- react-router-dom
+
+#### Backend:
+
+- bcrypt
+- dotenv
+- express-session
+- express-validator
