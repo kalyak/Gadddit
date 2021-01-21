@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import QuestionField from "../others/questionField";
 import UpvoteButton from "../buttons/upvoteButton";
+import LoginBtn from "../buttons/loginButton";
 
-const UserRoom = () => {
+const PublicRoom = () => {
   const roomId = useParams();
   const [roomInfo, setRoom] = useState({});
   const [qnaList, setQnaList] = useState([]);
@@ -16,18 +17,8 @@ const UserRoom = () => {
   console.log("roomid: ", roomId.roomid);
 
   useEffect(() => {
-    // axios
-    //   .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setRoom(response.data.room);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data);
-    // });
-
     axios
-      .get(`/qna/${roomId.roomid}`, { withCredentials: true })
+      .get(`/qna/public/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
         console.log(response.data);
         setQnaList(response.data.qna);
@@ -85,23 +76,10 @@ const UserRoom = () => {
     })
     .sort((a, b) => b.upvote.length - a.upvote.length)
     .map((qna, index) => {
-      const upVoted = qna.upvote.includes(userID);
       return (
         <tr key={qna._id}>
           <td>{index + 1}</td>
-          <td>
-            {upVoted ? null : (
-              <UpvoteButton
-                roomId={roomId}
-                qnaId={qna._id}
-                userID={userID}
-                setQnaList={setQnaList}
-                index={index}
-                qnaList={qnaList}
-                handleRefresh={handleRefresh}
-              />
-            )}
-          </td>
+          <td></td>
           <td>{qna.upvote.length}</td>
           <td>{qna.question}</td>
           <td>{qna.answer}</td>
@@ -121,7 +99,7 @@ const UserRoom = () => {
         Hosted by <b>{roomInfo.hostName}</b>
       </h3>
       <br />
-      <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
+      To submit questions to the host, please login. <LoginBtn />
       <br />
       <br />
       <label>Filter by: </label>
@@ -161,4 +139,4 @@ const UserRoom = () => {
   );
 };
 
-export default UserRoom;
+export default PublicRoom;

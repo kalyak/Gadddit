@@ -6,18 +6,21 @@ import SignUpBtn from "../buttons/signupButton.js";
 import About from "../pages/main-about.js";
 import Home from "../pages/main-Home.js";
 import LoginPage from "../pages/main-Login.js";
+import PublicUpcoming from "../pages/public-PublicEvents.js";
 import SignupPage from "../pages/main-Signup.js";
 import AppURL from "./route-constants.js";
+import PublicRoom from "../pages/public-room.js";
 
 const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Home Route</h1> */}
-      <Navbar bg="dark" variant="dark" sticky="top">
-        <Navbar.Brand href="/">Gadddit</Navbar.Brand>
-        <Nav className="mr-auto">
+      <Navbar bg='dark' variant='dark' sticky='top'>
+        <Navbar.Brand href='/'>Gadddit</Navbar.Brand>
+        <Nav className='mr-auto'>
           <Link to={AppURL.main.home}>Home</Link>
           <Link to={AppURL.main.about}>About</Link>
+          <Link to='/events'>Events</Link>
           <LoginBtn />
           <SignUpBtn />
         </Nav>
@@ -32,8 +35,14 @@ const MainRoute = ({ setLoggedIn }) => {
         <Route exact path={AppURL.main.signup}>
           <SignupPage setLoggedIn={setLoggedIn} />
         </Route>
+        <Route path={"/events"}>
+          <PublicUpcoming />
+        </Route>
         <Route exact path={AppURL.main.home}>
           <Home />
+        </Route>
+        <Route path='/public/:roomid'>
+          <PublicRoom />
         </Route>
         <Route>
           <Home />

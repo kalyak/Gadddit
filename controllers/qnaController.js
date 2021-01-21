@@ -78,6 +78,30 @@ router.get("/:roomID", isAuthenticated, isRoomAuthenticated, (req, res) => {
   );
 });
 
+//get all the qna for public joining the room
+router.get("/public/:roomID", (req, res) => {
+  console.log("getting room details...");
+  Rooms.findById(req.params.roomID, (err, room) => {
+    roomInfo = room;
+  });
+  console.log("getting q&a details...");
+  Qna.find(
+    { $and: [{ roomID: req.params.roomID }, { isFlagged: false }] },
+    (err, qna) => {
+      if (err) {
+        res.status(500).send("Database error. Pls contact your system admin");
+      } else {
+        console.log("roominfo", roomInfo);
+        res.status(200).send({
+          roomInfo: roomInfo,
+          qna: qna,
+          userID: "NOT_LOGGED_IN",
+        });
+      }
+    }
+  );
+});
+
 //get single qna details
 router.get(
   "/:roomID/:qnaID",

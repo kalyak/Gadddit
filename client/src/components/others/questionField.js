@@ -18,12 +18,12 @@ const QuestionField = (props) => {
       .catch((error) => {
         console.log(error);
       });
-
+    setQuestion("");
     props.handleRefresh();
   };
 
   const handleTextChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setQuestion(event.target.value);
   };
 
@@ -31,11 +31,12 @@ const QuestionField = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <textarea
-          name="question"
-          placeholder="Input your question here"
+          name='question'
+          placeholder='Input your question here'
+          value={question}
           onChange={handleTextChange}
         />
-        <button type="submit">Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     </>
   );

@@ -39,6 +39,21 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
     });
 });
 
+//Get upcoming rooms that are public for the public page
+router.get("/public", (req, res) => {
+  Rooms.find({
+    $and: [{ eventEnd: { $gte: new Date() } }, { isPublic: true }],
+  })
+    .sort({ eventEnd: 1 })
+    .exec((err, rooms) => {
+      if (err) {
+        res.status(500).send("Database error. Pls contact your system admin");
+      } else {
+        res.status(200).send(rooms);
+      }
+    });
+});
+
 //Get past attended room
 router.get("/past", isAuthenticated, (req, res) => {
   Users.findById(attendeeID)

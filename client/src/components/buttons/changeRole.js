@@ -1,8 +1,6 @@
-import { Link, useLocation, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const ChangeRoleBtn = () => {
-  const path = useLocation();
-
   const isHost = useRouteMatch({
     path: "/host",
   });
@@ -10,10 +8,6 @@ const ChangeRoleBtn = () => {
   const isAttendee = useRouteMatch({
     path: "/user",
   });
-
-  // console.log(path.pathname);
-  // console.log(isHost);
-  // console.log(isAttendee);
 
   if (isHost) {
     return (
