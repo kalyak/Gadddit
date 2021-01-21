@@ -4,7 +4,7 @@ import LoginBtn from "../buttons/loginButton";
 const Home = () => {
   return (
     <>
-      <h1>WELCOME TO GADDIT</h1>
+      <h1>WELCOME TO GADDDIT</h1>
 
       <LoginBtn />
       <span> </span>

@@ -31,13 +31,27 @@ const UserRoom = () => {
       .then((response) => {
         console.log(response.data);
         setQnaList(response.data.qna);
-        // setRoom(response.data.roomInfo);
+        setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
+  const handleRefresh = (event) => {
+    axios
+      .get(`/qna/${roomId.roomid}`, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data);
+        setQnaList(response.data.qna);
+        setRoom(response.data.roomInfo);
+        setUser(response.data.userID);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const countUnanswered = () => {
     let count = 0;
@@ -84,6 +98,7 @@ const UserRoom = () => {
                 setQnaList={setQnaList}
                 index={index}
                 qnaList={qnaList}
+                handleRefresh={handleRefresh}
               />
             )}
           </td>
@@ -101,14 +116,12 @@ const UserRoom = () => {
 
   return (
     <>
-      <h1>User QnA Page</h1>
-      {/* <h1>{roomInfo.eventName}</h1>
+      <h1>{roomInfo.eventName}</h1>
       <h3>
         Hosted by <b>{roomInfo.hostName}</b>
-      </h3> */}
-      <p>Display all QnA from database</p>
+      </h3>
       <br />
-      <QuestionField roomId={roomId} />
+      <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
       <br />
       <br />
       <label>Filter by: </label>
@@ -121,6 +134,15 @@ const UserRoom = () => {
         <option value='unanswered'>Unanswered ({countUnanswered()})</option>
         <option value='answered'>Answered ({countAnswered()})</option>
       </select>
+      <br />
+      <br />
+      <button
+        onClick={(error) => {
+          handleRefresh(error);
+        }}
+      >
+        Refresh
+      </button>
       <br />
       <br />
       <Table striped bordered hover>
