@@ -6,9 +6,11 @@ https://gadddit.herokuapp.com/
 
 Your event participants might find large / small crowds intimidating to ask questions.
 
-Our platform is only only catered for such groups of people,it may also help increasing engagement between organizer and participants!
+Our platform is not only catered for such group of people, it may also help increasing engagement between organizer and participants, even after the event ends!
 
 #### Engage and captivate your participants even more with our platform now!
+
+<br>
 
 ## PROBLEM STATEMENT
 
