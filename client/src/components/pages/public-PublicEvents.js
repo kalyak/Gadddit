@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import UpcomingEvent from "./user-UpcomingEvent";
+import PublicEvent from "./public-UpcomingEvent";
 
-const UserUpcoming = () => {
+const PublicUpcoming = () => {
   const [upcomingRooms, setUpcoming] = useState([]);
 
   useEffect(() => {
     axios
-      .get("/attendees/upcoming")
+      .get("/attendees/public")
       .then((response) => {
         setUpcoming(response.data);
       })
@@ -17,8 +17,8 @@ const UserUpcoming = () => {
       });
   }, [upcomingRooms.length]);
 
-  const upcomingDisplay = upcomingRooms.map((room, index) => {
-    return <UpcomingEvent key={room._id} room={room} index={index} />;
+  const publicDisplay = upcomingRooms.map((room, index) => {
+    return <PublicEvent key={room._id} room={room} index={index} />;
   });
 
   return (
@@ -35,10 +35,10 @@ const UserUpcoming = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{upcomingDisplay}</tbody>
+        <tbody>{publicDisplay}</tbody>
       </Table>
     </>
   );
 };
 
-export default UserUpcoming;
+export default PublicUpcoming;
