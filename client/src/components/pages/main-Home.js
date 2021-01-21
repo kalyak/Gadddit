@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        <h1 style={{ fontSize: "95px" }}>GADDDIT</h1>
+        <h1 style={{ fontSize: "80px" }}>GADDDIT</h1>
       </Row>
       <Row className="justify-content-md-center">
         <h3>An integrated platform for all your event needs!</h3>
@@ -21,21 +21,23 @@ const Home = () => {
       </Row>
 
       <br />
-      <Row className="justify-content-md-center">
-        <Col sm={9}>
-          <Row className="justify-content-md-center">
-            <br />
-            <br />
-            <br />
-            <h5>
-              Engage and captivate your participants even more with our platform
-            </h5>
-          </Row>
-          <Row>
-            <Col>
-              <img src={qnabubbles} alt="qnabubble" width="300" height="300" />
-            </Col>
 
+      <Row className="justify-content-md-center">
+        <br />
+        <br />
+        <br />
+        <h5>
+          Engage and captivate your participants even more with our platform
+        </h5>
+      </Row>
+
+      <Row className="justify-content-md-center">
+        <Col sm={4}>
+          <img src={qnabubbles} alt="qnabubble" height="300" />
+        </Col>
+
+        <Col sm={4}>
+          <Row>
             <Col>
               <h3 className="text-center">
                 <Badge pill variant="secondary">
@@ -71,8 +73,8 @@ const Home = () => {
           </Row>
         </Col>
 
-        <Col sm={3}>
-          <img src={qna} alt="qna" />
+        <Col sm={4}>
+          <img src={qna} alt="qna" height="350" />
         </Col>
       </Row>
     </Container>
