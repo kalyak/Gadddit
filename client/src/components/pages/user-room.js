@@ -128,10 +128,16 @@ const UserRoom = () => {
       <br />
       <br />
 
-      <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
-      <br />
-      <br />
-      <br />
+      {eventOngoing ? (
+        <>
+          <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
+          <br />
+          <br />
+          <br />
+        </>
+      ) : (
+        ""
+      )}
 
       <Row>
         <Col sm={10}>
