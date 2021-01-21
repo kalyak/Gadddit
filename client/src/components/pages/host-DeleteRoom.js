@@ -18,7 +18,7 @@ const DeleteRoom = (props) => {
 
   const handleConfirmDelete = () => {
     const roomID = props.roomID;
-    setIsDeleted(true);
+    // setIsDeleted(true);
     axios
       .delete(`/hosts/${roomID}`, { withCredentials: true })
       .then(() => {
