@@ -14,22 +14,32 @@ import AppURL from "./route-constants.js";
 const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
-      <Navbar bg='dark' variant='dark' sticky='top' expand='lg'>
-        <Navbar.Brand href='/'>Gadddit</Navbar.Brand>
-        <Nav className='mr-auto'>
+      {/* <h1>Home Route</h1> */}
+      <Navbar
+        bg="dark"
+        variant="dark"
+        sticky="top"
+        className="d-flex row align-items-center"
+      >
+        <Navbar.Brand href="/">Gadddit</Navbar.Brand>
+        <Nav className="mr-auto">
           <Nav.Link as={Link} to={AppURL.main.home}>
             Home
           </Nav.Link>
           <Nav.Link as={Link} to={AppURL.main.about}>
             About
           </Nav.Link>
-          <Nav.Link as={Link} to='/events'>
+          <Nav.Link as={Link} to="/events">
             Events
           </Nav.Link>
         </Nav>
         <Nav>
-          <LoginBtn />
-          <SignUpBtn />
+          <Nav.Link>
+            <LoginBtn />
+          </Nav.Link>
+          <Nav.Link>
+            <SignUpBtn />
+          </Nav.Link>
         </Nav>
       </Navbar>
 
@@ -49,7 +59,7 @@ const MainRoute = ({ setLoggedIn }) => {
         <Route exact path={AppURL.main.home}>
           <Home />
         </Route>
-        <Route path='/public/:roomid'>
+        <Route path="/public/:roomid">
           <PublicRoom />
         </Route>
         <Route>

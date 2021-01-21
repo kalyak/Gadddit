@@ -42,8 +42,13 @@ const UserAttended = () => {
 
   return (
     <Container>
+<<<<<<< HEAD
+      <Row className="justify-content-md-center">
+        <h1>Past Events</h1>
+=======
       <Row className='justify-content-md-center'>
         <h1>All Attended Events</h1>
+>>>>>>> master
       </Row>
       <Row>
         <br />

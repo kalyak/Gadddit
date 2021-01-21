@@ -12,14 +12,14 @@ const ChangeRoleBtn = () => {
 
   if (isHost) {
     return (
-      <Link to="/user/">
+      <Link to="/user">
         <Button variant="warning">Switch to Attendee </Button>
       </Link>
     );
   }
   if (isAttendee) {
     return (
-      <Link to="/host/">
+      <Link to="/host">
         <Button variant="warning">Switch to Host</Button>
       </Link>
     );

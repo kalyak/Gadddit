@@ -127,12 +127,26 @@ const UserRoom = () => {
       <br />
       <br />
       <br />
+<<<<<<< HEAD
+
+      {eventOngoing ? (
+        <>
+          <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
+          <br />
+          <br />
+          <br />
+        </>
+      ) : (
+        ""
+      )}
+=======
       {eventOngoing ? (
         <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
       ) : null}
       <br />
       <br />
       <br />
+>>>>>>> master
 
       <Row>
         <Col sm={10}>
