@@ -13,9 +13,9 @@ const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Home Route</h1> */}
-      <Navbar bg='dark' variant='dark' sticky='top'>
-        <Navbar.Brand href='/'>Gaddit</Navbar.Brand>
-        <Nav className='mr-auto'>
+      <Navbar bg="dark" variant="dark" sticky="top">
+        <Navbar.Brand href="/">Gadddit</Navbar.Brand>
+        <Nav className="mr-auto">
           <Link to={AppURL.main.home}>Home</Link>
           <Link to={AppURL.main.about}>About</Link>
           <LoginBtn />
