@@ -41,6 +41,7 @@ const AnswerField = (props) => {
       .catch((error) => {
         console.log(error);
       });
+    props.handleRefresh();
   };
 
   if (props.answer === "" && editing === false) {

@@ -1,13 +1,13 @@
-import AppURL from "./route-constants.js";
-import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import SignUpBtn from "../buttons/signupButton.js";
-import LoginBtn from "../buttons/loginButton.js";
+import Navbar from "react-bootstrap/Navbar";
 import { Link, Route, Switch } from "react-router-dom";
+import LoginBtn from "../buttons/loginButton.js";
+import SignUpBtn from "../buttons/signupButton.js";
 import About from "../pages/main-about.js";
+import Home from "../pages/main-Home.js";
 import LoginPage from "../pages/main-Login.js";
 import SignupPage from "../pages/main-Signup.js";
-import Home from "../pages/main-Home.js";
+import AppURL from "./route-constants.js";
 
 const MainRoute = ({ setLoggedIn }) => {
   return (
@@ -33,6 +33,9 @@ const MainRoute = ({ setLoggedIn }) => {
           <SignupPage setLoggedIn={setLoggedIn} />
         </Route>
         <Route exact path={AppURL.main.home}>
+          <Home />
+        </Route>
+        <Route>
           <Home />
         </Route>
       </Switch>

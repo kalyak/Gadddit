@@ -22,6 +22,18 @@ const HostRoom = () => {
       });
   }, []);
 
+  const handleRefresh = (event) => {
+    axios
+      .get(`/qna/${roomId.roomid}`, { withCredentials: true })
+      .then((response) => {
+        // console.log(response.data);
+        setQnaList(response.data.qna);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleAnswerBtn = (qnaObj) => {
     // console.log("Clicked");
     setQnaList((state) => {
@@ -113,6 +125,7 @@ const HostRoom = () => {
               handleStateUpdate={handleStateUpdate}
               qnaId={qnaObj._id}
               roomId={roomId}
+              handleRefresh={handleRefresh}
             />
           </td>
           {/* <td>{qnaList.answer}</td> */}
@@ -136,10 +149,19 @@ const HostRoom = () => {
           handleFilter(event);
         }}
       >
-        <option value='all'>All ({qnaList.length})</option>
-        <option value='unanswered'>Unanswered ({countUnanswered()})</option>
-        <option value='answered'>Answered ({countAnswered()})</option>
+        <option value="all">All ({qnaList.length})</option>
+        <option value="unanswered">Unanswered ({countUnanswered()})</option>
+        <option value="answered">Answered ({countAnswered()})</option>
       </select>
+      <br />
+      <br />
+      <button
+        onClick={(event) => {
+          handleRefresh(event);
+        }}
+      >
+        Refresh
+      </button>
       <br />
       <br />
       <Table striped bordered hover>
