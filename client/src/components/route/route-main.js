@@ -14,7 +14,6 @@ import AppURL from "./route-constants.js";
 const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
-      {/* <h1>Home Route</h1> */}
       <Navbar bg='dark' variant='dark' sticky='top' expand='lg'>
         <Navbar.Brand href='/'>Gadddit</Navbar.Brand>
         <Nav className='mr-auto'>

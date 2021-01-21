@@ -24,7 +24,7 @@ const PublicRoom = () => {
       .catch((error) => {
         console.log(error.response);
       });
-  }, []);
+  }, [roomId.roomid]);
 
   const handleRefresh = (event) => {
     axios

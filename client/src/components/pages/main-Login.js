@@ -1,6 +1,6 @@
 import axios from "axios";
-import { Table, Container, Row, Button, Col } from "react-bootstrap";
 import { useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 const LoginPage = ({ setLoggedIn }) => {

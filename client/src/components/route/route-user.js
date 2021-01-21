@@ -6,7 +6,6 @@ import LogoutBtn from "../buttons/logoutButton.js";
 const UserRoute = ({ setLoggedIn }) => {
   return (
     <>
-      {/* <h1>User Route</h1> */}
       <Navbar
         bg='info'
         variant='dark'

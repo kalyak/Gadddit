@@ -11,11 +11,11 @@ const UpvoteButton = (props) => {
         withCredential: true,
       })
       .then((response) => {
-        console.log(response.data.upvote);
+        // console.log(response.data.upvote);
         pushToState();
       })
       .catch((error) => {
-        console.log(error.responseå);
+        console.log(error.response);
       });
 
     // props.handleRefresh();
@@ -23,15 +23,15 @@ const UpvoteButton = (props) => {
 
   const pushToState = () => {
     const newQnaList = [...props.qnaList];
-    console.log(newQnaList);
+    // console.log(newQnaList);
     const qnaToChange = { ...newQnaList[props.index] };
-    console.log(qnaToChange);
+    // console.log(qnaToChange);
     const newUpvoteList = [...qnaToChange.upvote];
     newUpvoteList.push(props.userID);
-    console.log(newUpvoteList);
+    // console.log(newUpvoteList);
     qnaToChange.upvote = newUpvoteList;
     newQnaList[props.index] = qnaToChange;
-    console.log(newQnaList);
+    // console.log(newQnaList);
     props.setQnaList(newQnaList);
   };
 

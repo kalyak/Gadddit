@@ -14,10 +14,10 @@ const UserRoom = () => {
   const now = new Date();
   const endTime = new Date(roomInfo.eventEnd);
   const eventOngoing = now < endTime;
-  console.log(endTime);
-  console.log(eventOngoing);
+  // console.log(endTime);
+  // console.log(eventOngoing);
   // console.log(qnaList);
-  console.log(roomInfo);
+  // console.log(roomInfo);
   // console.log("roomid: ", roomId.roomid);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const UserRoom = () => {
       .catch((error) => {
         console.log(error.response);
       });
-  }, []);
+  }, [roomId.roomid]);
 
   const handleRefresh = (event) => {
     axios

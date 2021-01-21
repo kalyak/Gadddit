@@ -24,9 +24,9 @@ const HostRoom = () => {
         setRoom(response.data.roomInfo);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
-  }, []);
+  }, [roomId.roomid]);
 
   const handleRefresh = (event) => {
     axios
@@ -36,7 +36,7 @@ const HostRoom = () => {
         setQnaList(response.data.qna);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -64,7 +64,7 @@ const HostRoom = () => {
         // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -113,11 +113,11 @@ const HostRoom = () => {
     .map((qnaObj, index) => {
       return (
         <tr key={qnaObj._id}>
-          <td className="text-center">{index + 1}</td>
-          <td className="text-center">{qnaObj.upvote.length}</td>
+          <td className='text-center'>{index + 1}</td>
+          <td className='text-center'>{qnaObj.upvote.length}</td>
           {eventOngoing ? (
             qnaObj.answer === "" ? (
-              <td className="text-center">
+              <td className='text-center'>
                 <button onClick={() => handleAnswerBtn(qnaObj)}>✔️</button>
               </td>
             ) : (
@@ -146,7 +146,7 @@ const HostRoom = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>{roomInfo.eventName}</h1>
       </Row>
       <Row>
@@ -160,15 +160,15 @@ const HostRoom = () => {
               handleFilter(event);
             }}
           >
-            <option value="all">All ({qnaList.length})</option>
-            <option value="unanswered">Unanswered ({countUnanswered()})</option>
-            <option value="answered">Answered ({countAnswered()})</option>
+            <option value='all'>All ({qnaList.length})</option>
+            <option value='unanswered'>Unanswered ({countUnanswered()})</option>
+            <option value='answered'>Answered ({countAnswered()})</option>
           </select>
         </Col>
 
         <Col>
           <Button
-            variant="success"
+            variant='success'
             onClick={(event) => {
               handleRefresh(event);
             }}
@@ -182,19 +182,19 @@ const HostRoom = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <td className="text-center" width="70px">
+            <td className='text-center' width='70px'>
               S/N
             </td>
-            <td className="text-center" width="70px">
+            <td className='text-center' width='70px'>
               Vote Count
             </td>
             {eventOngoing ? (
-              <td className="text-center" width="120px">
+              <td className='text-center' width='120px'>
                 Answered during event
               </td>
             ) : null}
-            <td className="text-center">Question</td>
-            <td className="text-center">Answer</td>
+            <td className='text-center'>Question</td>
+            <td className='text-center'>Answer</td>
           </tr>
         </thead>
         <tbody>{displayAllqna}</tbody>

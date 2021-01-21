@@ -1,11 +1,9 @@
-import { useState } from "react";
-import DateTimePicker from "react-datetime-picker";
-import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
-import DatePicker from "react-datepicker";
-
+import { useState } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
+import DateTimePicker from "react-datetime-picker";
+import { Redirect } from "react-router-dom";
 
 const HostCreate = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +17,7 @@ const HostCreate = () => {
   const [formStart, setStart] = useState(new Date());
   const [formEnd, setEnd] = useState(new Date());
   const [done, setDone] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -47,7 +46,7 @@ const HostCreate = () => {
         setDone(true);
       })
       .catch((error) => {
-        setErrors(error.message);
+        setErrors(error.response.data);
       });
   };
 
@@ -57,54 +56,54 @@ const HostCreate = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <Form onSubmit={handleSubmit}>
           <h1> Create New Event Room </h1>
           <br />
 
-          <Form.Group as={Row} controlId="eventName">
+          <Form.Group as={Row} controlId='eventName'>
             <Form.Label column sm={4}>
-              Event Name:{" "}
+              Event Name:
             </Form.Label>
             <Col sm={8}>
               <Form.Control
                 required
-                type="text"
-                placeholder="Enter event name"
+                type='text'
+                placeholder='Enter event name'
                 value={formData.eventName}
                 onChange={handleChange}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className='text-muted'>
                 Event name for display in the calendar of events.
               </Form.Text>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="roomPassword">
+          <Form.Group as={Row} controlId='roomPassword'>
             <Form.Label column sm={4}>
-              Room Password:{" "}
+              Room Password:
             </Form.Label>
             <Col sm={8}>
               <Form.Control
                 required
-                type="text"
-                placeholder="Enter event password"
+                type='text'
+                placeholder='Enter event password'
                 value={formData.roomPassword}
                 onChange={handleChange}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className='text-muted'>
                 Event password for event entry confirmation.
               </Form.Text>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="eventStart">
+          <Form.Group as={Row} controlId='eventStart'>
             <Form.Label column sm={4}>
-              Start Time:{" "}
+              Start Time:
             </Form.Label>
             <Col sm={8}>
               <DateTimePicker
-                name="eventStart"
+                name='eventStart'
                 onChange={(event) => {
                   setStart(event);
                   setEnd(event);
@@ -113,25 +112,25 @@ const HostCreate = () => {
                 value={formStart}
                 minDate={new Date()}
                 disableClock={true}
-                returnValue="end"
+                returnValue='end'
                 clearIcon={null}
                 calendarIcon={null}
                 showLeadingZeros={true}
-                format="dd/MM/yyyy hh:mm a"
+                format='dd/MM/yyyy hh:mm a'
               />
-              <Form.Text className="text-muted">
+              <Form.Text className='text-muted'>
                 Select event start date and time.
               </Form.Text>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="eventEnd">
+          <Form.Group as={Row} controlId='eventEnd'>
             <Form.Label column sm={4}>
-              End Time:{" "}
+              End Time:
             </Form.Label>
             <Col sm={8}>
               <DateTimePicker
-                name="eventEnd"
+                name='eventEnd'
                 onChange={(event) => {
                   setEnd(event);
                   handleDateChange("eventEnd", event);
@@ -139,46 +138,38 @@ const HostCreate = () => {
                 value={formEnd}
                 minDate={formStart}
                 disableClock={true}
-                returnValue="end"
+                returnValue='end'
                 clearIcon={null}
                 calendarIcon={null}
                 showLeadingZeros={true}
-                format="dd/MM/yyyy hh:mm a"
+                format='dd/MM/yyyy hh:mm a'
                 activeStartDate={formStart}
               />
-              <Form.Text className="text-muted">
+              <Form.Text className='text-muted'>
                 Select event end date and time.
               </Form.Text>
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="isPublic">
+          <Form.Group as={Row} controlId='isPublic'>
             <Col sm={4}></Col>
             <Col sm={8}>
               <Form.Check
-                type="checkbox"
-                id="isPublic"
-                label="Public Event"
-                // value={true}
+                type='checkbox'
+                id='isPublic'
+                label='Public Event'
                 checked={formData.isPublic}
                 onChange={handleCheck}
               />
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} controlId="button">
+          <Form.Group as={Row} controlId='button'>
             <Col sm={4}></Col>
             <Col sm={8}>
-              <Button type="submit">Create Event</Button>
+              <Button type='submit'>Create Event</Button>
             </Col>
           </Form.Group>
-
-          {/* <DatePicker
-            selected={formEnd}
-            onChange={handleDateChange}
-            showTimeSelect
-            dateFormat='Pp'
-          /> */}
         </Form>
       </Row>
     </Container>
