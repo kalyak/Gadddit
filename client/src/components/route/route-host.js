@@ -14,23 +14,25 @@ const HostRoute = ({ setLoggedIn }) => {
         className="d-flex row align-items-center"
       >
         <Navbar.Brand as={Link} to="/host">
-          Gadddit
+          Gadddit Host
         </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/host">
-            Host Home
+            Home
           </Nav.Link>
           <Nav.Link as={Link} to="/host/hosted">
-            Hosted
+            Previous Event
           </Nav.Link>
           <Nav.Link as={Link} to="/host/createroom">
-            Create Room
+            Create A Room
           </Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link disabled>
-            <p>You are now viewing as Host</p>
+          <Nav.Link disabled style={{ color: "white" }}>
+            You are now viewing as Host
           </Nav.Link>
+        </Nav>
+        <Nav>
           <Nav.Link>
             <ChangeRoleBtn />
           </Nav.Link>

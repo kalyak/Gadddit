@@ -14,21 +14,25 @@ const UserRoute = ({ setLoggedIn }) => {
         className="d-flex row align-items-center"
       >
         <Navbar.Brand as={Link} to="/user">
-          Gadddit
+          Gadddit User
         </Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/user">
-            User Home
+            Home
           </Nav.Link>
           <Nav.Link as={Link} to="/user/attended">
-            Attended
+            Previous Event
           </Nav.Link>
           <Nav.Link as={Link} to="/user/enterroom">
-            Enter Room
+            Join A Room
           </Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link disabled>You are now logged in as a user.</Nav.Link>
+          <Nav.Link disabled style={{ color: "white" }}>
+            You are now viewing as a User
+          </Nav.Link>
+        </Nav>
+        <Nav>
           <Nav.Link>
             <ChangeRoleBtn />
           </Nav.Link>

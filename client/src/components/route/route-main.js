@@ -29,8 +29,12 @@ const MainRoute = ({ setLoggedIn }) => {
           </Nav.Link>
         </Nav>
         <Nav>
-          <LoginBtn />
-          <SignUpBtn />
+          <Nav.Link>
+            <LoginBtn />
+          </Nav.Link>
+          <Nav.Link>
+            <SignUpBtn />
+          </Nav.Link>
         </Nav>
       </Navbar>
 
