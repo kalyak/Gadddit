@@ -24,8 +24,8 @@ const LogoutBtn = ({ setLoggedIn }) => {
   };
 
   if (loggedOut) {
-    console.log("to redirect to home");
-    return <Redirect to="/" />;
+    // console.log("to redirect to home");
+    return <Redirect to='/' />;
   }
 
   return (
@@ -35,9 +35,9 @@ const LogoutBtn = ({ setLoggedIn }) => {
         <SweetAlert
           warning
           showCancel
-          confirmBtnText="Logout"
-          confirmBtnBsStyle="danger"
-          title="Sorry, we are unable to process your request."
+          confirmBtnText='Logout'
+          confirmBtnBsStyle='danger'
+          title='Sorry, we are unable to process your request.'
           onConfirm={handleLogout}
           onCancel={() => {
             setPopup(false);

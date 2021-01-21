@@ -1,12 +1,11 @@
-import ChangeRoleBtn from "../buttons/changeRole.js";
-import { Navbar, Nav, Row, Col } from "react-bootstrap";
-import LogoutBtn from "../buttons/logoutButton.js";
+import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import ChangeRoleBtn from "../buttons/changeRole.js";
+import LogoutBtn from "../buttons/logoutButton.js";
 
 const UserRoute = ({ setLoggedIn }) => {
   return (
     <>
-      {/* <h1>User Route</h1> */}
       <Navbar
         bg="info"
         variant="dark"

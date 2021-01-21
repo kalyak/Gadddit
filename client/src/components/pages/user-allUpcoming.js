@@ -13,7 +13,7 @@ const UserUpcoming = () => {
         setUpcoming(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, [upcomingRooms.length]);
 

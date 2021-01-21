@@ -1,12 +1,11 @@
+import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ChangeRoleBtn from "../buttons/changeRole";
 import LogoutBtn from "../buttons/logoutButton";
-import { Navbar, Nav, Row, Col } from "react-bootstrap";
 
 const HostRoute = ({ setLoggedIn }) => {
   return (
     <>
-      {/* <h1>Host Route</h1> */}
       <Navbar
         bg="danger"
         variant="dark"

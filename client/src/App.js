@@ -14,11 +14,12 @@ function App() {
     axios
       .get("/sessions/check", { withCredentials: true })
       .then((response) => {
-        console.log("checking login", response.data);
+        // console.log("checking login", response.data);
         setLoggedIn(response.data);
       })
       .catch((error) => {
         setLoggedIn(false);
+        console.log(error.response);
       });
   }, [isLoggedIn]);
 

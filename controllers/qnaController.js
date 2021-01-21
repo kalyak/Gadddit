@@ -23,7 +23,10 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isRoomAuthenticated = (req, res, next) => {
-  if (req.session.currentRoom) {
+  if (
+    req.session.currentRoom &&
+    req.session.currentRoom._id === req.params.roomID
+  ) {
     console.log("room data:", req.session.currentRoom);
     roomID = req.session.currentRoom._id;
     roomInfo = req.session.currentRoom;
@@ -35,7 +38,7 @@ const isRoomAuthenticated = (req, res, next) => {
       hostID = room.hostID;
       if (hostID === id) {
         console.log("this person is the host");
-        roomInfo = room;
+        req.session.currentRoom = roomInfo = room;
         next();
       } else {
         //check if the person attended this room previously
@@ -46,7 +49,7 @@ const isRoomAuthenticated = (req, res, next) => {
             console.log(
               "this person attended this room before, assigning roominfo"
             );
-            roomInfo = room;
+            req.session.currentRoom = roomInfo = room;
             next();
           } else {
             console.log("cannot assign room info");
@@ -95,7 +98,6 @@ router.get("/public/:roomID", (req, res) => {
         res.status(200).send({
           roomInfo: roomInfo,
           qna: qna,
-          userID: "NOT_LOGGED_IN",
         });
       }
     }

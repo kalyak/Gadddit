@@ -1,8 +1,8 @@
-import { Button } from "react-bootstrap";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { Redirect } from "react-router-dom";
 
 const DeleteRoom = (props) => {
   const [popUp, setPopUp] = useState(false);
@@ -25,18 +25,18 @@ const DeleteRoom = (props) => {
         setIsDeleted(true);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
   if (isDeleted) {
-    return <Redirect to="/host" />;
+    return <Redirect to='/host' />;
   }
   return (
     <>
       <Button
-        variant="primary"
-        type="submit"
+        variant='primary'
+        type='submit'
         onClick={() => {
           handleClick();
         }}
@@ -47,9 +47,9 @@ const DeleteRoom = (props) => {
         <SweetAlert
           warning
           showCancel
-          confirmBtnText="Yes, delete it!"
-          confirmBtnBsStyle="danger"
-          title="Are you sure?"
+          confirmBtnText='Yes, delete it!'
+          confirmBtnBsStyle='danger'
+          title='Are you sure?'
           onConfirm={() => handleConfirmDelete()}
           onCancel={() => handleClickCancel()}
           focusCancelBtn

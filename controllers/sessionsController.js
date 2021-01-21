@@ -10,8 +10,10 @@ sessions.post("/", (req, res) => {
   //check database
   Users.findOne(filter, (err, foundUser) => {
     if (err) {
-      console.log(error);
-      res.status(500).send("Database error. Pls contact your system admin");
+      console.log(err);
+      res
+        .status(500)
+        .send({ database: "Database error. Pls contact your system admin" });
     } else if (!foundUser) {
       return res.status(401).send({ username: "Username not found" });
     } else {

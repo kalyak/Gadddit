@@ -6,10 +6,10 @@ import SignUpBtn from "../buttons/signupButton.js";
 import About from "../pages/main-about.js";
 import Home from "../pages/main-Home.js";
 import LoginPage from "../pages/main-Login.js";
-import PublicUpcoming from "../pages/public-PublicEvents.js";
 import SignupPage from "../pages/main-Signup.js";
-import AppURL from "./route-constants.js";
+import PublicUpcoming from "../pages/public-PublicEvents.js";
 import PublicRoom from "../pages/public-room.js";
+import AppURL from "./route-constants.js";
 
 const MainRoute = ({ setLoggedIn }) => {
   return (
