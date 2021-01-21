@@ -22,7 +22,7 @@ const UpvoteButton = (props) => {
         console.log(error);
       });
 
-    props.handleRefresh();
+    // props.handleRefresh();
   };
 
   const pushToState = () => {
