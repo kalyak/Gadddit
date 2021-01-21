@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import LogoutBtn from "../buttons/logoutButton.js";
 import { Link } from "react-router-dom";
 
-const UserRoute = () => {
+const UserRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>User Route</h1> */}
@@ -15,7 +15,7 @@ const UserRoute = () => {
           <Link to='/user/attended'>Attended</Link>
           <Link to='/user/enterroom'>Enter Room</Link>
           <ChangeRoleBtn />
-          <LogoutBtn />
+          <LogoutBtn setLoggedIn={setLoggedIn} />
         </Nav>
       </Navbar>
     </>

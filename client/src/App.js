@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import SwitchRoute from "./components/route/switchroute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MainRoute from "./components/route/route-main";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import NavBar from "./components/route/NavBar";
 import axios from "axios";
 
@@ -27,11 +27,14 @@ function App() {
       <Router>
         {isLoggedIn ? (
           <>
-            <NavBar />
+            <NavBar setLoggedIn={setLoggedIn} />
             <SwitchRoute />
           </>
         ) : (
-          <MainRoute setLoggedIn={setLoggedIn} />
+          <>
+            <MainRoute setLoggedIn={setLoggedIn} />
+            <Redirect to='/' />
+          </>
         )}
       </Router>
     </>

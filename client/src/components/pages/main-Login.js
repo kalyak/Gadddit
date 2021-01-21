@@ -26,7 +26,7 @@ const LoginPage = ({ setLoggedIn }) => {
         setLoggedIn(true);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         setResError((state) => {
           return { ...state, ...error.response.data };
         });
@@ -34,6 +34,8 @@ const LoginPage = ({ setLoggedIn }) => {
   };
 
   if (isLogin) {
+    // setLoggedIn(true);
+
     return <Redirect to='/user' />;
   }
 

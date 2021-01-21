@@ -7,16 +7,31 @@ import UpvoteButton from "../buttons/upvoteButton";
 
 const UserRoom = () => {
   const roomId = useParams();
+  const [roomInfo, setRoom] = useState({});
   const [qnaList, setQnaList] = useState([]);
+  const [userID, setUser] = useState("");
   const [filterby, setFilterby] = useState("all");
   console.log(qnaList);
-
+  console.log(roomInfo);
+  console.log("roomid: ", roomId.roomid);
   useEffect(() => {
+    axios
+      .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data);
+        setRoom(response.data.room);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        // console.log(response.data);
-        setQnaList(response.data);
+        console.log(response.data);
+        setQnaList(response.data.qna);
+        // setRoom(response.data.roomInfo);
+        setUser(response.data.userID);
       })
       .catch((error) => {
         console.log(error);
@@ -54,16 +69,17 @@ const UserRoom = () => {
       }
     })
     .sort((a, b) => b.upvote.length - a.upvote.length)
-    .map((qnaList, index) => {
+    .map((qna, index) => {
+      const upVoted = qna.upvote.includes(userID);
       return (
-        <tr key={qnaList._id}>
+        <tr key={qna._id}>
           <td>{index + 1}</td>
           <td>
-            <UpvoteButton roomId={roomId} qnaId={qnaList._id} />
+            {upVoted ? null : <UpvoteButton roomId={roomId} qnaId={qna._id} />}
           </td>
-          <td>{qnaList.upvote.length}</td>
-          <td>{qnaList.question}</td>
-          <td>{qnaList.answer}</td>
+          <td>{qna.upvote.length}</td>
+          <td>{qna.question}</td>
+          <td>{qna.answer}</td>
         </tr>
       );
     });
@@ -75,8 +91,12 @@ const UserRoom = () => {
 
   return (
     <>
-      <h1>User QnA Page</h1>
-      <p>Display all QnA from database</p>
+      {/* <h1>User QnA Page</h1> */}
+      <h1>{roomInfo.eventName}</h1>
+      <h3>
+        Hosted by <b>{roomInfo.hostName}</b>
+      </h3>
+      {/* <p>Display all QnA from database</p> */}
       <br />
       <QuestionField roomId={roomId} />
       <br />
@@ -87,9 +107,9 @@ const UserRoom = () => {
           handleFilter(event);
         }}
       >
-        <option value="all">All ({qnaList.length})</option>
-        <option value="unanswered">Unanswered ({countUnanswered()})</option>
-        <option value="answered">Answered ({countAnswered()})</option>
+        <option value='all'>All ({qnaList.length})</option>
+        <option value='unanswered'>Unanswered ({countUnanswered()})</option>
+        <option value='answered'>Answered ({countAnswered()})</option>
       </select>
       <br />
       <br />

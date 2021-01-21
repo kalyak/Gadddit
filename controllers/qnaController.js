@@ -56,7 +56,13 @@ router.get("/:roomID", isAuthenticated, isRoomAuthenticated, (req, res) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
-        res.status(200).send(qna);
+        res
+          .status(200)
+          .send({
+            roomInfo: req.session.currentRoom,
+            qna: qna,
+            userID: req.session.currentUser._id,
+          });
       }
     }
   );
