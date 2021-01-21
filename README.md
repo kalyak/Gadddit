@@ -57,17 +57,17 @@ This app aims to allow participants to post any questions they have and the orga
 
 #### Frontend:
 
-- axios
-- dayjs
-- react-bootstrap
-- react-bootstrap-sweetalert
-- react-datepicker
-- react-datetime-picker
-- react-router-dom
+- Axios
+- Dayjs
+- React-bootstrap
+- React-bootstrap-sweetalert
+- React-datepicker
+- React-datetime-picker
+- React-router-dom
 
 #### Backend:
 
-- bcrypt
-- dotenv
-- express-session
-- express-validator
+- Bcrypt
+- Dotenv
+- Express-session
+- Express-validator
