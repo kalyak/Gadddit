@@ -19,7 +19,7 @@ const QuestionField = (props) => {
         console.log(error);
       });
 
-    props.handleRefresh(event);
+    props.handleRefresh();
   };
 
   const handleTextChange = (event) => {
