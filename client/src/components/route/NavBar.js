@@ -1,9 +1,9 @@
-import { useRouteMatch } from "react-router-dom";
+import { Redirect, useRouteMatch } from "react-router-dom";
 import MainRoute from "../route/route-main.js";
 import HostRoute from "../route/route-host.js";
 import UserRoute from "../route/route-user.js";
 
-const NavBar = () => {
+const NavBar = ({ setLoggedIn }) => {
   //   const path = useLocation();
 
   const isHost = useRouteMatch({
@@ -15,11 +15,11 @@ const NavBar = () => {
   });
 
   if (isHost) {
-    return <HostRoute />;
+    return <HostRoute setLoggedIn={setLoggedIn} />;
   } else if (isAttendee) {
-    return <UserRoute />;
+    return <UserRoute setLoggedIn={setLoggedIn} />;
   } else {
-    return <MainRoute />;
+    return <Redirect to='/user/' />;
   }
 };
 

@@ -160,7 +160,7 @@ router.post("/:roomID", isAuthenticated, (req, res) => {
                 .status(500)
                 .send("Database error. Pls contact your system admin");
             } else {
-              res.status(200).send("successfully join");
+              res.status(200).send({ room: room });
             }
           }
         );
@@ -169,6 +169,19 @@ router.post("/:roomID", isAuthenticated, (req, res) => {
           .status(401)
           .send("Please ensure the room code and room password is correct");
       }
+    }
+  });
+});
+
+//get room information for room
+router.get("/:roomID", isAuthenticated, (req, res) => {
+  Rooms.findById(req.params.roomID, (err, room) => {
+    if (err) {
+      res.status(500).send("Database error. Pls contact your system admin");
+    } else if (!room) {
+      res.status(401).send("where's the room ah");
+    } else {
+      res.status(200).send(room);
     }
   });
 });

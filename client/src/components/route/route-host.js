@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ChangeRoleBtn from "../buttons/changeRole";
 import LogoutBtn from "../buttons/logoutButton";
 
-const HostRoute = () => {
+const HostRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Host Route</h1> */}
@@ -15,7 +15,7 @@ const HostRoute = () => {
           <Link to='/host/hosted'>Hosted</Link>
           <Link to='/host/createroom'>Create Room</Link>
           <ChangeRoleBtn />
-          <LogoutBtn />
+          <LogoutBtn setLoggedIn={setLoggedIn} />
         </Nav>
       </Navbar>
     </>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 
-const LogoutBtn = () => {
+const LogoutBtn = ({ setLoggedIn }) => {
   const [loggedOut, setLogout] = useState(false);
   const [error, setError] = useState("");
   const [errorPopup, setPopup] = useState(false);
@@ -14,6 +14,7 @@ const LogoutBtn = () => {
       .delete("/sessions/")
       .then((response) => {
         setLogout(true);
+        setLoggedIn(false);
       })
       .catch((err) => {
         setError(err);
@@ -22,6 +23,7 @@ const LogoutBtn = () => {
   };
 
   if (loggedOut) {
+    console.log("to redirect to home");
     return <Redirect to='/' />;
   }
 
