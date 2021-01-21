@@ -13,7 +13,7 @@ const UserUpcoming = () => {
         setUpcoming(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, [upcomingRooms.length]);
 
@@ -23,7 +23,7 @@ const UserUpcoming = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>All Upcoming Event</h1>
       </Row>
       <Row>
@@ -32,12 +32,12 @@ const UserUpcoming = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th className="text-center">S/N</th>
-            <th className="text-center">Event Name</th>
-            <th className="text-center">Event Date</th>
-            <th className="text-center">Event Time</th>
-            <th className="text-center">Host</th>
-            <th className="text-center">Action</th>
+            <th className='text-center'>S/N</th>
+            <th className='text-center'>Event Name</th>
+            <th className='text-center'>Event Date</th>
+            <th className='text-center'>Event Time</th>
+            <th className='text-center'>Host</th>
+            <th className='text-center'>Action</th>
           </tr>
         </thead>
         <tbody>{upcomingDisplay}</tbody>

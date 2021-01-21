@@ -14,7 +14,7 @@ const UserAttended = () => {
         setHistroy(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, []);
 
@@ -24,14 +24,14 @@ const UserAttended = () => {
 
     return (
       <tr key={room._id}>
-        <td className="text-center">{index + 1}</td>
+        <td className='text-center'>{index + 1}</td>
         <td>
           <Link to={`/user/${room._id}`}>{room.eventName}</Link>
         </td>
-        <td className="text-center">{eventDate}</td>
-        <td className="text-center">{noOfQna}</td>
-        <td className="text-center">{room.hostName}</td>
-        <td className="text-center">
+        <td className='text-center'>{eventDate}</td>
+        <td className='text-center'>{noOfQna}</td>
+        <td className='text-center'>{room.hostName}</td>
+        <td className='text-center'>
           <Link to={`/user/${room._id}`}>
             <button>View</button>
           </Link>
@@ -42,7 +42,7 @@ const UserAttended = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>All Attended Events</h1>
       </Row>
       <Row>
@@ -51,12 +51,12 @@ const UserAttended = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th className="text-center">S/N</th>
-            <th className="text-center">Event Name</th>
-            <th className="text-center">Event Date</th>
-            <th className="text-center"># of Questions</th>
-            <th className="text-center">Hosted By</th>
-            <th className="text-center">View Room</th>
+            <th className='text-center'>S/N</th>
+            <th className='text-center'>Event Name</th>
+            <th className='text-center'>Event Date</th>
+            <th className='text-center'># of Questions</th>
+            <th className='text-center'>Hosted By</th>
+            <th className='text-center'>View Room</th>
           </tr>
         </thead>
         <tbody>{historyDisplay}</tbody>

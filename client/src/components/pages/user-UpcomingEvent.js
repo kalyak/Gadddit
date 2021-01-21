@@ -22,7 +22,7 @@ const UpcomingEvent = ({ room, index }) => {
         roomPassword: room.roomPassword,
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setJoin(true);
       })
       .catch((error) => {
@@ -37,12 +37,12 @@ const UpcomingEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td className="text-center">{index + 1}</td>
+        <td className='text-center'>{index + 1}</td>
         <td>{room.eventName}</td>
-        <td className="text-center">{eventDate}</td>
-        <td className="text-center">{eventTime}</td>
-        <td className="text-center">{room.hostName}</td>
-        <td className="text-center">
+        <td className='text-center'>{eventDate}</td>
+        <td className='text-center'>{eventTime}</td>
+        <td className='text-center'>{room.hostName}</td>
+        <td className='text-center'>
           {eventOngoing ? (
             <button
               onClick={() => {
@@ -59,8 +59,8 @@ const UpcomingEvent = ({ room, index }) => {
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText="Join event"
-          confirmBtnBsStyle="Back to listings"
+          confirmBtnText='Join event'
+          confirmBtnBsStyle='Back to listings'
           title={
             <>
               <small>You are now joining</small>

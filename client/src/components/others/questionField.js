@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
-import { Table, Container, Row, Button, Col } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 const QuestionField = (props) => {
   const [question, setQuestion] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log(question);
+    // console.log(event.target);
+    // console.log(question);
 
     axios
       .post(
@@ -17,7 +17,7 @@ const QuestionField = (props) => {
         { withCredentials: true }
       )
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
     setQuestion("");
     props.handleRefresh();
@@ -34,8 +34,8 @@ const QuestionField = (props) => {
         <Row>
           <Col sm={10}>
             <textarea
-              name="question"
-              placeholder="Post your question here"
+              name='question'
+              placeholder='Post your question here'
               value={question}
               onChange={handleTextChange}
               style={{ width: "100%" }}
@@ -43,7 +43,7 @@ const QuestionField = (props) => {
           </Col>
 
           <Col sm={2}>
-            <Button type="submit">Post Question</Button>
+            <Button type='submit'>Post Question</Button>
           </Col>
         </Row>
       </form>

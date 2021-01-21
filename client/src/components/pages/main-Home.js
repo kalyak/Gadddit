@@ -1,20 +1,20 @@
-import SignUpBtn from "../buttons/signupButton";
+import { Col, Container, Row } from "react-bootstrap";
 import LoginBtn from "../buttons/loginButton";
-import { Container, Row, Button, Col } from "react-bootstrap";
+import SignUpBtn from "../buttons/signupButton";
 
 const Home = () => {
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>WELCOME TO GADDDIT</h1>
       </Row>
       <br />
       <br />
-      <Row className="justify-content-md-center">
-        <Col sm="auto">
+      <Row className='justify-content-md-center'>
+        <Col sm='auto'>
           <LoginBtn />
         </Col>
-        <Col sm="auto">
+        <Col sm='auto'>
           <SignUpBtn />
         </Col>
       </Row>

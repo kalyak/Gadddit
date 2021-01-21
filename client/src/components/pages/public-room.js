@@ -1,16 +1,13 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { Table, Container, Row, Button, Col } from "react-bootstrap";
-import QuestionField from "../others/questionField";
-import UpvoteButton from "../buttons/upvoteButton";
 import LoginBtn from "../buttons/loginButton";
 
 const PublicRoom = () => {
   const roomId = useParams();
   const [roomInfo, setRoom] = useState({});
   const [qnaList, setQnaList] = useState([]);
-  const [userID, setUser] = useState("");
   const [filterby, setFilterby] = useState("all");
   // console.log(qnaList);
   // console.log(roomInfo);
@@ -23,12 +20,11 @@ const PublicRoom = () => {
         // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
-        setUser(response.data.userID);
       })
       .catch((error) => {
         console.log(error.response);
       });
-  }, []);
+  }, [roomId.roomid]);
 
   const handleRefresh = (event) => {
     axios
@@ -37,7 +33,6 @@ const PublicRoom = () => {
         // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
-        setUser(response.data.userID);
       })
       .catch((error) => {
         console.log(error.response);
@@ -88,28 +83,28 @@ const PublicRoom = () => {
     });
 
   const handleFilter = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setFilterby(event.target.value);
   };
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>{roomInfo.eventName}</h1>
       </Row>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h3>
           Hosted by <b>{roomInfo.hostName}</b>
         </h3>
       </Row>
       <br />
       <br />
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         To submit questions to the host, please login.
       </Row>
       <br />
 
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <LoginBtn />
       </Row>
       <br />
@@ -123,16 +118,16 @@ const PublicRoom = () => {
               handleFilter(event);
             }}
           >
-            <option value="all">All ({qnaList.length})</option>
-            <option value="unanswered">Unanswered ({countUnanswered()})</option>
-            <option value="answered">Answered ({countAnswered()})</option>
+            <option value='all'>All ({qnaList.length})</option>
+            <option value='unanswered'>Unanswered ({countUnanswered()})</option>
+            <option value='answered'>Answered ({countAnswered()})</option>
           </select>
         </Col>
         <br />
         <br />
         <Col>
           <Button
-            variant="success"
+            variant='success'
             onClick={(error) => {
               handleRefresh(error);
             }}

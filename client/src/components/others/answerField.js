@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Table, Container, Row, Col, Button } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 const AnswerField = (props) => {
   const [editing, setEditing] = useState(false);
@@ -40,7 +40,7 @@ const AnswerField = (props) => {
         // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
     props.handleRefresh();
   };
@@ -48,7 +48,7 @@ const AnswerField = (props) => {
   if (props.answer === "" && editing === false) {
     return (
       <Container>
-        <Row className="justify-content-md-center">
+        <Row className='justify-content-md-center'>
           <Button onClick={() => setEditing(true)}>Add Answer</Button>
         </Row>
       </Container>
@@ -69,14 +69,14 @@ const AnswerField = (props) => {
             ></textarea>
           </Row>
           <br />
-          <Row className="justify-content-md-center">
-            <Col sm="auto">
-              <Button variant="primary" type="submit">
+          <Row className='justify-content-md-center'>
+            <Col sm='auto'>
+              <Button variant='primary' type='submit'>
                 Update
               </Button>
             </Col>
-            <Col sm="auto">
-              <Button variant="danger" onClick={() => setEditing(false)}>
+            <Col sm='auto'>
+              <Button variant='danger' onClick={() => setEditing(false)}>
                 Cancel
               </Button>
             </Col>
@@ -92,7 +92,7 @@ const AnswerField = (props) => {
             <span onDoubleClick={handleDoubleClick}>{props.answer}</span>
           </Col>
           <Col sm={2}>
-            <Button className="text-end" onClick={handleClick}>
+            <Button className='text-end' onClick={handleClick}>
               Edit
             </Button>
           </Col>

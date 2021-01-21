@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Container, Row, Table } from "react-bootstrap";
 import PublicEvent from "./public-UpcomingEvent";
-import { Container, Row, Button, Col } from "react-bootstrap";
 
 const PublicUpcoming = () => {
   const [upcomingRooms, setUpcoming] = useState([]);
@@ -14,7 +13,7 @@ const PublicUpcoming = () => {
         setUpcoming(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, [upcomingRooms.length]);
 
@@ -24,7 +23,7 @@ const PublicUpcoming = () => {
 
   return (
     <Container>
-      <Row className="justify-content-md-center">
+      <Row className='justify-content-md-center'>
         <h1>All Upcoming Event</h1>
       </Row>
       <Row>
@@ -34,12 +33,12 @@ const PublicUpcoming = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th className="text-center">S/N</th>
-            <th className="text-center">Event Name</th>
-            <th className="text-center">Event Date</th>
-            <th className="text-center">Event Time</th>
-            <th className="text-center">Host</th>
-            <th className="text-center">Action</th>
+            <th className='text-center'>S/N</th>
+            <th className='text-center'>Event Name</th>
+            <th className='text-center'>Event Date</th>
+            <th className='text-center'>Event Time</th>
+            <th className='text-center'>Host</th>
+            <th className='text-center'>Action</th>
           </tr>
         </thead>
         <tbody>{publicDisplay}</tbody>

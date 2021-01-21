@@ -1,9 +1,7 @@
-import axios from "axios";
-import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import dayjs from "dayjs";
+import { useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { Container, Row, Button, Col } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 const PublicEvent = ({ room, index }) => {
   const [confirmPopup, setPopup] = useState(false);
@@ -28,13 +26,13 @@ const PublicEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td className="text-center">{index + 1}</td>
+        <td className='text-center'>{index + 1}</td>
         <td>{room.eventName}</td>
-        <td className="text-center">{eventDate}</td>
-        <td className="text-center">{eventTime}</td>
+        <td className='text-center'>{eventDate}</td>
+        <td className='text-center'>{eventTime}</td>
 
-        <td className="text-center">{room.hostName}</td>
-        <td className="text-center">
+        <td className='text-center'>{room.hostName}</td>
+        <td className='text-center'>
           {eventOngoing ? (
             <button
               onClick={() => {
@@ -43,16 +41,14 @@ const PublicEvent = ({ room, index }) => {
             >
               Join
             </button>
-          ) : (
-            ""
-          )}
+          ) : null}
         </td>
       </tr>
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText="Join event"
-          confirmBtnBsStyle="Back to listings"
+          confirmBtnText='Join event'
+          confirmBtnBsStyle='Back to listings'
           title={
             <>
               <small>You are now joining</small>
@@ -65,7 +61,6 @@ const PublicEvent = ({ room, index }) => {
           onCancel={() => {
             setPopup(false);
           }}
-          // focusCancelBtn
         />
       )}
     </>
