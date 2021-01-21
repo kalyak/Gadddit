@@ -15,7 +15,12 @@ const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Home Route</h1> */}
-      <Navbar bg="dark" variant="dark" sticky="top" expand="lg">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        sticky="top"
+        className="d-flex row align-items-center"
+      >
         <Navbar.Brand href="/">Gadddit</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link as={Link} to={AppURL.main.home}>
