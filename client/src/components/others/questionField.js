@@ -18,6 +18,8 @@ const QuestionField = (props) => {
       .catch((error) => {
         console.log(error);
       });
+
+    props.handleRefresh(event);
   };
 
   const handleTextChange = (event) => {
