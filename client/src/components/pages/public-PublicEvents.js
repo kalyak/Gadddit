@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import PublicEvent from "./public-UpcomingEvent";
+import { Container, Row, Button, Col } from "react-bootstrap";
 
 const PublicUpcoming = () => {
   const [upcomingRooms, setUpcoming] = useState([]);
@@ -22,22 +23,28 @@ const PublicUpcoming = () => {
   });
 
   return (
-    <>
-      <h1>All Upcoming Event</h1>
-      <br />
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>All Upcoming Event</h1>
+      </Row>
+      <Row>
+        <br />
+      </Row>
+
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>S/N</th>
-            <th>Event Name</th>
-            <th>Event Date</th>
-            <th>Host</th>
-            <th>Action</th>
+            <th className="text-center">S/N</th>
+            <th className="text-center">Event Name</th>
+            <th className="text-center">Event Date</th>
+            <th className="text-center">Event Time</th>
+            <th className="text-center">Host</th>
+            <th className="text-center">Action</th>
           </tr>
         </thead>
         <tbody>{publicDisplay}</tbody>
       </Table>
-    </>
+    </Container>
   );
 };
 

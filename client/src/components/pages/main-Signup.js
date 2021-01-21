@@ -2,8 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { Container, Row, Button, Col } from "react-bootstrap";
 
-const SignupPage = () => {
+const SignupPage = ({ setLoggedIn }) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -59,6 +60,7 @@ const SignupPage = () => {
       .then((response) => {
         console.log(response);
         setIsLogin(true);
+        setLoggedIn(true);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -68,57 +70,84 @@ const SignupPage = () => {
       });
   };
   if (isLogin) {
-    return <Redirect to='/user' />;
+    return <Redirect to="/user" />;
   }
 
   return (
-    <>
-      <h1>Sign Up Page</h1>
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>Sign Up Page</h1>
+      </Row>
+      <br />
+      <br />
+      <Row className="justify-content-md-center">
+        <h3>Create your new account here:</h3>
+      </Row>
+      <br />
+      <br />
+
       <form onSubmit={(event) => handleSubmit(event)}>
-        <fieldset>
-          <legend>Create New Account</legend>
-          <label>Username: </label>
-          <input
-            type='text'
-            name='username'
-            required
-            id='username'
-            value={formData.username}
-            onChange={handleChange}
-            placeholder='Username'
-          />
+        <Row className="justify-content-md-center">
+          <Col sm="auto">
+            <label>Username: </label>
+          </Col>
+          <Col sm="auto">
+            <input
+              type="text"
+              name="username"
+              required
+              id="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Username"
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
           <span style={{ color: "red" }}> {errors.username} </span>
-          <br />
-          <br />
-          <label>Password: </label>
-          <input
-            type='password'
-            name='password'
-            required
-            id='password'
-            value={formData.password}
-            onChange={handleChange}
-            placeholder='Password'
-            minLength='8'
-          />
+        </Row>
+
+        <br />
+        <br />
+        <Row className="justify-content-md-center">
+          <Col sm="auto">
+            <label>Password: </label>
+          </Col>
+          <Col sm="auto">
+            <input
+              type="password"
+              name="password"
+              required
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              minLength="8"
+            />
+          </Col>
+        </Row>
+        <br />
+        <br />
+        <Row className="justify-content-md-center">
           <span style={{ color: "red" }}> {errors.password} </span>
-          <br />
-          <br />
-          <input type='submit' />
-        </fieldset>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Button type="submit">Sign Up </Button>
+        </Row>
       </form>
+
       {donePopup && (
         <SweetAlert
           success
-          title='Welcome to Gaddit!'
+          title="Welcome to Gaddit!"
           onConfirm={handlenextPage}
           // onCancel={this.onCancel}
-          confirmBtnText='Go to home page'
+          confirmBtnText="Go to home page"
         >
           You have succesfully signed up!
         </SweetAlert>
       )}
-    </>
+    </Container>
   );
 };
 

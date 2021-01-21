@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Table, Container, Row, Button, Col } from "react-bootstrap";
 import QuestionField from "../others/questionField";
 import UpvoteButton from "../buttons/upvoteButton";
 import LoginBtn from "../buttons/loginButton";
@@ -12,21 +12,21 @@ const PublicRoom = () => {
   const [qnaList, setQnaList] = useState([]);
   const [userID, setUser] = useState("");
   const [filterby, setFilterby] = useState("all");
-  console.log(qnaList);
-  console.log(roomInfo);
-  console.log("roomid: ", roomId.roomid);
+  // console.log(qnaList);
+  // console.log(roomInfo);
+  // console.log("roomid: ", roomId.roomid);
 
   useEffect(() => {
     axios
       .get(`/qna/public/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, []);
 
@@ -34,13 +34,13 @@ const PublicRoom = () => {
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -79,7 +79,7 @@ const PublicRoom = () => {
       return (
         <tr key={qna._id}>
           <td>{index + 1}</td>
-          <td></td>
+
           <td>{qna.upvote.length}</td>
           <td>{qna.question}</td>
           <td>{qna.answer}</td>
@@ -93,41 +93,61 @@ const PublicRoom = () => {
   };
 
   return (
-    <>
-      <h1>{roomInfo.eventName}</h1>
-      <h3>
-        Hosted by <b>{roomInfo.hostName}</b>
-      </h3>
-      <br />
-      To submit questions to the host, please login. <LoginBtn />
-      <br />
-      <br />
-      <label>Filter by: </label>
-      <select
-        onChange={(event) => {
-          handleFilter(event);
-        }}
-      >
-        <option value='all'>All ({qnaList.length})</option>
-        <option value='unanswered'>Unanswered ({countUnanswered()})</option>
-        <option value='answered'>Answered ({countAnswered()})</option>
-      </select>
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>{roomInfo.eventName}</h1>
+      </Row>
+      <Row className="justify-content-md-center">
+        <h3>
+          Hosted by <b>{roomInfo.hostName}</b>
+        </h3>
+      </Row>
       <br />
       <br />
-      <button
-        onClick={(error) => {
-          handleRefresh(error);
-        }}
-      >
-        Refresh
-      </button>
+      <Row className="justify-content-md-center">
+        To submit questions to the host, please login.
+      </Row>
+      <br />
+
+      <Row className="justify-content-md-center">
+        <LoginBtn />
+      </Row>
+      <br />
+      <br />
+      <br />
+      <Row>
+        <Col sm={10}>
+          <label>Filter by: </label>
+          <select
+            onChange={(event) => {
+              handleFilter(event);
+            }}
+          >
+            <option value="all">All ({qnaList.length})</option>
+            <option value="unanswered">Unanswered ({countUnanswered()})</option>
+            <option value="answered">Answered ({countAnswered()})</option>
+          </select>
+        </Col>
+        <br />
+        <br />
+        <Col>
+          <Button
+            variant="success"
+            onClick={(error) => {
+              handleRefresh(error);
+            }}
+          >
+            Refresh
+          </Button>
+        </Col>
+      </Row>
       <br />
       <br />
       <Table striped bordered hover>
         <thead>
           <tr>
             <td>S/N</td>
-            <td></td>
+
             <td>Vote Count</td>
             <td>Question</td>
             <td>Answer</td>
@@ -135,7 +155,7 @@ const PublicRoom = () => {
         </thead>
         <tbody>{displayAllqna}</tbody>
       </Table>
-    </>
+    </Container>
   );
 };
 

@@ -169,9 +169,7 @@ const HostCreate = () => {
           <Form.Group as={Row} controlId="button">
             <Col sm={4}></Col>
             <Col sm={8}>
-              <Button variant="primary" type="submit">
-                Create Event
-              </Button>
+              <Button type="submit">Create Event</Button>
             </Col>
           </Form.Group>
 

@@ -35,6 +35,7 @@ const UserUpcoming = () => {
             <th className="text-center">S/N</th>
             <th className="text-center">Event Name</th>
             <th className="text-center">Event Date</th>
+            <th className="text-center">Event Time</th>
             <th className="text-center">Host</th>
             <th className="text-center">Action</th>
           </tr>

@@ -1,4 +1,5 @@
 import { Link, useRouteMatch } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const ChangeRoleBtn = () => {
   const isHost = useRouteMatch({
@@ -11,15 +12,15 @@ const ChangeRoleBtn = () => {
 
   if (isHost) {
     return (
-      <Link to='/user/'>
-        <button>Switch to Attendee </button>
+      <Link to="/user/">
+        <Button variant="warning">Switch to Attendee </Button>
       </Link>
     );
   }
   if (isAttendee) {
     return (
-      <Link to='/host/'>
-        <button>Switch to Host</button>
+      <Link to="/host/">
+        <Button variant="warning">Switch to Host</Button>
       </Link>
     );
   }

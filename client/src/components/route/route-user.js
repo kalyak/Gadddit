@@ -1,6 +1,5 @@
 import ChangeRoleBtn from "../buttons/changeRole.js";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
+import { Navbar, Nav, Row, Col } from "react-bootstrap";
 import LogoutBtn from "../buttons/logoutButton.js";
 import { Link } from "react-router-dom";
 
@@ -8,14 +7,34 @@ const UserRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>User Route</h1> */}
-      <Navbar bg="info" variant="dark" sticky="top">
-        <Navbar.Brand href="/user">Gadddit</Navbar.Brand>
+      <Navbar
+        bg="info"
+        variant="dark"
+        sticky="top"
+        className="d-flex row align-items-center"
+      >
+        <Navbar.Brand as={Link} to="/user">
+          Gadddit
+        </Navbar.Brand>
         <Nav className="mr-auto">
-          <Link to="/user">User Home</Link>
-          <Link to="/user/attended">Attended</Link>
-          <Link to="/user/enterroom">Enter Room</Link>
-          <ChangeRoleBtn />
-          <LogoutBtn setLoggedIn={setLoggedIn} />
+          <Nav.Link as={Link} to="/user">
+            User Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/user/attended">
+            Attended
+          </Nav.Link>
+          <Nav.Link as={Link} to="/user/enterroom">
+            Enter Room
+          </Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link disabled>You are now logged in as a user.</Nav.Link>
+          <Nav.Link>
+            <ChangeRoleBtn />
+          </Nav.Link>
+          <Nav.Link>
+            <LogoutBtn setLoggedIn={setLoggedIn} />
+          </Nav.Link>
         </Nav>
       </Navbar>
     </>

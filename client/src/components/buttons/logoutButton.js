@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { Button } from "react-bootstrap";
 
 const LogoutBtn = ({ setLoggedIn }) => {
   const [loggedOut, setLogout] = useState(false);
@@ -24,19 +25,19 @@ const LogoutBtn = ({ setLoggedIn }) => {
 
   if (loggedOut) {
     console.log("to redirect to home");
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 
   return (
     <>
-      <button onClick={handleLogout}>Logout</button>
+      <Button onClick={handleLogout}>Logout</Button>
       {errorPopup && (
         <SweetAlert
           warning
           showCancel
-          confirmBtnText='Logout'
-          confirmBtnBsStyle='danger'
-          title='Sorry, we are unable to process your request.'
+          confirmBtnText="Logout"
+          confirmBtnBsStyle="danger"
+          title="Sorry, we are unable to process your request."
           onConfirm={handleLogout}
           onCancel={() => {
             setPopup(false);

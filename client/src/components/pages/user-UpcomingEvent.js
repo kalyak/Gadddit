@@ -9,6 +9,7 @@ const UpcomingEvent = ({ room, index }) => {
   const [joined, setJoin] = useState(false);
 
   const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
+  const eventTime = dayjs(room.eventStart).format("HH:mm");
   const now = new Date();
   const startDate = new Date(room.eventStart);
   const endDate = new Date(room.eventEnd);
@@ -39,6 +40,7 @@ const UpcomingEvent = ({ room, index }) => {
         <td className="text-center">{index + 1}</td>
         <td>{room.eventName}</td>
         <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
         <td className="text-center">{room.hostName}</td>
         <td className="text-center">
           {eventOngoing ? (

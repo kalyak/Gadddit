@@ -14,32 +14,23 @@ const UserRoom = () => {
   const now = new Date();
   const endTime = new Date(roomInfo.eventEnd);
   const eventOngoing = now < endTime;
-
-  console.log(qnaList);
+  console.log(endTime);
+  console.log(eventOngoing);
+  // console.log(qnaList);
   console.log(roomInfo);
-  console.log("roomid: ", roomId.roomid);
+  // console.log("roomid: ", roomId.roomid);
 
   useEffect(() => {
-    // axios
-    //   .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setRoom(response.data.room);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data);
-    // });
-
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   }, []);
 
@@ -47,13 +38,13 @@ const UserRoom = () => {
     axios
       .get(`/qna/${roomId.roomid}`, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setQnaList(response.data.qna);
         setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
 
@@ -119,7 +110,7 @@ const UserRoom = () => {
     });
 
   const handleFilter = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setFilterby(event.target.value);
   };
 

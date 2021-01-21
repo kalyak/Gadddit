@@ -46,7 +46,13 @@ const AnswerField = (props) => {
   };
 
   if (props.answer === "" && editing === false) {
-    return <Button onClick={() => setEditing(true)}>Add Answer</Button>;
+    return (
+      <Container>
+        <Row className="justify-content-md-center">
+          <Button onClick={() => setEditing(true)}>Add Answer</Button>
+        </Row>
+      </Container>
+    );
   }
 
   if (editing) {

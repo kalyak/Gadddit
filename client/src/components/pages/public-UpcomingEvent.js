@@ -3,12 +3,15 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import dayjs from "dayjs";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { Container, Row, Button, Col } from "react-bootstrap";
 
 const PublicEvent = ({ room, index }) => {
   const [confirmPopup, setPopup] = useState(false);
   const [joined, setJoin] = useState(false);
 
   const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
+  const eventTime = dayjs(room.eventStart).format("HH:mm");
+
   const now = new Date();
   const startDate = new Date(room.eventStart);
   const endDate = new Date(room.eventEnd);
@@ -16,19 +19,6 @@ const PublicEvent = ({ room, index }) => {
 
   const handleJoinEvent = () => {
     setJoin(true);
-
-    // axios
-    //   .post("/attendees/private", {
-    //     roomCode: room.roomCode,
-    //     roomPassword: room.roomPassword,
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setJoin(true);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response.data);
-    //   });
   };
 
   if (joined) {
@@ -38,11 +28,13 @@ const PublicEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>{room.eventName}</td>
-        <td>{eventDate}</td>
-        <td>{room.hostName}</td>
-        <td>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
+
+        <td className="text-center">{room.hostName}</td>
+        <td className="text-center">
           {eventOngoing ? (
             <button
               onClick={() => {
@@ -59,8 +51,8 @@ const PublicEvent = ({ room, index }) => {
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText='Join event'
-          confirmBtnBsStyle='Back to listings'
+          confirmBtnText="Join event"
+          confirmBtnBsStyle="Back to listings"
           title={
             <>
               <small>You are now joining</small>
