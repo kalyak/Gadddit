@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 const EnterRoom = () => {
@@ -48,49 +48,69 @@ const EnterRoom = () => {
   }
 
   return (
-    <>
-      <h1>Enter Room</h1>
-      <p>Need to add in forms to enter rooms</p>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='roomCode'>
-          <Form.Label>Event Code: </Form.Label>
-          <Form.Control
-            required
-            type='text'
-            placeholder='Enter event code'
-            value={formData.roomCode}
-            onChange={handleChange}
-          />
-          <span style={{ color: "red" }}>
-            {" "}
-            {resError.database}
-            {resError.roomCode}
-          </span>
-          <Form.Text className='text-muted'>
-            Enter event code given by the event host.
-          </Form.Text>
-        </Form.Group>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <h1>Join Room</h1>
+          </Row>
+          <Row>
+            <p>To join a room, please key in the room code and password</p>
+          </Row>
 
-        <Form.Group controlId='roomPassword'>
-          <Form.Label>Room Password: </Form.Label>
-          <Form.Control
-            required
-            type='text'
-            placeholder='Enter event password'
-            value={formData.roomPassword}
-            onChange={handleChange}
-          />
-          <span style={{ color: "red" }}> {resError.roomPassword} </span>
-          <Form.Text className='text-muted'>
-            Enter event password given by the event host.
-          </Form.Text>
-        </Form.Group>
+          <Form.Group controlId="roomCode">
+            <Row>
+              <Form.Label>Room Code: </Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter event code"
+                value={formData.roomCode}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <span style={{ color: "red" }}>
+                {resError.database}
+                {resError.roomCode}
+              </span>
+            </Row>
+            <Row>
+              <Form.Text className="text-muted">
+                Enter event code given by the event host.
+              </Form.Text>
+            </Row>
+          </Form.Group>
 
-        <Button variant='primary' type='submit'>
-          Enter Room
-        </Button>
-      </Form>
-    </>
+          <Form.Group controlId="roomPassword">
+            <Row>
+              <Form.Label>Room Password: </Form.Label>
+              <Form.Control
+                required
+                type="text"
+                placeholder="Enter event password"
+                value={formData.roomPassword}
+                onChange={handleChange}
+              />
+            </Row>
+            <Row>
+              <span style={{ color: "red" }}> {resError.roomPassword} </span>
+            </Row>
+            <Row>
+              <Form.Text className="text-muted">
+                Enter event password given by the event host.
+              </Form.Text>
+            </Row>
+          </Form.Group>
+
+          <Row className="justify-content-md-center">
+            <Button variant="primary" type="submit">
+              Enter Room
+            </Button>
+          </Row>
+        </Form>
+      </Row>
+    </Container>
   );
 };
 

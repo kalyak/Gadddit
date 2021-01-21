@@ -2,13 +2,17 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AnswerField from "../others/answerField";
-import { Table } from "react-bootstrap";
+import { Table, Container, Row, Button, Col } from "react-bootstrap";
 
 const HostRoom = () => {
   const roomId = useParams();
   const [qnaList, setQnaList] = useState([]);
   const [roomInfo, setRoom] = useState({});
   const [filterby, setFilterby] = useState("all");
+  const now = new Date();
+  const endTime = new Date(roomInfo.eventEnd);
+  const eventOngoing = now < endTime;
+
   // console.log(qnaList);
 
   useEffect(() => {
@@ -109,17 +113,17 @@ const HostRoom = () => {
     .map((qnaObj, index) => {
       return (
         <tr key={qnaObj._id}>
-          <td>{index + 1}</td>
-          <td>{qnaObj.upvote.length}</td>
-
-          {qnaObj.answer === "" ? (
-            <td>
-              <button onClick={() => handleAnswerBtn(qnaObj)}>✔️</button>
-            </td>
-          ) : (
-            <td></td>
-          )}
-
+          <td className="text-center">{index + 1}</td>
+          <td className="text-center">{qnaObj.upvote.length}</td>
+          {eventOngoing ? (
+            qnaObj.answer === "" ? (
+              <td className="text-center">
+                <button onClick={() => handleAnswerBtn(qnaObj)}>✔️</button>
+              </td>
+            ) : (
+              <td></td>
+            )
+          ) : null}
           <td>{qnaObj.question}</td>
           <td>
             <AnswerField
@@ -141,44 +145,61 @@ const HostRoom = () => {
   };
 
   return (
-    <>
-      <h1>{roomInfo.eventName}</h1>
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>{roomInfo.eventName}</h1>
+      </Row>
+      <Row>
+        <br />
+      </Row>
+      <Row>
+        <Col sm={10}>
+          <label>Filter by: </label>
+          <select
+            onChange={(event) => {
+              handleFilter(event);
+            }}
+          >
+            <option value="all">All ({qnaList.length})</option>
+            <option value="unanswered">Unanswered ({countUnanswered()})</option>
+            <option value="answered">Answered ({countAnswered()})</option>
+          </select>
+        </Col>
 
+        <Col>
+          <Button
+            variant="success"
+            onClick={(event) => {
+              handleRefresh(event);
+            }}
+          >
+            Refresh
+          </Button>
+        </Col>
+      </Row>
       <br />
-      <label>Filter by: </label>
-      <select
-        onChange={(event) => {
-          handleFilter(event);
-        }}
-      >
-        <option value="all">All ({qnaList.length})</option>
-        <option value="unanswered">Unanswered ({countUnanswered()})</option>
-        <option value="answered">Answered ({countAnswered()})</option>
-      </select>
-      <br />
-      <br />
-      <button
-        onClick={(event) => {
-          handleRefresh(event);
-        }}
-      >
-        Refresh
-      </button>
-      <br />
-      <br />
+
       <Table striped bordered hover>
         <thead>
           <tr>
-            <td>S/N</td>
-            <td>Upvote</td>
-            <td>Answered during event</td>
-            <td>Question</td>
-            <td>Answer</td>
+            <td className="text-center" width="70px">
+              S/N
+            </td>
+            <td className="text-center" width="70px">
+              Vote Count
+            </td>
+            {eventOngoing ? (
+              <td className="text-center" width="120px">
+                Answered during event
+              </td>
+            ) : null}
+            <td className="text-center">Question</td>
+            <td className="text-center">Answer</td>
           </tr>
         </thead>
         <tbody>{displayAllqna}</tbody>
       </Table>
-    </>
+    </Container>
   );
 };
 

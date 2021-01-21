@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { Table } from "react-bootstrap";
+import { Table, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UserAttended = () => {
@@ -24,14 +24,14 @@ const UserAttended = () => {
 
     return (
       <tr key={room._id}>
-        <td>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>
           <Link to={`/user/${room._id}`}>{room.eventName}</Link>
         </td>
-        <td>{eventDate}</td>
-        <td>{noOfQna}</td>
-        <td>{room.hostName}</td>
-        <td>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{noOfQna}</td>
+        <td className="text-center">{room.hostName}</td>
+        <td className="text-center">
           <Link to={`/user/${room._id}`}>
             <button>View</button>
           </Link>
@@ -41,23 +41,27 @@ const UserAttended = () => {
   });
 
   return (
-    <>
-      <h1>All Attended Events</h1>
-      <br />
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>All Attended Events</h1>
+      </Row>
+      <Row>
+        <br />
+      </Row>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>S/N</th>
-            <th>Event Name</th>
-            <th>Event Date</th>
-            <th># of Questions</th>
-            <th>Host</th>
-            <th>Action</th>
+            <th className="text-center">S/N</th>
+            <th className="text-center">Event Name</th>
+            <th className="text-center">Event Date</th>
+            <th className="text-center"># of Questions</th>
+            <th className="text-center">Hosted By</th>
+            <th className="text-center">View Room</th>
           </tr>
         </thead>
         <tbody>{historyDisplay}</tbody>
       </Table>
-    </>
+    </Container>
   );
 };
 
