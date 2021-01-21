@@ -14,6 +14,7 @@ const UserRoom = () => {
   console.log(qnaList);
   console.log(roomInfo);
   console.log("roomid: ", roomId.roomid);
+
   useEffect(() => {
     // axios
     //   .get(`/attendees/${roomId.roomid}`, { withCredentials: true })
@@ -75,7 +76,16 @@ const UserRoom = () => {
         <tr key={qna._id}>
           <td>{index + 1}</td>
           <td>
-            {upVoted ? null : <UpvoteButton roomId={roomId} qnaId={qna._id} />}
+            {upVoted ? null : (
+              <UpvoteButton
+                roomId={roomId}
+                qnaId={qna._id}
+                userID={userID}
+                setQnaList={setQnaList}
+                index={index}
+                qnaList={qnaList}
+              />
+            )}
           </td>
           <td>{qna.upvote.length}</td>
           <td>{qna.question}</td>
