@@ -9,6 +9,7 @@ const UpcomingEvent = ({ room, index }) => {
   const [joined, setJoin] = useState(false);
 
   const eventDate = dayjs(room.eventStart).format("DD/MM/YYYY");
+  const eventTime = dayjs(room.eventStart).format("HH:mm");
   const now = new Date();
   const startDate = new Date(room.eventStart);
   const endDate = new Date(room.eventEnd);
@@ -36,11 +37,12 @@ const UpcomingEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>{room.eventName}</td>
-        <td>{eventDate}</td>
-        <td>{room.hostName}</td>
-        <td>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
+        <td className="text-center">{room.hostName}</td>
+        <td className="text-center">
           {eventOngoing ? (
             <button
               onClick={() => {
@@ -57,8 +59,8 @@ const UpcomingEvent = ({ room, index }) => {
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText='Join event'
-          confirmBtnBsStyle='Back to listings'
+          confirmBtnText="Join event"
+          confirmBtnBsStyle="Back to listings"
           title={
             <>
               <small>You are now joining</small>

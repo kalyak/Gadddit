@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import { Table } from "react-bootstrap";
+import { Table, Container, Row } from "react-bootstrap";
 
 const HostHosted = () => {
   const [allHostedListing, setAllHostedListing] = useState([]);
@@ -39,16 +39,16 @@ const HostHosted = () => {
 
     return (
       <tr key={room._id}>
-        <td>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>
           <Link to={`/host/${room._id}`}>{room.eventName}</Link>
         </td>
-        <td>{eventDate}</td>
-        <td>{room.questions.length}</td>
-        <td>{countUnanswered(room.questions)}</td>
-        <td>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{room.questions.length}</td>
+        <td className="text-center">{countUnanswered(room.questions)}</td>
+        <td className="text-center">
           <Link to={`/host/${room._id}`}>
-            <button>View Room</button>
+            <button>View</button>
           </Link>
         </td>
       </tr>
@@ -57,20 +57,28 @@ const HostHosted = () => {
 
   return (
     <>
-      <h1>Past Events</h1>
+      <Container>
+        <Row className="justify-content-md-center">
+          <h1>Past Events</h1>
+        </Row>
+        <Row>
+          <br />
+        </Row>
 
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>S/N</th>
-            <th>Event Name</th>
-            <th>Event Date</th>
-            <th># of questions</th>
-            <th># of unanswered</th>
-          </tr>
-        </thead>
-        <tbody>{displayAllEvents}</tbody>
-      </Table>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th className="text-center">S/N</th>
+              <th className="text-center">Event Name</th>
+              <th className="text-center">Event Date</th>
+              <th className="text-center"># of questions</th>
+              <th className="text-center"># of unanswered</th>
+              <th className="text-center">View Room</th>
+            </tr>
+          </thead>
+          <tbody>{displayAllEvents}</tbody>
+        </Table>
+      </Container>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Table, Container, Row, Button, Col } from "react-bootstrap";
 
 const LoginPage = ({ setLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -36,7 +37,7 @@ const LoginPage = ({ setLoggedIn }) => {
   if (isLogin) {
     // setLoggedIn(true);
 
-    return <Redirect to='/user' />;
+    return <Redirect to="/user" />;
   }
 
   const handleChange = (event) => {
@@ -50,56 +51,63 @@ const LoginPage = ({ setLoggedIn }) => {
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
-
+    <Container>
+      <Row className="justify-content-md-center">
+        <h1>Login Page</h1>
+      </Row>
+      <br />
+      <br />
       <form
         onSubmit={(event) => {
           handleSubmit(event);
         }}
       >
-        <label>Username: </label>
-        <input
-          type='text'
-          name='username'
-          id='username'
-          required
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <span style={{ color: "red" }}> {resError.username} </span>
+        <Row className="justify-content-md-center">
+          <Col sm="auto">
+            <label>Username: </label>
+          </Col>
+          <Col sm="auto">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <span style={{ color: "red" }}> {resError.username} </span>
+        </Row>
         <br />
         <br />
-        <label>Password: </label>
-        <input
-          type='password'
-          name='password'
-          id='password'
-          required
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <span style={{ color: "red" }}> {resError.password} </span>
+        <Row className="justify-content-md-center">
+          <Col sm="auto">
+            <label>Password: </label>
+          </Col>
+          <Col sm="auto">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <span style={{ color: "red" }}> {resError.password} </span>
+        </Row>
 
-        {/* <br />
-        <br />
-        <label>Signing As: </label>
-        <select
-          name="userType"
-          value={formData.userType}
-          onChange={handleChange}
-        >
-          <option value="" disabled>
-            Select
-          </option>
-          <option value="host">Host</option>
-          <option value="attendee">Attendee</option>
-        </select> */}
         <br />
         <br />
-        <input type='submit' value='Login' />
+        <Row className="justify-content-md-center">
+          <Button type="submit">Login</Button>
+        </Row>
       </form>
-    </>
+    </Container>
   );
 };
 

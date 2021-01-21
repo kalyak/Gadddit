@@ -15,16 +15,25 @@ const MainRoute = ({ setLoggedIn }) => {
   return (
     <>
       {/* <h1>Home Route</h1> */}
-      <Navbar bg='dark' variant='dark' sticky='top'>
-        <Navbar.Brand href='/'>Gadddit</Navbar.Brand>
-        <Nav className='mr-auto'>
-          <Link to={AppURL.main.home}>Home</Link>
-          <Link to={AppURL.main.about}>About</Link>
-          <Link to='/events'>Events</Link>
+      <Navbar bg="dark" variant="dark" sticky="top" expand="lg">
+        <Navbar.Brand href="/">Gadddit</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to={AppURL.main.home}>
+            Home
+          </Nav.Link>
+          <Nav.Link as={Link} to={AppURL.main.about}>
+            About
+          </Nav.Link>
+          <Nav.Link as={Link} to="/events">
+            Events
+          </Nav.Link>
+        </Nav>
+        <Nav>
           <LoginBtn />
           <SignUpBtn />
         </Nav>
       </Navbar>
+
       <Switch>
         <Route exact path={AppURL.main.about}>
           <About />
@@ -41,7 +50,7 @@ const MainRoute = ({ setLoggedIn }) => {
         <Route exact path={AppURL.main.home}>
           <Home />
         </Route>
-        <Route path='/public/:roomid'>
+        <Route path="/public/:roomid">
           <PublicRoom />
         </Route>
         <Route>

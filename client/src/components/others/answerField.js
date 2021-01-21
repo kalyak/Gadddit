@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Table, Container, Row, Col, Button } from "react-bootstrap";
 
 const AnswerField = (props) => {
   const [editing, setEditing] = useState(false);
@@ -45,31 +46,58 @@ const AnswerField = (props) => {
   };
 
   if (props.answer === "" && editing === false) {
-    return <button onClick={() => setEditing(true)}>Add Answer</button>;
+    return (
+      <Container>
+        <Row className="justify-content-md-center">
+          <Button onClick={() => setEditing(true)}>Add Answer</Button>
+        </Row>
+      </Container>
+    );
   }
 
   if (editing) {
     return (
-      <>
+      <Container>
         <form onSubmit={handleUpdate}>
-          <textarea
-            value={answer}
-            onChange={(event) => {
-              handleTextChange(event);
-            }}
-          ></textarea>
+          <Row>
+            <textarea
+              value={answer}
+              onChange={(event) => {
+                handleTextChange(event);
+              }}
+              style={{ width: "100%" }}
+            ></textarea>
+          </Row>
           <br />
-          <button type="submit">Update</button>
-          <button onClick={() => setEditing(false)}>Cancel</button>
+          <Row className="justify-content-md-center">
+            <Col sm="auto">
+              <Button variant="primary" type="submit">
+                Update
+              </Button>
+            </Col>
+            <Col sm="auto">
+              <Button variant="danger" onClick={() => setEditing(false)}>
+                Cancel
+              </Button>
+            </Col>
+          </Row>
         </form>
-      </>
+      </Container>
     );
   } else {
     return (
-      <>
-        <span onDoubleClick={handleDoubleClick}>{props.answer}</span>
-        <button onClick={handleClick}>Edit</button>
-      </>
+      <Container>
+        <Row>
+          <Col sm={10}>
+            <span onDoubleClick={handleDoubleClick}>{props.answer}</span>
+          </Col>
+          <Col sm={2}>
+            <Button className="text-end" onClick={handleClick}>
+              Edit
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 };
