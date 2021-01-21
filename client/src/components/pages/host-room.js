@@ -7,6 +7,7 @@ import { Table } from "react-bootstrap";
 const HostRoom = () => {
   const roomId = useParams();
   const [qnaList, setQnaList] = useState([]);
+  const [roomInfo, setRoom] = useState({});
   const [filterby, setFilterby] = useState("all");
   // console.log(qnaList);
 
@@ -16,6 +17,7 @@ const HostRoom = () => {
       .then((response) => {
         // console.log(response.data);
         setQnaList(response.data.qna);
+        setRoom(response.data.roomInfo);
       })
       .catch((error) => {
         console.log(error);
@@ -140,8 +142,8 @@ const HostRoom = () => {
 
   return (
     <>
-      <h1>Host QnA Page</h1>
-      <p>Display all QnA from database</p>
+      <h1>{roomInfo.eventName}</h1>
+
       <br />
       <label>Filter by: </label>
       <select

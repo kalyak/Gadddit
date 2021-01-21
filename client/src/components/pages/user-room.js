@@ -31,7 +31,7 @@ const UserRoom = () => {
       .then((response) => {
         console.log(response.data);
         setQnaList(response.data.qna);
-        // setRoom(response.data.roomInfo);
+        setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ const UserRoom = () => {
       .then((response) => {
         console.log(response.data);
         setQnaList(response.data.qna);
-        // setRoom(response.data.roomInfo);
+        setRoom(response.data.roomInfo);
         setUser(response.data.userID);
       })
       .catch((error) => {
@@ -112,12 +112,10 @@ const UserRoom = () => {
 
   return (
     <>
-      <h1>User QnA Page</h1>
-      {/* <h1>{roomInfo.eventName}</h1>
+      <h1>{roomInfo.eventName}</h1>
       <h3>
         Hosted by <b>{roomInfo.hostName}</b>
-      </h3> */}
-      <p>Display all QnA from database</p>
+      </h3>
       <br />
       <QuestionField roomId={roomId} handleRefresh={handleRefresh} />
       <br />

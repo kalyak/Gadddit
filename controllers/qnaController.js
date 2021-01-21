@@ -7,12 +7,14 @@ const router = express.Router();
 let id = "";
 let hostID = "";
 let username = "";
+let roomInfo = "";
 
 const isAuthenticated = (req, res, next) => {
   console.log("session data:", req.session.currentUser);
   if (req.session.currentUser) {
     id = req.session.currentUser._id;
     username = req.session.currentUser.username;
+
     next();
   } else {
     console.log("no session");
@@ -21,9 +23,10 @@ const isAuthenticated = (req, res, next) => {
 };
 
 const isRoomAuthenticated = (req, res, next) => {
-  console.log("room data:", req.session.currentRoom);
   if (req.session.currentRoom) {
+    console.log("room data:", req.session.currentRoom);
     roomID = req.session.currentRoom._id;
+    roomInfo = req.session.currentRoom;
     next();
   } else {
     //check if the person is the host
@@ -31,6 +34,8 @@ const isRoomAuthenticated = (req, res, next) => {
     Rooms.findById(req.params.roomID, (err, room) => {
       hostID = room.hostID;
       if (hostID === id) {
+        console.log("this person is the host");
+        roomInfo = room;
         next();
       } else {
         //check if the person attended this room previously
@@ -38,8 +43,13 @@ const isRoomAuthenticated = (req, res, next) => {
         Users.findById(id, (err, user) => {
           const roomAttendedHistory = user.roomAttendedHistory;
           if (roomAttendedHistory.includes(req.params.roomID)) {
+            console.log(
+              "this person attended this room before, assigning roominfo"
+            );
+            roomInfo = room;
             next();
           } else {
+            console.log("cannot assign room info");
             res.status(401).send("Not authenticated to room");
           }
         });
@@ -50,19 +60,19 @@ const isRoomAuthenticated = (req, res, next) => {
 
 //get all the qna when hosts start the room or attendees join room
 router.get("/:roomID", isAuthenticated, isRoomAuthenticated, (req, res) => {
+  console.log("getting q&a details...");
   Qna.find(
     { $and: [{ roomID: req.params.roomID }, { isFlagged: false }] },
     (err, qna) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
       } else {
-        res
-          .status(200)
-          .send({
-            roomInfo: req.session.currentRoom,
-            qna: qna,
-            userID: req.session.currentUser._id,
-          });
+        console.log("roominfo", roomInfo);
+        res.status(200).send({
+          roomInfo: roomInfo,
+          qna: qna,
+          userID: req.session.currentUser._id,
+        });
       }
     }
   );
