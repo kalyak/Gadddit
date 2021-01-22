@@ -1,43 +1,112 @@
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 const About = () => {
   return (
-    <>
-      <Container>
-        <h1 className="text-center">Project 3 - General Assembly - SEI26</h1>
-        <br />
-        <br />
-        <br />
-        <h1 className="text-center">Au Kok Yong</h1>
-        <h1 className="text-center">Kalya Kusumadi</h1>
-        <h1 className="text-center"> Sophia Ratna</h1>
-        <br />
-        <br />
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col>
+          <h1 className="text-center">Project for General Assembly (SEI26)</h1>
+          <br />
+          <h2 className="text-center">Done By:</h2>
+          <h4 className="text-center">Au Kok Yong</h4>
+          <h4 className="text-center">Kalya Kusumadi</h4>
+          <h4 className="text-center"> Sophia Ratna</h4>
+        </Col>
+      </Row>
+      <br />
+
+      <Row className="justify-content-md-center">
         <h2 className="text-center">Tech Stacks Used:</h2>
-        <br />
-        <h3 style={{ textDecoration: "underline", textAlign: "center" }}>
-          Front end:
-        </h3>
-        <h5 className="text-center">HTML, CSS, Javascript, ReactJS</h5>
-        <br />
-        <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
-          Back end:
-        </h4>
-        <h5 className="text-center">Express, Mongoose, MongoDB Atlas</h5>
-        <br />
-        <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
-          Other libraries used:
-        </h4>
-        <h5 className="text-center">
-          axios, dayjs, react-bootstrap, react-bootstrap-sweetalert,
-          react-datepicker, react-datetime-picker, react-router-dom, bcrypt,
-          dotenv, express-session, express-validator
-        </h5>
-      </Container>
-      <footer style={{ position: "fixed", bottom: "0", width: "100%" }}>
-        <h1>&copy; Gadddit - 2021</h1>
-      </footer>
-    </>
+      </Row>
+      <br />
+      <Row className="justify-content-md-center">
+        <Col sm="auto">
+          <Row className="justify-content-md-center">
+            <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
+              Front-End
+            </h4>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>ReactJS</li>
+            </ul>
+          </Row>
+        </Col>
+        <Col sm={1}></Col>
+        <Col sm="auto">
+          <Row className="justify-content-md-center">
+            <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
+              Back-End
+            </h4>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ul>
+              <li>Express</li>
+              <li>Mongoose</li>
+              <li>MongoDB Atlas</li>
+            </ul>
+          </Row>
+        </Col>
+      </Row>
+      <br />
+      <h3 style={{ textDecoration: "underline", textAlign: "center" }}>
+        Other libraries used:
+      </h3>
+      <br />
+
+      <Row className="justify-content-md-center">
+        <Col sm="auto">
+          <Row className="justify-content-md-center">
+            <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
+              Front-End
+            </h4>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ul>
+              <li>Axios</li>
+              <li>Dayjs</li>
+              <li>React-bootstrap</li>
+              <li>React-bootstrap-sweetalert</li>
+              <li>React-datepicker</li>
+              <li>React-datetime-picker</li>
+              <li>React-router-dom</li>
+            </ul>
+          </Row>
+        </Col>
+        <Col sm={1}></Col>
+        <Col sm="auto">
+          <Row className="justify-content-md-center">
+            <h4 style={{ textDecoration: "underline", textAlign: "center" }}>
+              Back-End
+            </h4>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ul>
+              <li>Bcrypt</li>
+              <li>Dotenv</li>
+              <li>Express-session</li>
+              <li>Express-validator</li>
+            </ul>
+          </Row>
+        </Col>
+      </Row>
+
+      <Row className="justify-content-md-center">
+        <footer
+          style={{
+            position: "fixed",
+            bottom: "0",
+            width: "100%",
+            textAlign: "right",
+          }}
+        >
+          &copy; Gadddit - 2021
+        </footer>
+      </Row>
+    </Container>
   );
 };
 

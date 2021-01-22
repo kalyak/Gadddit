@@ -19,7 +19,7 @@ const MainRoute = ({ setLoggedIn }) => {
         bg="dark"
         variant="dark"
         sticky="top"
-        className="d-flex row align-items-center"
+        className="row align-items-center"
       >
         <Navbar.Brand href="/">Gadddit</Navbar.Brand>
         <Nav className="mr-auto">
