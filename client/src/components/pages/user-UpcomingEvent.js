@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import dayjs from "dayjs";
 import SweetAlert from "react-bootstrap-sweetalert";
+import { Button } from "react-bootstrap";
 
 const UpcomingEvent = ({ room, index }) => {
   const [confirmPopup, setPopup] = useState(false);
@@ -37,20 +38,20 @@ const UpcomingEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td className='text-center'>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>{room.eventName}</td>
-        <td className='text-center'>{eventDate}</td>
-        <td className='text-center'>{eventTime}</td>
-        <td className='text-center'>{room.hostName}</td>
-        <td className='text-center'>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
+        <td className="text-center">{room.hostName}</td>
+        <td className="text-center">
           {eventOngoing ? (
-            <button
+            <Button
               onClick={() => {
                 setPopup(true);
               }}
             >
               Join
-            </button>
+            </Button>
           ) : (
             ""
           )}
@@ -59,8 +60,8 @@ const UpcomingEvent = ({ room, index }) => {
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText='Join event'
-          confirmBtnBsStyle='Back to listings'
+          confirmBtnText="Join event"
+          confirmBtnBsStyle="Back to listings"
           title={
             <>
               <small>You are now joining</small>

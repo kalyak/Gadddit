@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UpvoteButton = (props) => {
   // console.log(props);
@@ -37,13 +39,13 @@ const UpvoteButton = (props) => {
 
   return (
     <>
-      <button
+      <Button
         onClick={(event) => {
           handleUpvote(event);
         }}
       >
-        Vote
-      </button>
+        <FontAwesomeIcon icon="thumbs-up" />
+      </Button>
     </>
   );
 };

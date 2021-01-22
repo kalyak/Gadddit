@@ -6,6 +6,10 @@ import "./App.css";
 import NavBar from "./components/route/NavBar";
 import MainRoute from "./components/route/route-main";
 import SwitchRoute from "./components/route/switchroute";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faThumbsUp, faCheck, faSync } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faThumbsUp, faCheck, faSync);
 
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);

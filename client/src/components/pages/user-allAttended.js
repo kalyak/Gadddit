@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { Table, Container, Row } from "react-bootstrap";
+import { Table, Container, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UserAttended = () => {
@@ -33,7 +33,7 @@ const UserAttended = () => {
         <td className="text-center">{room.hostName}</td>
         <td className="text-center">
           <Link to={`/user/${room._id}`}>
-            <button>View</button>
+            <Button>View</Button>
           </Link>
         </td>
       </tr>

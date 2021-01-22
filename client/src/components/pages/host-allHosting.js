@@ -1,7 +1,7 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { Container, Row, Table } from "react-bootstrap";
+import { Container, Row, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const HostHosting = () => {
@@ -25,21 +25,23 @@ const HostHosting = () => {
 
     return (
       <tr key={room._id}>
-        <td className='text-center'>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>
           <Link to={`/host/${room._id}`}>{room.eventName}</Link>
         </td>
-        <td className='text-center'>{eventDate}</td>
-        <td className='text-center'>{eventTime}</td>
-        <td className='text-center'>{room.roomCode}</td>
-        <td className='text-center'>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
+        <td className="text-center">{room.roomCode}</td>
+        <td className="text-center">
           <Link to={`/host/${room._id}/edit`}>
-            <button id={room._id}>Edit Event</button>
+            <Button variant="danger" id={room._id}>
+              Edit Event
+            </Button>
           </Link>
         </td>
-        <td className='text-center'>
+        <td className="text-center">
           <Link to={`/host/${room._id}`}>
-            <button>Start Event</button>
+            <Button>Start Event</Button>
           </Link>
         </td>
       </tr>
@@ -48,7 +50,7 @@ const HostHosting = () => {
 
   return (
     <Container>
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         <h1>Upcoming Events</h1>
       </Row>
       <Row>
@@ -58,12 +60,12 @@ const HostHosting = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th className='text-center'>S/N</th>
-            <th className='text-center'>Event Name</th>
-            <th className='text-center'>Event Date</th>
-            <th className='text-center'>Event Time</th>
-            <th className='text-center'>Room Code</th>
-            <th colSpan='2' className='text-center'>
+            <th className="text-center">S/N</th>
+            <th className="text-center">Event Name</th>
+            <th className="text-center">Event Date</th>
+            <th className="text-center">Event Time</th>
+            <th className="text-center">Room Code</th>
+            <th colSpan="2" className="text-center">
               Actions
             </th>
           </tr>

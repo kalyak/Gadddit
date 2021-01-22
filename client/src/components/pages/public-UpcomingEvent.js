@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Redirect } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const PublicEvent = ({ room, index }) => {
   const [confirmPopup, setPopup] = useState(false);
@@ -13,7 +14,7 @@ const PublicEvent = ({ room, index }) => {
   const now = new Date();
   const startDate = new Date(room.eventStart);
   const endDate = new Date(room.eventEnd);
-  const eventOngoing = now > startDate && now < endDate;
+  const eventOngoing = startDate < now && now < endDate;
 
   const handleJoinEvent = () => {
     setJoin(true);
@@ -26,29 +27,29 @@ const PublicEvent = ({ room, index }) => {
   return (
     <>
       <tr key={room._id}>
-        <td className='text-center'>{index + 1}</td>
+        <td className="text-center">{index + 1}</td>
         <td>{room.eventName}</td>
-        <td className='text-center'>{eventDate}</td>
-        <td className='text-center'>{eventTime}</td>
+        <td className="text-center">{eventDate}</td>
+        <td className="text-center">{eventTime}</td>
 
-        <td className='text-center'>{room.hostName}</td>
-        <td className='text-center'>
+        <td className="text-center">{room.hostName}</td>
+        <td className="text-center">
           {eventOngoing ? (
-            <button
+            <Button
               onClick={() => {
                 setPopup(true);
               }}
             >
               Join
-            </button>
+            </Button>
           ) : null}
         </td>
       </tr>
       {confirmPopup && (
         <SweetAlert
           showCancel
-          confirmBtnText='Join event'
-          confirmBtnBsStyle='Back to listings'
+          confirmBtnText="Join event"
+          confirmBtnBsStyle="Back to listings"
           title={
             <>
               <small>You are now joining</small>
