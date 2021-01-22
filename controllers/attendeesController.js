@@ -29,7 +29,7 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
       { hostID: { $ne: attendeeID } },
     ],
   })
-    .sort({ eventEnd: 1 })
+    .sort({ eventStart: 1 })
     .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");
@@ -44,7 +44,7 @@ router.get("/public", (req, res) => {
   Rooms.find({
     $and: [{ eventEnd: { $gte: new Date() } }, { isPublic: true }],
   })
-    .sort({ eventEnd: 1 })
+    .sort({ eventStart: 1 })
     .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");

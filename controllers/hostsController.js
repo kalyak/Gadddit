@@ -25,7 +25,7 @@ router.get("/upcoming", isAuthenticated, (req, res) => {
   Rooms.find({
     $and: [{ eventEnd: { $gte: new Date() } }, { hostID: hostID }],
   })
-    .sort({ eventEnd: 1 })
+    .sort({ eventStart: 1 })
     .exec((err, rooms) => {
       if (err) {
         res.status(500).send("Database error. Pls contact your system admin");

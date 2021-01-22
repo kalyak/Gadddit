@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AnswerField from "../others/answerField";
 import { Table, Container, Row, Button, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HostRoom = () => {
   const roomId = useParams();
@@ -113,12 +114,17 @@ const HostRoom = () => {
     .map((qnaObj, index) => {
       return (
         <tr key={qnaObj._id}>
-          <td className='text-center'>{index + 1}</td>
-          <td className='text-center'>{qnaObj.upvote.length}</td>
+          <td className="text-center">{index + 1}</td>
+          <td className="text-center">{qnaObj.upvote.length}</td>
           {eventOngoing ? (
             qnaObj.answer === "" ? (
-              <td className='text-center'>
-                <button onClick={() => handleAnswerBtn(qnaObj)}>✔️</button>
+              <td className="text-center">
+                <Button
+                  variant="success"
+                  onClick={() => handleAnswerBtn(qnaObj)}
+                >
+                  <FontAwesomeIcon icon="check" />
+                </Button>
               </td>
             ) : (
               <td></td>
@@ -146,7 +152,7 @@ const HostRoom = () => {
 
   return (
     <Container>
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         <h1>{roomInfo.eventName}</h1>
       </Row>
       <Row>
@@ -160,20 +166,21 @@ const HostRoom = () => {
               handleFilter(event);
             }}
           >
-            <option value='all'>All ({qnaList.length})</option>
-            <option value='unanswered'>Unanswered ({countUnanswered()})</option>
-            <option value='answered'>Answered ({countAnswered()})</option>
+            <option value="all">All ({qnaList.length})</option>
+            <option value="unanswered">Unanswered ({countUnanswered()})</option>
+            <option value="answered">Answered ({countAnswered()})</option>
           </select>
         </Col>
 
         <Col>
           <Button
-            variant='success'
+            variant="success"
             onClick={(event) => {
               handleRefresh(event);
             }}
           >
-            Refresh
+            {/* Refresh */}
+            <FontAwesomeIcon icon="sync" />
           </Button>
         </Col>
       </Row>
@@ -182,19 +189,19 @@ const HostRoom = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <td className='text-center' width='70px'>
+            <td className="text-center" width="70px">
               S/N
             </td>
-            <td className='text-center' width='70px'>
+            <td className="text-center" width="70px">
               Vote Count
             </td>
             {eventOngoing ? (
-              <td className='text-center' width='120px'>
+              <td className="text-center" width="120px">
                 Answered during event
               </td>
             ) : null}
-            <td className='text-center'>Question</td>
-            <td className='text-center'>Answer</td>
+            <td className="text-center">Question</td>
+            <td className="text-center">Answer</td>
           </tr>
         </thead>
         <tbody>{displayAllqna}</tbody>

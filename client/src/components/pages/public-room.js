@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import LoginBtn from "../buttons/loginButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PublicRoom = () => {
   const roomId = useParams();
@@ -89,22 +90,22 @@ const PublicRoom = () => {
 
   return (
     <Container>
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         <h1>{roomInfo.eventName}</h1>
       </Row>
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         <h3>
           Hosted by <b>{roomInfo.hostName}</b>
         </h3>
       </Row>
       <br />
       <br />
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         To submit questions to the host, please login.
       </Row>
       <br />
 
-      <Row className='justify-content-md-center'>
+      <Row className="justify-content-md-center">
         <LoginBtn />
       </Row>
       <br />
@@ -118,21 +119,22 @@ const PublicRoom = () => {
               handleFilter(event);
             }}
           >
-            <option value='all'>All ({qnaList.length})</option>
-            <option value='unanswered'>Unanswered ({countUnanswered()})</option>
-            <option value='answered'>Answered ({countAnswered()})</option>
+            <option value="all">All ({qnaList.length})</option>
+            <option value="unanswered">Unanswered ({countUnanswered()})</option>
+            <option value="answered">Answered ({countAnswered()})</option>
           </select>
         </Col>
         <br />
         <br />
         <Col>
           <Button
-            variant='success'
+            variant="success"
             onClick={(error) => {
               handleRefresh(error);
             }}
           >
-            Refresh
+            {/* Refresh */}
+            <FontAwesomeIcon icon="sync" />
           </Button>
         </Col>
       </Row>

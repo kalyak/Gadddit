@@ -10,7 +10,7 @@ const UserRoute = ({ setLoggedIn }) => {
         bg="info"
         variant="dark"
         sticky="top"
-        className="d-flex row align-items-center"
+        className="row align-items-center"
       >
         <Navbar.Brand as={Link} to="/user">
           Gadddit User

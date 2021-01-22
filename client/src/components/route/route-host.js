@@ -10,7 +10,7 @@ const HostRoute = ({ setLoggedIn }) => {
         bg="danger"
         variant="dark"
         sticky="top"
-        className="d-flex row align-items-center"
+        className="row align-items-center"
       >
         <Navbar.Brand as={Link} to="/host">
           Gadddit Host

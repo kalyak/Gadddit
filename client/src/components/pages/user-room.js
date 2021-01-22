@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Table, Container, Row, Button, Col } from "react-bootstrap";
 import QuestionField from "../others/questionField";
 import UpvoteButton from "../buttons/upvoteButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UserRoom = () => {
   const roomId = useParams();
@@ -160,7 +161,8 @@ const UserRoom = () => {
               handleRefresh(error);
             }}
           >
-            Refresh
+            {/* Refresh */}
+            <FontAwesomeIcon icon="sync" />
           </Button>
         </Col>
       </Row>
