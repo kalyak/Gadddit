@@ -1,6 +1,6 @@
 # Project 3 - Gadddit
 
-https://gadddit.herokuapp.com/
+https://gadddit-v2.herokuapp.com/
 
 ### An integrated platform for all your event needs!
 
